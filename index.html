@@ -3,146 +3,131 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mathieu Padlewski – CV</title>
+<title>mathieu_padlewski.exe</title>
+
 <style>
     body {
-        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #00ff88;
+        font-family: "Courier New", Courier, monospace;
         margin: 0;
-        background: #f5f7fa;
-        color: #333;
-    }
-    header {
-        background: #1e2a38;
-        color: white;
-        padding: 40px 20px;
-        text-align: center;
-    }
-    header h1 {
-        margin: 0;
-        font-size: 2.5em;
-    }
-    header p {
-        margin: 5px 0;
-        opacity: 0.8;
-    }
-    section {
-        max-width: 900px;
-        margin: 30px auto;
-        background: white;
-        padding: 25px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-    h2 {
-        border-bottom: 2px solid #eee;
-        padding-bottom: 5px;
-        color: #1e2a38;
-    }
-    ul {
-        padding-left: 20px;
-    }
-    .item {
-        margin-bottom: 15px;
-    }
-    .small {
-        color: #666;
-        font-size: 0.9em;
-    }
-    footer {
-        text-align: center;
         padding: 20px;
-        font-size: 0.9em;
-        color: #777;
+    }
+
+    .terminal {
+        max-width: 900px;
+        margin: auto;
+        white-space: pre-line;
+        line-height: 1.6;
+    }
+
+    .prompt::before {
+        content: ">> ";
+        color: #00ffaa;
+    }
+
+    h1, h2 {
+        color: #00ffaa;
+        margin-top: 30px;
+    }
+
+    a {
+        color: #00ffff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .cursor {
+        display: inline-block;
+        width: 10px;
+        background: #00ff88;
+        margin-left: 5px;
+        animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+        0%, 50%, 100% { opacity: 1; }
+        25%, 75% { opacity: 0; }
     }
 </style>
 </head>
+
 <body>
 
-<header>
-    <h1>Mathieu Padlewski</h1>
-    <p>Phys. dipl. EPFL</p>
-    <p>Lausanne, Switzerland | +41 76 123 4567 | mathieu.padlewski@gmail.com</p>
-</header>
+<div class="terminal">
 
-<section>
-    <h2>Education</h2>
+<div class="prompt">cat profile.txt</div>
 
-    <div class="item">
-        <strong>PhD Student – EPFL</strong> <span class="small">(2021–2025)</span><br>
-        Laboratory of Wave Engineering – Acoustics<br>
-        Thesis: <em>Active Acoustic Metamaterials: A New Way to Understand Nonlinear and Topological Phenomena</em>
-    </div>
+<h1>mathieu_padlewski</h1>
+Phys. dipl. EPFL  
+Lausanne, Switzerland  
++41 76 123 4567  
+mathieu.padlewski@gmail.com  
 
-    <div class="item">
-        <strong>Intern – EPFL</strong> <span class="small">(2019–2020)</span><br>
-        Project: Topological Semimetals subjected to Torsional Strain
-    </div>
+<div class="prompt">cat education.log</div>
 
-    <div class="item">
-        <strong>MSc in Physics – EPFL</strong> <span class="small">(2017–2019)</span><br>
-        Projects include Charge Density Waves, ZrTe5 transport, MOT coil systems
-    </div>
+<h2>education</h2>
 
-    <div class="item">
-        <strong>BSc in Physics – UNIGE</strong> <span class="small">(2013–2016)</span><br>
-        Projects include superconducting Nb3Sn and astrophysical imaging
-    </div>
-</section>
+PhD Student – EPFL (2021–2025)  
+- Active Acoustic Metamaterials  
+- nonlinear + topological phenomena  
 
-<section>
-    <h2>Computer Skills</h2>
-    <ul>
-        <li><strong>Programming:</strong> Python, MATLAB, LabVIEW, Mathematica</li>
-        <li><strong>Simulation:</strong> COMSOL, Simulink, EAGLE, Ableton Live</li>
-    </ul>
-</section>
+Intern – EPFL (2019–2020)  
+- Topological semimetals under torsional strain  
 
-<section>
-    <h2>Languages</h2>
-    <ul>
-        <li>French – Fluent</li>
-        <li>English – Fluent</li>
-    </ul>
-</section>
+MSc Physics – EPFL (2017–2019)  
+- Charge density waves / ZrTe5 / cold atom systems  
 
-<section>
-    <h2>Scientific Contributions</h2>
+BSc Physics – UNIGE (2013–2016)  
+- superconductivity / astrophysical imaging  
 
-    <h3>Journal Papers</h3>
-    <ul>
-        <li>Probing intraband excitations in ZrTe5 (Physical Review B, 2020)</li>
-        <li>Electron-phonon liquid in NbGe2 (Nature Communications, 2021)</li>
-        <li>Active Acoustic SSH-like Metamaterial (Physical Review Applied, 2023)</li>
-        <li>Topological confinement via acoustic crystals (arXiv, 2024)</li>
-        <li>Chiral nonlinearity realization (SciPost Physics, 2025)</li>
-        <li>Amplitude-driven nonreciprocity (Physical Review B, 2025)</li>
-    </ul>
+<div class="prompt">cat skills.sys</div>
 
-    <h3>Conference Papers</h3>
-    <ul>
-        <li>Active Acoustic SSH-like System – Forum Acusticum (2024)</li>
-    </ul>
+<h2>skills</h2>
 
-    <h3>Presentations</h3>
-    <ul>
-        <li>Symposium on Acoustic Metamaterials – Nîmes (2022)</li>
-        <li>IRP Acoustic Summer School – Canada (2023)</li>
-        <li>Forum Acusticum – Torino (2023)</li>
-    </ul>
-</section>
+programming: python / matlab / labview / mathematica  
+simulation: comsol / simulink / eagle / ableton  
 
-<section>
-    <h2>Activities & Hobbies</h2>
-    <ul>
-        <li>Music composer, singer, guitar player</li>
-        <li>Long-distance cycling, snowboarding, swimming</li>
-        <li>Arduino projects</li>
-    </ul>
-</section>
+<div class="prompt">cat languages.cfg</div>
 
-<footer>
-    © 2026 Mathieu Padlewski
-</footer>
+<h2>languages</h2>
+
+- french: fluent  
+- english: fluent  
+
+<div class="prompt">cat publications.db</div>
+
+<h2>scientific_contributions</h2>
+
+[2020] ZrTe5 intraband excitations – PhysRevB  
+[2021] electron-phonon liquid NbGe2 – Nature Comm  
+[2023] acoustic SSH metamaterial – PhysRevApplied  
+[2024] acoustic crystals – arXiv  
+[2025] chiral nonlinearity – SciPost  
+[2025] nonreciprocity – PhysRevB  
+
+conference:  
+- forum acusticum (2024)  
+
+talks:  
+- nîmes (2022)  
+- canada (2023)  
+- torino (2023)  
+
+<div class="prompt">cat hobbies.txt</div>
+
+<h2>activities</h2>
+
+- music: composer / singer / guitar  
+- sports: cycling / snowboard / swimming  
+- random arduino experiments  
+
+<div class="prompt">_</div><span class="cursor"></span>
+
+</div>
 
 </body>
 </html>
