@@ -12,40 +12,59 @@ body {
     color: #fff;
     margin: 0;
     min-height: 100vh;
-
     display: flex;
+    flex-direction: column;
     align-items: center;
+}
+
+/* Title */
+.title {
+    margin-top: 40px;
+    font-size: 34px;
+    text-align: center;
+}
+
+/* Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 180px);
+    gap: 20px;
+    margin-top: 40px;
+    padding: 20px;
     justify-content: center;
 }
 
-.container {
+/* Cards */
+.card {
+    background: #333;
+    padding: 25px 15px;
     text-align: center;
-    padding: 20px;
+    border-radius: 10px;
 }
 
-h1 {
-    margin: 18px 0;
-    font-size: 28px;
-    letter-spacing: 0.5px;
-}
-
-a {
-    color: #ffffff;
+.card a {
+    color: #fff;
     text-decoration: none;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    display: inline-block;
+    font-size: 20px;
 }
 
-a:hover {
-    opacity: 0.7;
-    transform: scale(1.05);
-}
-
-/* Mobile adjustments */
+/* Mobile */
 @media (max-width: 600px) {
-    h1 {
-        font-size: 22px;
-        margin: 14px 0;
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .title {
+        font-size: 26px;
+    }
+
+    .card {
+        padding: 20px 10px;
+    }
+
+    .card a {
+        font-size: 18px;
     }
 }
 </style>
@@ -54,13 +73,15 @@ a:hover {
 
 <body>
 
-<div class="container">
+<div class="title">Padlewski Family</div>
 
-    <h1><a href="https://padlewsk.github.io/padlewski-site/sylvie">Sylvie</a></h1>
-    <h1><a href="https://padlewsk.github.io/padlewski-site/stephan">Stephan</a></h1>
-    <h1><a href="https://padlewsk.github.io/padlewski-site/guillaume">Guillaume</a></h1>
-    <h1><a href="https://padlewsk.github.io/padlewski-site/mathieu">Mathieu</a></h1>
-    <h1><a href="https://padlewsk.github.io/padlewski-site/alice">Alice</a></h1>
+<div class="grid">
+
+    <div class="card"><a href="https://padlewsk.github.io/padlewski-site/sylvie">Sylvie</a></div>
+    <div class="card"><a href="https://padlewsk.github.io/padlewski-site/stephan">Stephan</a></div>
+    <div class="card"><a href="https://padlewsk.github.io/padlewski-site/guillaume">Guillaume</a></div>
+    <div class="card"><a href="https://padlewsk.github.io/padlewski-site/mathieu">Mathieu</a></div>
+    <div class="card"><a href="https://padlewsk.github.io/padlewski-site/alice">Alice</a></div>
 
 </div>
 
