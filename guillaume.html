@@ -36,20 +36,26 @@
   </p>
 
   <!-- Links -->
-  <div class="mt-4 flex justify-center gap-4 text-sm">
-    
-    <a href="https://www.linkedin.com/in/guillaume-padlewski-1b9621a6/" 
-       target="_blank"
-       class="px-4 py-2 rounded-xl bg-gray-200 dark:bg-gray-700 hover:opacity-80 transition">
-      LinkedIn
-    </a>
+  <div class="mt-6 flex flex-col items-center gap-4">
 
-    <a href="mailto:guillaume_padlewski1@hotmail.com"
-       class="px-4 py-2 rounded-xl bg-gray-200 dark:bg-gray-700 hover:opacity-80 transition">
-      Email
-    </a>
+  <!-- Download vCard -->
+  <a href="guillaume_padlewski.vcf" download
+     class="px-4 py-2 rounded-xl bg-gray-900 text-white dark:bg-white dark:text-black hover:opacity-80 transition">
+    Download Contact
+  </a>
 
-  </div>
+  <!-- QR Code -->
+  <img 
+    src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.linkedin.com/in/guillaume-padlewski-1b9621a6/"
+    alt="QR Code"
+    class="rounded-xl shadow-md"
+  />
+
+  <p class="text-xs text-gray-500 dark:text-gray-400">
+    Scan to open LinkedIn
+  </p>
+
+</div>
 </div>
 
   <!-- Profile -->
