@@ -21,10 +21,23 @@ body {
     margin: auto;
 }
 
-h1 {
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.header-left h1 {
     font-size: 20px;
     font-weight: normal;
-    margin-bottom: 4px;
+    margin: 0 0 4px 0;
+}
+
+.header-right {
+    text-align: right;
+    font-size: 13px;
+    line-height: 1.4;
 }
 
 h2 {
@@ -55,7 +68,7 @@ h2 {
 }
 
 a {
-    color: #999;
+    color: #ffffff;
     text-decoration: none;
 }
 
@@ -69,13 +82,20 @@ a:hover {
 
 <div class="container">
 
-<h1>Mathieu Padlewski</h1>
-PhD in Physics, EPFL<br>
-Lausanne, Switzerland<br>
+<div class="header">
+    <div class="header-left">
+        <h1>Mathieu Padlewski</h1>
+        PhD in Physics, EPFL<br>
+        Lausanne, Switzerland
+    </div>
 
-<a href="mailto:mathieu.padlewski@gmail.com">mathieu.padlewski@gmail.com</a><br>
-<a href="https://orcid.org/0000-0003-1558-8399">ORCID: 0000-0003-1558-8399</a><br>
-<a href="https://scholar.google.com/citations?user=9S4nXlIAAAAJ&hl=en">Google Scholar</a>
+    <div class="header-right">
+        <a href="mailto:mathieu.padlewski@gmail.com">mathieu.padlewski@gmail.com</a><br>
+        <a href="https://orcid.org/0000-0003-1558-8399">ORCID</a><br>
+        <a href="https://scholar.google.com/citations?user=9S4nXlIAAAAJ&hl=en">Google Scholar</a><br>
+        <a href="https://www.linkedin.com/in/mathieu-padlewski-957a63159/">LinkedIn</a>
+    </div>
+</div>
 
 <h2>Education</h2>
 
@@ -83,32 +103,34 @@ Lausanne, Switzerland<br>
 <strong>École Polytechnique Fédérale de Lausanne (EPFL)</strong> – Post-doc
 <span class="date">2025</span><br>
 Laboratory of Wave Engineering – Acoustics (Collaboration with LG Electonics)<br>
-Project: Active noise suppression of cooktop hoods<br>
-Advisors: Sebastian Meyer, H. Lissek
+Project: <em>Active noise suppression of cooktop hoods</em><br>
+Advisors: S.Meyer, H. Lissek
 </div>
 
 <div class="entry">
-<strong>École Polytechnique Fédérale de Lausanne (EPFL)</strong> – PhD in Physics
+<strong>EPFL</strong> – PhD in Physics
 <span class="date">2021–2025</span><br>
 Laboratory of Wave Engineering – Acoustics<br>
-Thesis: <em>Active Acoustic Metamaterials: A New Way to Understand Nonlinear and Topological Phenomena</em><br>
+Thesis:<a href="https://infoscience.epfl.ch/entities/publication/5626dfcb-ba6c-40dd-afa4-44fc304bedae"> <em>Active Acoustic Metamaterials: A New Way to Understand Nonlinear and Topological Phenomena</em></a><br>
 Advisors: R. Fleury, H. Lissek
 </div>
 
 <div class="entry">
 <strong>EPFL</strong> – Research Intern
 <span class="date">2019–2020</span><br>
-Topological semimetals under torsional strain<br>
+Project: <em>Topological Semimetals under Torsional Strain</em><br>
 Advisors: P. Moll, C. Putzke
 </div>
 
 <div class="entry">
 <strong>EPFL</strong> – MSc in Physics
-<span class="date">2017–2019</span>
+<span class="date">2017–2019</span><br>
+Master Project: <em>Charge Density Waves and Transport Properties of 4Hb-TaS<sub>2</sub></em><br>
+Advisors: L.Forro, E. Martino
 </div>
 
 <div class="entry">
-<strong>Université de Genève</strong> – BSc in Physics
+<strong>University of Geneva</strong> – BSc in Physics
 <span class="date">2013–2016</span>
 </div>
 
@@ -117,71 +139,64 @@ Advisors: P. Moll, C. Putzke
 <h2>Publications</h2>
 
 <div class="pub">
-D. Santos-Cottin, <strong>M. Padlewski</strong>, et al., 
-<em>Phys. Rev. B</em> <strong>101</strong>, 125205 (2020). 
-<a href="https://doi.org/10.1103/PhysRevB.101.125205">doi:10.1103/PhysRevB.101.125205</a>
+<a href="https://doi.org/10.48550/arXiv.2601.02977"><strong>M. Padlewski</strong>, T. Tuuva, B. Apffel, et al., 
+arXiv:2601.02977 (2026)</a>
 </div>
 
 <div class="pub">
-H.-Y. Yang, X. Yao, V. Plisson, et al., 
-<em>Nat. Commun.</em> <strong>12</strong>, 5292 (2021). 
-<a href="https://doi.org/10.1038/s41467-021-25547-x">doi:10.1038/s41467-021-25547-x</a>
+<a href="https://doi.org/10.1103/PhysRevB.111.125156"><strong>M. Padlewski</strong>, R. Fleury, H. Lissek, 
+<em>Phys. Rev. B</em> <strong>111</strong>, 125156 (2025)</a>
 </div>
 
 <div class="pub">
-<strong>M. Padlewski</strong>, M. Volery, R. Fleury, H. Lissek, X. Guo, 
-<em>Phys. Rev. Applied</em> <strong>20</strong>, 014022 (2023). 
-<a href="https://doi.org/10.1103/PhysRevApplied.20.014022">doi:10.1103/PhysRevApplied.20.014022</a>
+<a href="https://doi.org/10.21468/SciPostPhys.18.1.034">X. Guo, L. Jezequel, <strong>M. Padlewski</strong>, et al., 
+<em>SciPost Phys.</em> <strong>18</strong>, 034 (2025)</a>
 </div>
 
 <div class="pub">
-X. Guo, L. Jezequel, <strong>M. Padlewski</strong>, et al., 
-<em>SciPost Phys.</em> <strong>18</strong>, 034 (2025). 
-<a href="https://doi.org/10.21468/SciPostPhys.18.1.034">doi:10.21468/SciPostPhys.18.1.034</a>
+<a href="https://doi.org/10.1103/PhysRevApplied.20.014022"><strong>M. Padlewski</strong>, M. Volery, R. Fleury, et al., 
+<em>Phys. Rev. Applied</em> <strong>20</strong>, 014022 (2023) </a>
 </div>
 
 <div class="pub">
-<strong>M. Padlewski</strong>, R. Fleury, H. Lissek, 
-<em>Phys. Rev. B</em> <strong>111</strong>, 125156 (2025). 
-<a href="https://doi.org/10.1103/PhysRevB.111.125156">doi:10.1103/PhysRevB.111.125156</a>
+<a href="https://doi.org/10.1038/s41467-021-25547-x">H.-Y. Yang, X. Yao, V. Plisson, et al., 
+<em>Nat. Commun.</em> <strong>12</strong>, 5292 (2021)</a>
+</div>
+
+<div class="pub">
+<a href="https://doi.org/10.1103/PhysRevB.101.125205">D. Santos-Cottin, <strong>M. Padlewski</strong>, E.Martino et al., 
+<em>Phys. Rev. B</em> <strong>101</strong>, 125205 (2020)</a>
 </div>
 
 <h2>Preprints</h2>
 
 <div class="pub">
-<strong>M. Padlewski</strong>, X. Guo, M. Volery, R. Fleury, H. Lissek, 
-arXiv:2408.16801 (2024). 
-<a href="https://doi.org/10.48550/arXiv.2408.16801">doi:10.48550/arXiv.2408.16801</a>
-</div>
-
-<div class="pub">
-<strong>M. Padlewski</strong>, T. Tuuva, B. Apffel, H. Lissek, R.Fleury 
-arXiv:2601.02977 (2026). 
-<a href="https://doi.org/10.48550/arXiv.2601.02977">doi:10.48550/arXiv.2601.02977</a>
+<a href="https://doi.org/10.48550/arXiv.2408.16801"><strong>M. Padlewski</strong>, X. Guo, M. Volery, et al., 
+arXiv:2408.16801 (2024)</a>
 </div>
 
 <h2>Talks and Conferences</h2>
 
 <div class="entry">
-Forum Acusticum, Torino, Italy
+<a href="https://www.fa2023.org">Forum Acusticum, Torino, Italy</a>
 <span class="date">2023</span>
 </div>
 
 <div class="entry">
-IRP Centre d’Acoustique Summer School, Sherbrooke, Canada
+<a href="https://celya.universite-lyon.fr/site-anglais/irp-summer-school-centre-acoustique-jacques-cartier-314632.kjsp">IRP Centre d’Acoustique Summer School, Sherbrooke, Canada</a>
 <span class="date">2023</span>
 </div>
 
 <div class="entry">
-Symposium on Acoustic Metamaterials, Nîmes, France
+<a href="https://sam-2022.sciencesconf.org">Symposium on Acoustic Metamaterials, Nîmes, France</a>
 <span class="date">2022</span>
 </div>
 
 <h2>Programming</h2>
-Python, MATLAB, LabVIEW, Mathematica; COMSOL, Simulink, EAGLE
+Python, MATLAB, Simulink, LabVIEW, COMSOL, Mathematica, EAGLE, Autodesk Inventor
 
 <h2>Languages</h2>
-French (native), English (fluent)
+French (native), English (native)
 
 <h2>Activities</h2>
 Music (composition, guitar); endurance sports; useless Arduino projects
