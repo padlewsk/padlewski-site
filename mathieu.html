@@ -15,6 +15,8 @@ body {
     padding: 40px;
     font-size: 14.5px;
     line-height: 1.45;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 .container {
@@ -31,7 +33,7 @@ body {
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    display: inline-block;
+    display: block;
 }
 
 .photo button {
@@ -71,17 +73,6 @@ body {
 .header-left,
 .header-right {
     flex: 1;
-}
-
-@media (max-width: 600px) {
-    .header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .header-right {
-        text-align: center;
-    }
 }
 
 .header-left h1 {
@@ -130,6 +121,71 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    body {
+        padding: 24px 16px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .header-left,
+    .header-right {
+        flex: none;
+    }
+
+    .photo {
+        order: -1;
+    }
+
+    .photo img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .header-left h1 {
+        font-size: 22px;
+    }
+
+    .header-right {
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .header-right br {
+        display: none;
+    }
+
+    .header-right a {
+        display: inline-block;
+        margin: 0 6px;
+        padding: 4px 0;
+    }
+
+    .entry,
+    .pub {
+        margin-bottom: 14px;
+    }
+
+    .pub {
+        text-align: left;
+    }
+
+    .date {
+        float: none;
+        display: block;
+        font-size: 13px;
+    }
+
+    .date + br {
+        display: none;
+    }
 }
 </style>
 </head>
