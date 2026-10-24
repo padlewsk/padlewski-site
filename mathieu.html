@@ -34,6 +34,32 @@ body {
     display: inline-block;
 }
 
+.photo button {
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: zoom-in;
+}
+
+.lightbox {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
+}
+
+.lightbox::backdrop {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.lightbox img {
+    display: block;
+    max-width: min(90vw, 480px);
+    max-height: 90vh;
+    border-radius: 8px;
+    cursor: zoom-out;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -121,7 +147,9 @@ a:hover {
     </div>
 
     <div class="photo">
-        <img src="mathieu.jpg" alt="Portrait of Mathieu Padlewski">
+        <button type="button" aria-label="Enlarge photo">
+            <img src="mathieu.jpg" alt="Portrait of Mathieu Padlewski">
+        </button>
     </div>
 
     <div class="header-right">
@@ -288,6 +316,16 @@ French (native), English (native)
 Music (composition, guitar); endurance sports; useless Arduino projects
 
 </div>
+
+<dialog class="lightbox">
+    <img src="mathieu.jpg" alt="Portrait of Mathieu Padlewski">
+</dialog>
+
+<script>
+const lightbox = document.querySelector('.lightbox');
+document.querySelector('.photo button').addEventListener('click', () => lightbox.showModal());
+lightbox.addEventListener('click', () => lightbox.close());
+</script>
 
 </body>
 </html>
