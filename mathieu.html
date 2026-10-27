@@ -67,18 +67,38 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 20px;
+    margin-bottom: 12px;
+}
+
+.interests {
+    text-align: center;
+    color: #bbb;
     margin-bottom: 20px;
+}
+
+.interests span {
+    white-space: nowrap;
 }
 
 .header-left,
 .header-right {
     flex: 1;
+    color: #bbb;
+    /* share a bottom line, roughly centred on the photo */
+    align-self: flex-end;
+    margin-bottom: 30px;
 }
 
 .header-left h1 {
     font-size: 20px;
     font-weight: normal;
     margin: 0 0 4px 0;
+    color: #fff;
+}
+
+.header-left a,
+.header-right a {
+    color: inherit;
 }
 
 .header-right {
@@ -100,9 +120,17 @@ h2 {
     margin-bottom: 8px;
 }
 
+.details {
+    color: #bbb;
+}
+
+.details a {
+    color: inherit;
+}
+
 .date {
     float: right;
-    color: #999;
+    color: #bbb;
 }
 
 .clear {
@@ -110,8 +138,13 @@ h2 {
 }
 
 .pub {
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     text-align: justify;
+    color: #bbb;
+}
+
+.pub > a {
+    font-style: italic;
 }
 
 a {
@@ -138,6 +171,8 @@ a:hover {
     .header-left,
     .header-right {
         flex: none;
+        align-self: auto;
+        margin-bottom: 0;
     }
 
     .photo {
@@ -187,6 +222,72 @@ a:hover {
         display: none;
     }
 }
+
+/* Print / PDF */
+@media print {
+    @page {
+        margin: 12mm 15mm;
+    }
+
+    body {
+        background: #fff;
+        color: #000;
+        padding: 0;
+        font-size: 12px;
+    }
+
+    .header-left h1 {
+        font-size: 18px;
+    }
+
+    .header-right {
+        font-size: 12px;
+    }
+
+    a {
+        color: #000;
+    }
+
+    .header-left,
+    .header-right,
+    .details,
+    .date,
+    .pub,
+    .interests {
+        color: #555;
+    }
+
+    .header-left h1 {
+        color: #000;
+    }
+
+    .photo img {
+        width: 110px;
+        height: 110px;
+    }
+
+    .header-left,
+    .header-right {
+        margin-bottom: 18px;
+    }
+
+    h2 {
+        font-size: 12.5px;
+        margin-top: 16px;
+        border-bottom-color: #999;
+        break-after: avoid;
+    }
+
+    .entry,
+    .pub {
+        margin-bottom: 6px;
+        break-inside: avoid;
+    }
+
+    .pdf-link {
+        display: none;
+    }
+}
 </style>
 </head>
 
@@ -197,8 +298,8 @@ a:hover {
 <div class="header">
     <div class="header-left">
         <h1>Mathieu Padlewski</h1>
-        Postdoc, Institut Langevin<br>
-        ESPCI Paris, PSL University<br>
+        Postdoc, <a href="https://www.institut-langevin.espci.fr/the_langevin_institute?lang=en">Institut Langevin</a><br>
+        <a href="https://www.espci.psl.eu">ESPCI Paris, PSL University</a><br>
         Paris, France
     </div>
 
@@ -212,59 +313,76 @@ a:hover {
         <a href="mailto:mathieu.padlewski@gmail.com">E-mail</a><br>
         <a href="https://orcid.org/0000-0003-1558-8399">ORCID</a><br>
         <a href="https://scholar.google.com/citations?user=9S4nXlIAAAAJ&hl=en">Google Scholar</a><br>
-        <a href="https://www.linkedin.com/in/mathieu-padlewski-957a63159/">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/mathieu-padlewski-957a63159/">LinkedIn</a><br class="pdf-link">
+        <a class="pdf-link" href="mathieu_padlewski_cv.pdf">CV (PDF)</a>
     </div>
+</div>
+
+<div class="interests">
+<span>Active metamaterials</span> · <span>Topological physics</span> · <span>Wave-based computing</span>
 </div>
 
 <h2>Positions</h2>
 
 <div class="entry">
 <strong>ESPCI Paris, PSL University</strong> – Postdoc
-<span class="date">Sep. 2026 – present</span><br>
-Institut Langevin<br>
+<span class="date">Sep. 2026 – present</span>
+<div class="details">
+<a href="https://www.institut-langevin.espci.fr/the_langevin_institute?lang=en">Institut Langevin</a><br>
 Project: <em>Time-Varying Media, Temporal Metamaterials and Wave Control</em><br>
 Advisors: Prof. M. Fink, Prof. E. Fort
+</div>
 </div>
 
 <div class="entry">
 <strong>École Polytechnique Fédérale de Lausanne (EPFL)</strong> – Guest Scientist
-<span class="date">Nov. 2025 – Aug. 2026</span><br>
-Laboratory of Wave Engineering (LWE)<br>
+<span class="date">Nov. 2025 – Aug. 2026</span>
+<div class="details">
+<a href="https://www.epfl.ch/labs/lwe/">Laboratory of Wave Engineering (LWE)</a><br>
 Project: <a href="https://arxiv.org/abs/2601.02977"><em>Classical Emulation of Quantum Phenomena</em></a>
+</div>
 </div>
 
 <div class="entry">
 <strong>EPFL</strong> – Postdoc
-<span class="date">Jul. 2025 – Oct. 2025</span><br>
-LWE (Collaboration with LG Electronics)<br>
+<span class="date">Jul. 2025 – Oct. 2025</span>
+<div class="details">
+<a href="https://www.epfl.ch/labs/lwe/">LWE</a> (Collaboration with LG Electronics)<br>
 Project: <em>Active Noise Abatement of Electronic Appliances</em><br>
 Advisors: Dr. S. Meyer, Dr. H. Lissek
+</div>
 </div>
 
 <div class="entry">
 <strong>EPFL</strong> – Research Intern
-<span class="date">Mar. 2020 – Aug. 2021</span><br>
-Laboratory of Quantum Materials (QMAT)<br>
+<span class="date">Mar. 2020 – Aug. 2021</span>
+<div class="details">
+<a href="https://archiveweb.epfl.ch/qmat.epfl.ch/">Laboratory of Quantum Materials (QMAT)</a><br>
 Project: <em>Topological Semimetals under Torsional Strain</em><br>
 Advisors: Dr. C. Putzke, Prof. P. Moll
+</div>
 </div>
 
 <h2>Education</h2>
 
 <div class="entry">
 <strong>EPFL</strong> – PhD in Physics
-<span class="date">Sep. 2021 – Jun. 2025</span><br>
-LWE<br>
+<span class="date">Sep. 2021 – Jun. 2025</span>
+<div class="details">
+<a href="https://www.epfl.ch/labs/lwe/">Laboratory of Wave Engineering (LWE)</a><br>
 Thesis: <a href="https://infoscience.epfl.ch/handle/20.500.14299/251327"><em>Active Acoustic Metamaterials: A New Way to Understand Nonlinear and Topological Phenomena</em></a><br>
 Advisors: Dr. H. Lissek, Prof. R. Fleury
+</div>
 </div>
 
 <div class="entry">
 <strong>EPFL</strong> – MSc in Physics
-<span class="date">Sep. 2017 – Dec. 2019</span><br>
+<span class="date">Sep. 2017 – Dec. 2019</span>
+<div class="details">
 Physics Laboratory of Complex Matter (LPMC)<br>
-Master Project: <a href="https://infoscience.epfl.ch/handle/20.500.14299/263737"><em>Charge Density Waves and Transport Properties of 4Hb-TaS<sub>2</sub></em></a><br>
+Master's project: <a href="https://infoscience.epfl.ch/handle/20.500.14299/263737"><em>Charge Density Waves and Transport Properties of 4Hb-TaS<sub>2</sub></em></a><br>
 Advisors: Dr. E. Martino, Prof. L. Forró
+</div>
 </div>
 
 <div class="entry">
@@ -274,102 +392,132 @@ Advisors: Dr. E. Martino, Prof. L. Forró
 
 <div class="clear"></div>
 
+<h2>Awards and Grants</h2>
+
+<div class="entry">
+<strong>Seal of Excellence</strong> – European Commission
+<div class="details">
+Horizon Europe MSCA Postdoctoral Fellowship 2025, with CNRS<br>
+Project: <em>Wavebits: Analog Quantum-Inspired Computing</em>
+</div>
+</div>
+
 <h2>Publications</h2>
 
 <div class="pub">
-<a href="https://doi.org/10.1103/PhysRevB.111.125156"><strong>M. Padlewski</strong>, R. Fleury, H. Lissek,
-<em>Phys. Rev. B</em> <strong>111</strong>, 125156</a> <span class="date">Mar. 2025</span><br>
+<a href="https://doi.org/10.1103/PhysRevB.111.125156">Observation of amplitude-driven nonreciprocity for energy guiding</a> <span class="date">Mar. 2025</span><br>
+<strong>M. Padlewski</strong>, R. Fleury, H. Lissek,
+<em>Phys. Rev. B</em> <strong>111</strong>, 125156
 </div>
 
 <div class="pub">
-<a href="https://doi.org/10.21468/SciPostPhys.18.1.034">X. Guo, L. Jezequel, <strong>M. Padlewski</strong>, et al.,
-<em>SciPost Phys.</em> <strong>18</strong>, 034</a> <span class="date">Jan. 2025</span><br>
+<a href="https://doi.org/10.21468/SciPostPhys.18.1.034">Practical realization of chiral nonlinearity for strong topological protection</a> <span class="date">Jan. 2025</span><br>
+X. Guo, L. Jezequel, <strong>M. Padlewski</strong>, et al.,
+<em>SciPost Phys.</em> <strong>18</strong>, 034
 </div>
 
 <div class="pub">
-<a href="https://doi.org/10.1103/PhysRevApplied.20.014022"><strong>M. Padlewski</strong>, M. Volery, R. Fleury, et al.,
-<em>Phys. Rev. Applied</em> <strong>20</strong>, 014022</a> <span class="date">Jul. 2023</span><br>
+<a href="https://doi.org/10.1103/PhysRevApplied.20.014022">Active acoustic Su-Schrieffer-Heeger-like metamaterial</a> <span class="date">Jul. 2023</span><br>
+<strong>M. Padlewski</strong>, M. Volery, R. Fleury, et al.,
+<em>Phys. Rev. Applied</em> <strong>20</strong>, 014022
 </div>
 
 <div class="pub">
-<a href="https://doi.org/10.1038/s41467-021-25547-x">H.-Y. Yang, X. Yao, V. Plisson, et al.,
-<em>Nat. Commun.</em> <strong>12</strong>, 5292</a> <span class="date">Sep. 2021</span><br>
+<a href="https://doi.org/10.1038/s41467-021-25547-x">Evidence of a coupled electron-phonon liquid in NbGe<sub>2</sub></a> <span class="date">Sep. 2021</span><br>
+H.-Y. Yang, X. Yao, V. Plisson, et al.,
+<em>Nat. Commun.</em> <strong>12</strong>, 5292
 </div>
 
 <div class="pub">
-<a href="https://doi.org/10.1103/PhysRevB.101.125205">D. Santos-Cottin, <strong>M. Padlewski</strong>, E. Martino, et al.,
-<em>Phys. Rev. B</em> <strong>101</strong>, 125205</a> <span class="date">Mar. 2020</span><br>
+<a href="https://doi.org/10.1103/PhysRevB.101.125205">Probing intraband excitations in ZrTe<sub>5</sub>: A high-pressure infrared and transport study</a> <span class="date">Mar. 2020</span><br>
+D. Santos-Cottin, <strong>M. Padlewski</strong>, E. Martino, et al.,
+<em>Phys. Rev. B</em> <strong>101</strong>, 125205
 </div>
 
 <h2>Preprints</h2>
 
 <div class="pub">
-<a href="https://doi.org/10.48550/arXiv.2601.02977">M. Valle, T. Tuuva, B. Apffel, H. Lissek, R. Fleury, and <strong>M. Padlewski</strong>,
-arXiv:2601.02977</a> <span class="date">Jan. 2026</span><br>
+<a href="https://doi.org/10.48550/arXiv.2601.02977">Classical analog emulation of quantum circuits via time-averaged dynamic states</a> <span class="date">Jul. 2026</span><br>
+M. Valle, T. Tuuva, B. Apffel, H. Lissek, R. Fleury, <strong>M. Padlewski</strong>,
+arXiv:2601.02977
 </div>
 
 <div class="pub">
-<a href="https://doi.org/10.48550/arXiv.2408.16801"><strong>M. Padlewski</strong>, X. Guo, M. Volery, R. Fleury, H. Lissek,
-arXiv:2408.16801</a> <span class="date">Aug. 2026</span><br>
+<a href="https://doi.org/10.48550/arXiv.2408.16801">Hybrid broadband conduction and amplitude-driven topological confinement of sound via synthetic acoustic crystals</a> <span class="date">Mar. 2026</span><br>
+<strong>M. Padlewski</strong>, X. Guo, M. Volery, R. Fleury, H. Lissek,
+arXiv:2408.16801
 </div>
 
 <h2>Talks and Conferences</h2>
 
 <div class="entry">
-<a href="https://www.ietr.fr">Invited talk — IETR CNRS Institute, University of Rennes, France</a>
+<a href="https://www.ietr.fr">IETR CNRS Institute, University of Rennes, France</a>
 <span class="date">Jun. 2026</span>
+<div class="details">Invited talk</div>
 </div>
 
 <div class="entry">
-<a href="https://complexmedia2024.sciencesconf.org">Selected conference talk — Wave Propagation and Control in Complex Media, Cargèse, France</a>
+<a href="https://complexmedia2024.sciencesconf.org">Wave Propagation and Control in Complex Media, Cargèse, France</a>
 <span class="date">Apr. 2024</span>
+<div class="details">Selected conference talk</div>
 </div>
 
 <div class="entry">
-<a href="https://www.fa2023.org">Conference talk — Forum Acusticum, Turin, Italy</a>
+<a href="https://www.fa2023.org">Forum Acusticum, Turin, Italy</a>
 <span class="date">Sep. 2023</span>
+<div class="details">Conference talk</div>
 </div>
 
 <div class="entry">
-<a href="https://celya.universite-lyon.fr/site-anglais/irp-summer-school-centre-acoustique-jacques-cartier-314632.kjsp">Poster — IRP Centre d’Acoustique Summer School, Sherbrooke, Canada</a>
+<a href="https://celya.universite-lyon.fr/site-anglais/irp-summer-school-centre-acoustique-jacques-cartier-314632.kjsp">IRP Centre d’Acoustique Summer School, Sherbrooke, Canada</a>
 <span class="date">Jun. 2023</span>
+<div class="details">Poster</div>
 </div>
 
 <div class="entry">
-<a href="https://sam-2022.sciencesconf.org">Conference talk — Symposium on Acoustic Metamaterials, Nîmes, France</a>
+<a href="https://sam-2022.sciencesconf.org">Symposium on Acoustic Metamaterials, Nîmes, France</a>
 <span class="date">Oct. 2022</span>
+<div class="details">Conference talk</div>
 </div>
 
 <h2>Outreach</h2>
 
 <div class="entry">
-<a href="https://actu.epfl.ch/news/listen-to-quantum-atoms-talk-together-thanks-to-ac/">Dimensions — EPFL Magazine</a>
+<a href="https://actu.epfl.ch/news/listen-to-quantum-atoms-talk-together-thanks-to-ac/">Listen to quantum atoms talk together thanks to acoustics</a>
+<div class="details">Dimensions – EPFL Magazine</div>
 </div>
 
 <div class="entry">
-<a href="https://www.thebrighterside.news/post/scientists-use-sound-waves-to-unlock-the-secrets-of-quantum-physics/">The Brighter Side of News</a>
+<a href="https://www.thebrighterside.news/post/scientists-use-sound-waves-to-unlock-the-secrets-of-quantum-physics/">Scientists use sound waves to unlock the secrets of quantum physics</a>
+<div class="details">The Brighter Side of News</div>
 </div>
 
 <div class="entry">
-<a href="https://www.iflscience.com/listen-to-quantum-acoustic-atoms-a-new-way-to-study-the-secrets-of-the-universe-78595">IFLScience — LabX Media Group</a>
+<a href="https://www.iflscience.com/listen-to-quantum-acoustic-atoms-a-new-way-to-study-the-secrets-of-the-universe-78595">Listen to quantum acoustic atoms – a new way to study the secrets of the universe</a>
+<div class="details">IFLScience – LabX Media Group</div>
 </div>
 
 <div class="entry">
-<a href="https://www.polymedia.ch/fr/des-ondes-sonores-pour-explorer-la-mecanique-quantique/">La Revue Polytechnique — Polymedia SA</a>
+<a href="https://www.polymedia.ch/fr/des-ondes-sonores-pour-explorer-la-mecanique-quantique/">Des ondes sonores pour explorer la mécanique quantique</a>
+<div class="details">La Revue Polytechnique – Polymedia SA</div>
 </div>
 
 <div class="entry">
-<a href="https://shaastramag.iitm.ac.in/lead-story/science-sound">Shaastra — IIT Madras</a>
+<a href="https://shaastramag.iitm.ac.in/lead-story/science-sound">The science is sound</a>
+<div class="details">Shaastra – IIT Madras</div>
 </div>
+
+<h2>Peer Review</h2>
+<div class="details">Physical Review Letters, Physical Review B, Communications Physics</div>
 
 <h2>Programming</h2>
-Python, Qiskit, MATLAB, Simulink, LabVIEW, Mathematica, COMSOL, Inventor, EAGLE
+<div class="details">Python, Qiskit, MATLAB, Simulink, LabVIEW, Mathematica, COMSOL, Inventor, EAGLE</div>
 
 <h2>Languages</h2>
-French (native), English (native)
+<div class="details">French (native), English (native)</div>
 
 <h2>Activities</h2>
-Music (composition, guitar); endurance sports; useless Arduino projects
+<div class="details">Music (composition, guitar); endurance sports; useless Arduino projects</div>
 
 </div>
 
