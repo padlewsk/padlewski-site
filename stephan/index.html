@@ -7,12 +7,15 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="180x180" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 body {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     background: #222;
-    color: #ffffff;
+    color: #fff;
     margin: 0;
     padding: 40px;
     font-size: 14.5px;
@@ -73,31 +76,22 @@ body {
     margin-bottom: 12px;
 }
 
-.interests {
-    text-align: center;
-    color: #bbb;
-    margin-bottom: 20px;
-}
-
-.interests span {
-    white-space: nowrap;
-}
-
 .header-left,
-.header-spacer {
+.interests {
     flex: 1;
-}
-
-.header-left {
     color: #bbb;
     /* bottom line roughly centred on the photo */
     align-self: flex-end;
     margin-bottom: 20px;
 }
 
+.interests {
+    text-align: right;
+}
+
 .header-left h1 {
     font-size: 20px;
-    font-weight: normal;
+    font-weight: 500;
     margin: 0 0 4px 0;
     color: #fff;
 }
@@ -108,7 +102,7 @@ body {
 
 h2 {
     font-size: 14.5px;
-    font-weight: bold;
+    font-weight: 600;
     margin-top: 26px;
     margin-bottom: 6px;
     border-bottom: 1px solid #bbb;
@@ -116,12 +110,23 @@ h2 {
 }
 
 .summary {
-    color: #bbb;
-    text-align: justify;
+    color: #fff;
 }
 
 .entry {
     margin-bottom: 8px;
+}
+
+.entry-head {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.leader {
+    flex: 1;
+    min-width: 20px;
+    border-bottom: 1px dotted #777;
 }
 
 .details {
@@ -133,16 +138,12 @@ h2 {
 }
 
 .date {
-    float: right;
-    color: #bbb;
-}
-
-.clear {
-    clear: both;
+    color: #fff;
+    white-space: nowrap;
 }
 
 a {
-    color: #ffffff;
+    color: #fff;
     text-decoration: none;
 }
 
@@ -162,14 +163,15 @@ a:hover {
         text-align: center;
     }
 
-    .header-left {
+    .header-left,
+    .interests {
         flex: none;
         align-self: auto;
         margin-bottom: 0;
     }
 
-    .header-spacer {
-        display: none;
+    .interests {
+        text-align: center;
     }
 
     .photo {
@@ -185,16 +187,19 @@ a:hover {
         font-size: 22px;
     }
 
-    .summary {
-        text-align: left;
-    }
-
     .entry {
         margin-bottom: 14px;
     }
 
+    .entry-head {
+        display: block;
+    }
+
+    .leader {
+        display: none;
+    }
+
     .date {
-        float: none;
         display: block;
         font-size: 13px;
     }
@@ -228,11 +233,18 @@ a:hover {
     }
 
     .header-left,
-    .summary,
     .details,
-    .date,
     .interests {
         color: #555;
+    }
+
+    .summary,
+    .date {
+        color: #000;
+    }
+
+    .leader {
+        border-bottom-color: #999;
     }
 
     h2 {
@@ -245,6 +257,10 @@ a:hover {
     .entry {
         margin-bottom: 6px;
         break-inside: avoid;
+    }
+
+    .pdf-link {
+        display: none;
     }
 }
 </style>
@@ -262,7 +278,8 @@ a:hover {
         Échenevex, France<br>
         <a href="tel:+33674611100">Phone</a> ·
         <a href="mailto:spadlewski@hotmail.com">E-mail</a> ·
-        <a href="https://www.linkedin.com/in/stephan-padlewski-910923/">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/stephan-padlewski-910923/">LinkedIn</a><span class="pdf-link"> ·
+        <a href="stephan_padlewski_cv.pdf" download>CV (PDF)</a></span>
     </div>
 
     <div class="photo">
@@ -271,11 +288,12 @@ a:hover {
         </button>
     </div>
 
-    <div class="header-spacer"></div>
-</div>
-
-<div class="interests">
-<span>Photovoltaics</span> · <span>Circular economy</span> · <span>Cleantech entrepreneurship</span>
+    <div class="interests">
+        Photovoltaics<br>
+        Circular economy<br>
+        Cleantech entrepreneurship<br>
+        Business development
+    </div>
 </div>
 
 <h2>Profile</h2>
@@ -292,8 +310,11 @@ Bee Solar’s projects for low-carbon European solar manufacturing and power gen
 <h2>Experience</h2>
 
 <div class="entry">
-<strong><a href="https://www.dotsun.fr/en">DOTSun</a></strong> – Co-founder &amp; Chief Technology Officer
+<div class="entry-head">
+<span class="title"><strong><a href="https://www.dotsun.fr/en">DOTSun</a></strong> – Co-founder &amp; Chief Technology Officer</span>
+<span class="leader"></span>
 <span class="date">2022 – present</span>
+</div>
 <div class="details">
 Var, France<br>
 Cleantech start-up (société à mission) for the on-site repair, revamping and life extension of photovoltaic modules<br>
@@ -303,8 +324,11 @@ co-developed with Addev Materials, and a string-level monitoring system with Sic
 </div>
 
 <div class="entry">
-<strong><a href="https://www.beesolar.eu">Bee Solar Holding</a></strong> – Project Lead
+<div class="entry-head">
+<span class="title"><strong><a href="https://www.beesolar.eu">Bee Solar Holding</a></strong> – Project Lead</span>
+<span class="leader"></span>
 <span class="date">present</span>
+</div>
 <div class="details">
 Milan, Italy<br>
 GW-scale, vertically integrated European PV manufacturing (ingots, wafers, cells, modules) with a minimal carbon footprint<br>
@@ -313,16 +337,22 @@ Large-scale PV power plants with storage, supplying industrial customers through
 </div>
 
 <div class="entry">
-<strong>Andromède Investment &amp; Consulting SAS</strong>
+<div class="entry-head">
+<span class="title"><strong>Andromède Investment &amp; Consulting SAS</strong></span>
+<span class="leader"></span>
 <span class="date">present</span>
+</div>
 <div class="details">
 Échenevex, France
 </div>
 </div>
 
 <div class="entry">
-<strong>DuPont Photovoltaic Solutions</strong> – Regional Marketing Leader, EMEA
+<div class="entry-head">
+<span class="title"><strong>DuPont Photovoltaic Solutions</strong> – Regional Marketing Leader, EMEA</span>
+<span class="leader"></span>
 <span class="date">2008 – 2021</span>
+</div>
 <div class="details">
 Geneva, Switzerland<br>
 Led business development and marketing across Europe, the Middle East and Africa for
@@ -333,8 +363,11 @@ which links early panel degradation to module design and materials
 </div>
 
 <div class="entry">
-<strong>DuPont</strong> – New Technology &amp; Market Development, Electronics
+<div class="entry-head">
+<span class="title"><strong>DuPont</strong> – New Technology &amp; Market Development, Electronics</span>
+<span class="leader"></span>
 <span class="date">1991 – 2008</span>
+</div>
 <div class="details">
 New-technology and market-development work for printed circuit boards, integrated-circuit packaging
 and organic light-emitting diode (OLED) flat-panel displays
@@ -342,8 +375,11 @@ and organic light-emitting diode (OLED) flat-panel displays
 </div>
 
 <div class="entry">
-<strong>Independent project</strong> – Rooftop PV development
+<div class="entry-head">
+<span class="title"><strong>Independent project</strong> – Rooftop PV development</span>
+<span class="leader"></span>
 <span class="date">Mid-2000s</span>
+</div>
 <div class="details">
 Co-developed three rooftop photovoltaic systems in south-west France, all still in operation
 </div>
@@ -352,111 +388,170 @@ Co-developed three rooftop photovoltaic systems in south-west France, all still 
 <h2>Education</h2>
 
 <div class="entry">
-<strong>University of Cambridge</strong> – PhD in Physics
+<div class="entry-head">
+<span class="title"><strong>University of Cambridge</strong> – PhD in Physics</span>
+<span class="leader"></span>
 <span class="date">1991</span>
+</div>
 <div class="details">
 Graduate work in advanced physics, semiconductor technologies and photovoltaics
 </div>
 </div>
 
-<div class="clear"></div>
-
 <h2>Awards and Grants</h2>
 
 <div class="entry">
-<a href="https://www.reseau-preci.org/articles/h/dotsun-i-laureat-du-prix-initiatives-circulaires-2eme-edition.html">Prix Initiatives Circulaires</a> – DOTSun
+<div class="entry-head">
+<span class="title"><a href="https://www.reseau-preci.org/articles/h/dotsun-i-laureat-du-prix-initiatives-circulaires-2eme-edition.html">Prix Initiatives Circulaires</a> – DOTSun</span>
+<span class="leader"></span>
 <span class="date">2024</span>
+</div>
 <div class="details">Laureate, “Espoirs” category – Provence-Alpes-Côte d’Azur circular economy award (PRECI)</div>
 </div>
 
 <div class="entry">
-<strong>Fonds vert – Territoires d’industrie</strong> – DOTSun
+<div class="entry-head">
+<span class="title">Fonds vert – Territoires d’industrie – DOTSun</span>
+<span class="leader"></span>
 <span class="date">2025</span>
+</div>
 <div class="details">Grant from ADEME and the regional prefecture</div>
 </div>
 
 <h2>Partnerships and Launches</h2>
 
 <div class="entry">
-<a href="https://www.pv-magazine-australia.com/2021/07/04/sunday-read-a-pv-band-aid/">DuPont Tedlar® PV Rescue Tape</a>
+<div class="entry-head">
+<span class="title"><a href="https://www.pv-magazine-australia.com/2021/07/04/sunday-read-a-pv-band-aid/">DuPont Tedlar® PV Rescue Tape</a></span>
+<span class="leader"></span>
 <span class="date">Jul. 2021</span>
+</div>
 <div class="details">Launch of a field repair solution for modules with damaged backsheets – pv magazine</div>
 </div>
 
 <div class="entry">
-<a href="https://www.pv-tech.org/dupont-photovoltaic-collaborating-with-envision-on-solar-module-degradation/">DuPont × Envision</a>
+<div class="entry-head">
+<span class="title"><a href="https://www.pv-tech.org/dupont-photovoltaic-collaborating-with-envision-on-solar-module-degradation/">DuPont × Envision</a></span>
+<span class="leader"></span>
 <span class="date">Mar. 2018</span>
+</div>
 <div class="details">Predictive analytics for module degradation and backsheet failures on the EnOS platform – PV Tech</div>
 </div>
 
 <div class="entry">
-<a href="https://www.pv-tech.org/desert-technologies-and-dupont-enter-strategic-partnership/">DuPont × Desert Technologies</a>
+<div class="entry-head">
+<span class="title"><a href="https://www.pv-tech.org/desert-technologies-and-dupont-enter-strategic-partnership/">DuPont × Desert Technologies</a></span>
+<span class="leader"></span>
 <span class="date">Sep. 2017</span>
+</div>
 <div class="details">Strategic partnership for durable solar systems in the Middle East (Saudi Arabia) – PV Tech</div>
 </div>
 
 <h2>Talks and Webinars</h2>
 
 <div class="entry">
-<a href="https://www.pv-magazine.com/webinars/panneaux-biface-avec-backsheet-transparente-innovation-performances-et-fiabilite/">Panneaux biface avec backsheet transparente : innovation, performances et fiabilité</a>
+<div class="entry-head">
+<span class="title"><a href="https://www.pv-magazine.com/webinars/panneaux-biface-avec-backsheet-transparente-innovation-performances-et-fiabilite/">Panneaux biface avec backsheet transparente : innovation, performances et fiabilité</a></span>
+<span class="leader"></span>
 <span class="date">Nov. 2020</span>
+</div>
 <div class="details">pv magazine webinar (in French)</div>
 </div>
 
 <div class="entry">
-KAUST Solar Future Symposium, Thuwal, Saudi Arabia
-<span class="date">2019</span>
+<div class="entry-head">
+<span class="title">Large Scale Solar Digital Series</span>
+<span class="leader"></span>
+<span class="date">May 2020</span>
+</div>
+<div class="details">Fireside chat – Making the most of bifacial modules and trackers</div>
+</div>
+
+<div class="entry">
+<div class="entry-head">
+<span class="title">KAUST Solar Future Symposium, Thuwal, Saudi Arabia</span>
+<span class="leader"></span>
+<span class="date">Feb. 2019</span>
+</div>
 <div class="details">Invited speaker</div>
 </div>
 
 <div class="entry">
-Large Scale Solar Digital Series
-<div class="details">Speaker</div>
+<div class="entry-head">
+<span class="title"><a href="https://www.dupont.com/solar-photovoltaic-materials/news-media/solar-energy-systems-in-south-africa.html">African Utility Week, Cape Town, South Africa</a></span>
+<span class="leader"></span>
+<span class="date">May 2015</span>
 </div>
-
-<div class="entry">
-<a href="https://www.dupont.com/solar-photovoltaic-materials/news-media/solar-energy-systems-in-south-africa.html">African Utility Week, Cape Town, South Africa</a>
 <div class="details">Risk management for rooftop solar energy systems</div>
 </div>
 
 <div class="entry">
-<a href="https://www.dupont.com/solar-photovoltaic-materials/news-media/dupont-photovoltaic-solutions-and-enerpoint-highlight-risk-management-for-rooftop-solar-installations-in-italy.html">DuPont × Enerpoint, Italy</a>
-<div class="details">Risk management for rooftop solar installations</div>
+<div class="entry-head">
+<span class="title"><a href="https://www.dupont.com/solar-photovoltaic-materials/news-media/dupont-photovoltaic-solutions-and-enerpoint-highlight-risk-management-for-rooftop-solar-installations-in-italy.html">DuPont × Enerpoint, Italy</a></span>
+<span class="leader"></span>
+<span class="date">Apr. 2015</span>
+</div>
+<div class="details">Risk management for rooftop solar installations – Solarexpo, Milan</div>
 </div>
 
 <h2>Press</h2>
 
 <div class="entry">
-<a href="https://www.nicematin.com/economie/a-tourrettes-la-start-up-dotsun-a-mis-au-point-une-solution-revolutionnaire-pour-prolonger-la-vie-des-panneaux-photovoltaiques-10668861">À Tourrettes, la start-up DOTSun a mis au point une solution révolutionnaire pour prolonger la vie des panneaux photovoltaïques</a>
-<div class="details">Nice-Matin</div>
-</div>
-
-<div class="entry">
-<a href="https://www.lejournaldesentreprises.com/article/dotsun-prepare-sa-premiere-usine-de-reparation-de-panneaux-photovoltaiques-2141717">DOTSun prépare sa première usine de réparation de panneaux photovoltaïques</a>
+<div class="entry-head">
+<span class="title"><a href="https://www.lejournaldesentreprises.com/article/dotsun-prepare-sa-premiere-usine-de-reparation-de-panneaux-photovoltaiques-2141717">DOTSun prépare sa première usine de réparation de panneaux photovoltaïques</a></span>
+<span class="leader"></span>
 <span class="date">Apr. 2026</span>
+</div>
 <div class="details">Le Journal des Entreprises</div>
 </div>
 
 <div class="entry">
-<a href="https://www.pv-magazine.fr/2026/01/12/lacteur-de-la-semaine-dotsun-la-start-up-francaise-qui-propose-la-reparation-de-modules-solaires-sur-site/">L’acteur de la semaine : DOTSun, la start-up française qui propose la réparation de modules solaires sur site</a>
+<div class="entry-head">
+<span class="title"><a href="https://www.nicematin.com/economie/a-tourrettes-la-start-up-dotsun-a-mis-au-point-une-solution-revolutionnaire-pour-prolonger-la-vie-des-panneaux-photovoltaiques-10668861">À Tourrettes, la start-up DOTSun a mis au point une solution révolutionnaire pour prolonger la vie des panneaux photovoltaïques</a></span>
+<span class="leader"></span>
+<span class="date">Feb. 2026</span>
+</div>
+<div class="details">Nice-Matin</div>
+</div>
+
+<div class="entry">
+<div class="entry-head">
+<span class="title"><a href="https://www.pv-magazine.fr/2026/01/12/lacteur-de-la-semaine-dotsun-la-start-up-francaise-qui-propose-la-reparation-de-modules-solaires-sur-site/">L’acteur de la semaine : DOTSun, la start-up française qui propose la réparation de modules solaires sur site</a></span>
+<span class="leader"></span>
 <span class="date">Jan. 2026</span>
+</div>
 <div class="details">pv magazine France</div>
 </div>
 
 <div class="entry">
-<a href="https://www.pv-magazine.com/2026/01/07/french-startup-offers-on-site-solar-module-repair-solution/">French startup offers on-site solar module repair solution</a>
+<div class="entry-head">
+<span class="title"><a href="https://www.pv-magazine.com/2026/01/07/french-startup-offers-on-site-solar-module-repair-solution/">French startup offers on-site solar module repair solution</a></span>
+<span class="leader"></span>
 <span class="date">Jan. 2026</span>
+</div>
 <div class="details">pv magazine International</div>
 </div>
 
 <div class="entry">
-<a href="https://www.afsiasolar.com/whos-who-stephan-padlewski/">Who’s Who: Stephan Padlewski</a>
+<div class="entry-head">
+<span class="title"><a href="https://www.linkedin.com/posts/episode-17-addev-x-dotsun-un-partenariat-share-7179541965963710465-SgYr/">Episode 17 – ADDEV x DOTSun : un partenariat industriel pour la transition énergétique</a></span>
+<span class="leader"></span>
+<span class="date">Apr. 2024</span>
+</div>
+<div class="details">Podcast – ADDEV Materials (in French)</div>
+</div>
+
+<div class="entry">
+<div class="entry-head">
+<span class="title"><a href="https://www.afsiasolar.com/whos-who-stephan-padlewski/">Who’s Who: Stephan Padlewski</a></span>
+<span class="leader"></span>
 <span class="date">Mar. 2020</span>
+</div>
 <div class="details">Interview – Africa Solar Industry Association (AFSIA)</div>
 </div>
 
 <h2>Expertise</h2>
-<div class="details">PV module repair and life extension, circular economy, PV module reliability and degradation, backsheet and metallization materials, business development, strategic partnerships, EMEA markets, electronic materials (PCB, IC packaging, OLED)</div>
+<div class="summary">PV module repair and life extension, circular economy, PV module reliability and degradation, backsheet and metallization materials, business development, strategic partnerships, EMEA markets, electronic materials (PCB, IC packaging, OLED)</div>
 
 </div>
 
