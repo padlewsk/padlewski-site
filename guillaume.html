@@ -361,7 +361,8 @@ nav.scrolled {
 }
 
 .hero h1 .line span {
-    display: block;
+    display: inline-block;
+    vertical-align: top;
     transform: translateY(105%);
     transition: transform 1.1s cubic-bezier(.2, .8, .2, 1);
 }
@@ -1323,6 +1324,17 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 // Start the intro as soon as the first frame is painted; don't wait for fonts or images
 requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add('loaded')));
+
+// Size "GUILLAUME" so it spans exactly as wide as "PADLEWSKI"
+const [firstName, lastName] = document.querySelectorAll('.hero h1 .line span');
+function matchTitleWidths() {
+    firstName.style.fontSize = '';
+    const ratio = lastName.getBoundingClientRect().width / firstName.getBoundingClientRect().width;
+    firstName.style.fontSize = parseFloat(getComputedStyle(firstName).fontSize) * ratio + 'px';
+}
+matchTitleWidths();
+document.fonts.ready.then(matchTitleWidths);
+window.addEventListener('resize', matchTitleWidths);
 
 // Nav background once scrolled
 const nav = document.querySelector('nav');
