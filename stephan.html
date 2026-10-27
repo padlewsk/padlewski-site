@@ -1,12 +1,471 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Stephan Padlewski</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stephan Padlewski – CV</title>
+
+<style>
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: #222;
+    color: #ffffff;
+    margin: 0;
+    padding: 40px;
+    font-size: 14.5px;
+    line-height: 1.45;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+.container {
+    max-width: 780px;
+    margin: auto;
+}
+
+.photo {
+    text-align: center;
+}
+
+.photo img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+}
+
+.photo button {
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: zoom-in;
+}
+
+.lightbox {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
+}
+
+.lightbox::backdrop {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.lightbox img {
+    display: block;
+    max-width: min(90vw, 480px);
+    max-height: 90vh;
+    border-radius: 8px;
+    cursor: zoom-out;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 12px;
+}
+
+.interests {
+    text-align: center;
+    color: #bbb;
+    margin-bottom: 20px;
+}
+
+.interests span {
+    white-space: nowrap;
+}
+
+.header-left,
+.header-spacer {
+    flex: 1;
+}
+
+.header-left {
+    color: #bbb;
+    /* bottom line roughly centred on the photo */
+    align-self: flex-end;
+    margin-bottom: 20px;
+}
+
+.header-left h1 {
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0 0 4px 0;
+    color: #fff;
+}
+
+.header-left a {
+    color: inherit;
+}
+
+h2 {
+    font-size: 14.5px;
+    font-weight: bold;
+    margin-top: 26px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #bbb;
+    padding-bottom: 2px;
+}
+
+.summary {
+    color: #bbb;
+    text-align: justify;
+}
+
+.entry {
+    margin-bottom: 8px;
+}
+
+.details {
+    color: #bbb;
+}
+
+.details a {
+    color: inherit;
+}
+
+.date {
+    float: right;
+    color: #bbb;
+}
+
+.clear {
+    clear: both;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    body {
+        padding: 24px 16px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .header-left {
+        flex: none;
+        align-self: auto;
+        margin-bottom: 0;
+    }
+
+    .header-spacer {
+        display: none;
+    }
+
+    .photo {
+        order: -1;
+    }
+
+    .photo img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .header-left h1 {
+        font-size: 22px;
+    }
+
+    .summary {
+        text-align: left;
+    }
+
+    .entry {
+        margin-bottom: 14px;
+    }
+
+    .date {
+        float: none;
+        display: block;
+        font-size: 13px;
+    }
+}
+
+/* Print / PDF */
+@media print {
+    @page {
+        margin: 12mm 15mm;
+    }
+
+    body {
+        background: #fff;
+        color: #000;
+        padding: 0;
+        font-size: 12px;
+    }
+
+    .header-left h1 {
+        font-size: 18px;
+        color: #000;
+    }
+
+    .photo img {
+        width: 110px;
+        height: 110px;
+    }
+
+    a {
+        color: #000;
+    }
+
+    .header-left,
+    .summary,
+    .details,
+    .date,
+    .interests {
+        color: #555;
+    }
+
+    h2 {
+        font-size: 12.5px;
+        margin-top: 16px;
+        border-bottom-color: #999;
+        break-after: avoid;
+    }
+
+    .entry {
+        margin-bottom: 6px;
+        break-inside: avoid;
+    }
+}
+</style>
 </head>
+
 <body>
 
-<h1>Stephan Padlewski</h1>
-<p>[Website under construction]</p>
+<div class="container">
+
+<div class="header">
+    <div class="header-left">
+        <h1>Dr. Stephan Padlewski</h1>
+        Co-founder &amp; CTO, <a href="https://www.dotsun.fr/en">DOTSun</a><br>
+        <a href="https://www.beesolar.eu">Bee Solar</a><br>
+        Échenevex, France<br>
+        <a href="tel:+33674611100">Phone</a> ·
+        <a href="mailto:spadlewski@hotmail.com">E-mail</a> ·
+        <a href="https://www.linkedin.com/in/stephan-padlewski-910923/">LinkedIn</a>
+    </div>
+
+    <div class="photo">
+        <button type="button" aria-label="Enlarge photo">
+            <img src="stephan.jpg" alt="Portrait of Stephan Padlewski">
+        </button>
+    </div>
+
+    <div class="header-spacer"></div>
+</div>
+
+<div class="interests">
+<span>Photovoltaics</span> · <span>Circular economy</span> · <span>Cleantech entrepreneurship</span>
+</div>
+
+<h2>Profile</h2>
+<div class="summary">
+Physicist turned business leader with three decades at DuPont, bringing new materials
+technologies to market across the electronics and solar industries. For more than a decade
+he led DuPont Photovoltaic Solutions’ marketing and business development across Europe,
+the Middle East and Africa, with a focus on long-term reliability of solar modules
+in demanding climates. He is now co-founder and CTO of DOTSun, a French cleantech start-up
+that repairs, revamps and extends the lifespan of photovoltaic modules on site, and leads
+Bee Solar’s projects for low-carbon European solar manufacturing and power generation.
+</div>
+
+<h2>Experience</h2>
+
+<div class="entry">
+<strong><a href="https://www.dotsun.fr/en">DOTSun</a></strong> – Co-founder &amp; Chief Technology Officer
+<span class="date">2022 – present</span>
+<div class="details">
+Var, France<br>
+Cleantech start-up (société à mission) for the on-site repair, revamping and life extension of photovoltaic modules<br>
+Developed <em>DOTSun Extended Life</em>, an on-site backsheet repair process using a PFAS-free adhesive film
+co-developed with Addev Materials, and a string-level monitoring system with Sicame Group
+</div>
+</div>
+
+<div class="entry">
+<strong><a href="https://www.beesolar.eu">Bee Solar Holding</a></strong> – Project Lead
+<span class="date">present</span>
+<div class="details">
+Milan, Italy<br>
+GW-scale, vertically integrated European PV manufacturing (ingots, wafers, cells, modules) with a minimal carbon footprint<br>
+Large-scale PV power plants with storage, supplying industrial customers through power purchase agreements
+</div>
+</div>
+
+<div class="entry">
+<strong>Andromède Investment &amp; Consulting SAS</strong>
+<span class="date">present</span>
+<div class="details">
+Échenevex, France
+</div>
+</div>
+
+<div class="entry">
+<strong>DuPont Photovoltaic Solutions</strong> – Regional Marketing Leader, EMEA
+<span class="date">2008 – 2021</span>
+<div class="details">
+Geneva, Switzerland<br>
+Led business development and marketing across Europe, the Middle East and Africa for
+DuPont’s PV materials, including <em>Tedlar®</em> backsheet films and <em>Solamet®</em> metallization pastes<br>
+Promoted DuPont’s global field-reliability programme (about 2 GW of installed modules surveyed since 2011),
+which links early panel degradation to module design and materials
+</div>
+</div>
+
+<div class="entry">
+<strong>DuPont</strong> – New Technology &amp; Market Development, Electronics
+<span class="date">1991 – 2008</span>
+<div class="details">
+New-technology and market-development work for printed circuit boards, integrated-circuit packaging
+and organic light-emitting diode (OLED) flat-panel displays
+</div>
+</div>
+
+<div class="entry">
+<strong>Independent project</strong> – Rooftop PV development
+<span class="date">Mid-2000s</span>
+<div class="details">
+Co-developed three rooftop photovoltaic systems in south-west France, all still in operation
+</div>
+</div>
+
+<h2>Education</h2>
+
+<div class="entry">
+<strong>University of Cambridge</strong> – PhD in Physics
+<span class="date">1991</span>
+<div class="details">
+Graduate work in advanced physics, semiconductor technologies and photovoltaics
+</div>
+</div>
+
+<div class="clear"></div>
+
+<h2>Awards and Grants</h2>
+
+<div class="entry">
+<a href="https://www.reseau-preci.org/articles/h/dotsun-i-laureat-du-prix-initiatives-circulaires-2eme-edition.html">Prix Initiatives Circulaires</a> – DOTSun
+<span class="date">2024</span>
+<div class="details">Laureate, “Espoirs” category – Provence-Alpes-Côte d’Azur circular economy award (PRECI)</div>
+</div>
+
+<div class="entry">
+<strong>Fonds vert – Territoires d’industrie</strong> – DOTSun
+<span class="date">2025</span>
+<div class="details">Grant from ADEME and the regional prefecture</div>
+</div>
+
+<h2>Partnerships and Launches</h2>
+
+<div class="entry">
+<a href="https://www.pv-magazine-australia.com/2021/07/04/sunday-read-a-pv-band-aid/">DuPont Tedlar® PV Rescue Tape</a>
+<span class="date">Jul. 2021</span>
+<div class="details">Launch of a field repair solution for modules with damaged backsheets – pv magazine</div>
+</div>
+
+<div class="entry">
+<a href="https://www.pv-tech.org/dupont-photovoltaic-collaborating-with-envision-on-solar-module-degradation/">DuPont × Envision</a>
+<span class="date">Mar. 2018</span>
+<div class="details">Predictive analytics for module degradation and backsheet failures on the EnOS platform – PV Tech</div>
+</div>
+
+<div class="entry">
+<a href="https://www.pv-tech.org/desert-technologies-and-dupont-enter-strategic-partnership/">DuPont × Desert Technologies</a>
+<span class="date">Sep. 2017</span>
+<div class="details">Strategic partnership for durable solar systems in the Middle East (Saudi Arabia) – PV Tech</div>
+</div>
+
+<h2>Talks and Webinars</h2>
+
+<div class="entry">
+<a href="https://www.pv-magazine.com/webinars/panneaux-biface-avec-backsheet-transparente-innovation-performances-et-fiabilite/">Panneaux biface avec backsheet transparente : innovation, performances et fiabilité</a>
+<span class="date">Nov. 2020</span>
+<div class="details">pv magazine webinar (in French)</div>
+</div>
+
+<div class="entry">
+KAUST Solar Future Symposium, Thuwal, Saudi Arabia
+<span class="date">2019</span>
+<div class="details">Invited speaker</div>
+</div>
+
+<div class="entry">
+Large Scale Solar Digital Series
+<div class="details">Speaker</div>
+</div>
+
+<div class="entry">
+<a href="https://www.dupont.com/solar-photovoltaic-materials/news-media/solar-energy-systems-in-south-africa.html">African Utility Week, Cape Town, South Africa</a>
+<div class="details">Risk management for rooftop solar energy systems</div>
+</div>
+
+<div class="entry">
+<a href="https://www.dupont.com/solar-photovoltaic-materials/news-media/dupont-photovoltaic-solutions-and-enerpoint-highlight-risk-management-for-rooftop-solar-installations-in-italy.html">DuPont × Enerpoint, Italy</a>
+<div class="details">Risk management for rooftop solar installations</div>
+</div>
+
+<h2>Press</h2>
+
+<div class="entry">
+<a href="https://www.nicematin.com/economie/a-tourrettes-la-start-up-dotsun-a-mis-au-point-une-solution-revolutionnaire-pour-prolonger-la-vie-des-panneaux-photovoltaiques-10668861">À Tourrettes, la start-up DOTSun a mis au point une solution révolutionnaire pour prolonger la vie des panneaux photovoltaïques</a>
+<div class="details">Nice-Matin</div>
+</div>
+
+<div class="entry">
+<a href="https://www.lejournaldesentreprises.com/article/dotsun-prepare-sa-premiere-usine-de-reparation-de-panneaux-photovoltaiques-2141717">DOTSun prépare sa première usine de réparation de panneaux photovoltaïques</a>
+<span class="date">Apr. 2026</span>
+<div class="details">Le Journal des Entreprises</div>
+</div>
+
+<div class="entry">
+<a href="https://www.pv-magazine.fr/2026/01/12/lacteur-de-la-semaine-dotsun-la-start-up-francaise-qui-propose-la-reparation-de-modules-solaires-sur-site/">L’acteur de la semaine : DOTSun, la start-up française qui propose la réparation de modules solaires sur site</a>
+<span class="date">Jan. 2026</span>
+<div class="details">pv magazine France</div>
+</div>
+
+<div class="entry">
+<a href="https://www.pv-magazine.com/2026/01/07/french-startup-offers-on-site-solar-module-repair-solution/">French startup offers on-site solar module repair solution</a>
+<span class="date">Jan. 2026</span>
+<div class="details">pv magazine International</div>
+</div>
+
+<div class="entry">
+<a href="https://www.afsiasolar.com/whos-who-stephan-padlewski/">Who’s Who: Stephan Padlewski</a>
+<span class="date">Mar. 2020</span>
+<div class="details">Interview – Africa Solar Industry Association (AFSIA)</div>
+</div>
+
+<h2>Expertise</h2>
+<div class="details">PV module repair and life extension, circular economy, PV module reliability and degradation, backsheet and metallization materials, business development, strategic partnerships, EMEA markets, electronic materials (PCB, IC packaging, OLED)</div>
+
+</div>
+
+<dialog class="lightbox">
+    <img src="stephan.jpg" alt="Portrait of Stephan Padlewski">
+</dialog>
+
+<script>
+const lightbox = document.querySelector('.lightbox');
+document.querySelector('.photo button').addEventListener('click', () => lightbox.showModal());
+lightbox.addEventListener('click', () => lightbox.close());
+</script>
 
 </body>
 </html>

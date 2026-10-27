@@ -1,120 +1,1318 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Guillaume Padlewski - CV</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class'
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guillaume Padlewski – Video Production</title>
+<meta name="description" content="Guillaume Padlewski – Head of Video Production at Dorier Group. Editing, motion design, colour grading and camera.">
+
+<script>document.documentElement.classList.add('js');</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #0b0b0c;
+    --surface: #141416;
+    --line: #2a2a2e;
+    --text: #f2f0eb;
+    --muted: #9a978f;
+    --accent: #ff4d2e;   /* tally red */
+    --display: "Syne", "Helvetica Neue", Arial, sans-serif;
+    --body: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --gutter: clamp(16px, 5vw, 64px);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+::selection {
+    background: var(--accent);
+    color: #000;
+}
+
+/* ---------- Film grain + intro shutter ---------- */
+
+#grain {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.07;
+    mix-blend-mode: screen;
+}
+
+.shutter {
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 50vh;
+    background: #000;
+    z-index: 60;
+    pointer-events: none;
+    transition: transform 1.1s cubic-bezier(.77, 0, .18, 1) .25s;
+}
+
+.shutter.top { top: 0; }
+.shutter.bottom { bottom: 0; }
+
+.loaded .shutter.top { transform: translateY(-100%); }
+.loaded .shutter.bottom { transform: translateY(100%); }
+
+/* ---------- Navigation ---------- */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px var(--gutter);
+    transition: background .4s, backdrop-filter .4s;
+}
+
+nav.scrolled {
+    background: rgba(11, 11, 12, .75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.logo {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.nav-links a:hover {
+    color: var(--text);
+}
+
+/* Rolling label on hover */
+.roll {
+    display: inline-block;
+    height: 1.25em;
+    line-height: 1.25em;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.roll span {
+    display: block;
+    transition: transform .45s cubic-bezier(.65, 0, .35, 1);
+}
+
+.roll span::after {
+    content: attr(data-text);
+    display: block;
+}
+
+a:hover .roll span {
+    transform: translateY(-100%);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px;
+    border: 1px solid var(--text);
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background .3s, color .3s, border-color .3s;
+}
+
+.btn:hover {
+    background: var(--text);
+    color: var(--bg);
+}
+
+.btn.solid {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+}
+
+.btn.solid:hover {
+    background: var(--text);
+    border-color: var(--text);
+}
+
+/* ---------- Hero / viewfinder ---------- */
+
+.hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 120px var(--gutter) 84px;
+    overflow: hidden;
+}
+
+.glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: .45;
+    pointer-events: none;
+}
+
+.glow.one {
+    width: 55vw;
+    height: 55vw;
+    background: #ff4d2e;
+    top: -20vw;
+    right: -15vw;
+    animation: drift 14s ease-in-out infinite alternate;
+}
+
+.glow.two {
+    width: 40vw;
+    height: 40vw;
+    background: #ffb000;
+    bottom: -18vw;
+    left: -10vw;
+    opacity: .25;
+    animation: drift 18s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes drift {
+    to { transform: translate(-8vw, 6vw) scale(1.15); }
+}
+
+.viewfinder {
+    position: absolute;
+    inset: clamp(70px, 10vh, 96px) var(--gutter) 28px;
+    pointer-events: none;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .08em;
+    color: var(--muted);
+}
+
+.corner {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-color: rgba(242, 240, 235, .6);
+    border-style: solid;
+    border-width: 0;
+}
+
+.corner.tl { top: 0; left: 0; border-top-width: 2px; border-left-width: 2px; }
+.corner.tr { top: 0; right: 0; border-top-width: 2px; border-right-width: 2px; }
+.corner.bl { bottom: 0; left: 0; border-bottom-width: 2px; border-left-width: 2px; }
+.corner.br { bottom: 0; right: 0; border-bottom-width: 2px; border-right-width: 2px; }
+
+.rec {
+    position: absolute;
+    top: 14px;
+    left: 44px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text);
+}
+
+.rec i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: blink 1.2s steps(1) infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.specs {
+    position: absolute;
+    top: 14px;
+    right: 44px;
+    display: flex;
+    gap: 18px;
+}
+
+.timecode {
+    margin-left: 10px;
+    color: var(--muted);
+}
+
+.hero-kicker {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    /* Syne caps run ~1em per letter: 9vw keeps both 9-letter lines inside the frame */
+    font-size: clamp(32px, 9vw, 170px);
+    line-height: .88;
+    letter-spacing: -0.04em;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.hero h1 .line {
+    display: block;
+    overflow: hidden;
+}
+
+.hero h1 .line span {
+    display: block;
+    transform: translateY(105%);
+    transition: transform 1.1s cubic-bezier(.2, .8, .2, 1);
+}
+
+.hero h1 .line:nth-child(2) span {
+    transition-delay: .12s;
+    -webkit-text-stroke: 2px var(--text);
+    color: transparent;
+}
+
+.loaded .hero h1 .line span {
+    transform: none;
+    transition-delay: 1.1s;
+}
+
+.loaded .hero h1 .line:nth-child(2) span {
+    transition-delay: 1.22s;
+}
+
+.hero-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+}
+
+.hero-foot p {
+    max-width: 440px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 17px;
+}
+
+.hero-foot p strong {
+    color: var(--text);
+    font-weight: 500;
+}
+
+.fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .9s ease 1.6s, transform .9s ease 1.6s;
+}
+
+.loaded .fade-up {
+    opacity: 1;
+    transform: none;
+}
+
+/* ---------- Marquees ---------- */
+
+.marquee {
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 22px 0;
+    white-space: nowrap;
+}
+
+.marquee-track {
+    display: inline-flex;
+    animation: scroll 32s linear infinite;
+}
+
+.marquee.reverse .marquee-track {
+    animation-direction: reverse;
+    animation-duration: 40s;
+}
+
+.marquee-track > span {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(28px, 5vw, 64px);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    padding-right: 48px;
+    display: inline-flex;
+    align-items: center;
+    gap: 48px;
+}
+
+.marquee-track > span::after {
+    content: "";
+    width: .35em;
+    height: .35em;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.marquee-track > span.outline {
+    -webkit-text-stroke: 1.5px var(--text);
+    color: transparent;
+}
+
+.marquee.small .marquee-track > span {
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    text-transform: none;
+    color: var(--muted);
+    letter-spacing: 0;
+}
+
+@keyframes scroll {
+    to { transform: translateX(-50%); }
+}
+
+/* ---------- Sections ---------- */
+
+section {
+    padding: clamp(80px, 12vw, 160px) var(--gutter);
+}
+
+.wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.label {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.label::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+}
+
+h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(36px, 6vw, 84px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin: 0 0 56px;
+}
+
+h2 em {
+    font-style: normal;
+    color: var(--accent);
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity .9s ease, transform .9s cubic-bezier(.2, .8, .2, 1);
+}
+
+.reveal.in {
+    opacity: 1;
+    transform: none;
+}
+
+/* ---------- About ---------- */
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: clamp(32px, 6vw, 96px);
+    align-items: start;
+}
+
+.frame {
+    position: relative;
+    border: 1px solid var(--line);
+    padding: 12px 12px 40px;
+    background: var(--surface);
+}
+
+.frame img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    filter: grayscale(.25) contrast(1.05);
+}
+
+.frame figcaption {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.about-text p {
+    font-size: clamp(20px, 2.4vw, 30px);
+    line-height: 1.35;
+    margin: 0 0 24px;
+    letter-spacing: -0.01em;
+}
+
+.about-text p.small {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+/* ---------- Timeline (NLE style) ---------- */
+
+.timeline {
+    position: relative;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 16px 16px 20px 72px;
+    margin-bottom: 72px;
+    font-family: var(--mono);
+    font-size: 11px;
+}
+
+.ruler,
+.track {
+    position: relative;
+    height: 34px;
+}
+
+.ruler {
+    height: 22px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 10px;
+    color: var(--muted);
+}
+
+.ruler span {
+    position: absolute;
+    left: calc((var(--y) - 2010) / 17 * 100%);
+    transform: translateX(-50%);
+}
+
+.track {
+    margin-bottom: 8px;
+}
+
+.track::before {
+    content: attr(data-name);
+    position: absolute;
+    left: -56px;
+    top: 9px;
+    color: var(--muted);
+}
+
+.clip {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc((var(--s) - 2010) / 17 * 100%);
+    width: max(6px, calc((var(--e) - var(--s)) / 17 * 100%));
+    border-radius: 4px;
+    background: #3a3a40;
+    border-left: 2px solid rgba(255, 255, 255, .35);
+    color: var(--text);
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: default;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform .8s cubic-bezier(.2, .8, .2, 1), filter .2s;
+}
+
+.clip:hover {
+    filter: brightness(1.3);
+}
+
+.clip.v { background: #7a2a1c; }
+.clip.v.now { background: var(--accent); color: #000; }
+.clip.edu { background: #5b4a1a; }
+
+.timeline.in .clip {
+    transform: none;
+}
+
+.timeline.in .clip:nth-child(2) { transition-delay: .1s; }
+.timeline.in .clip:nth-child(3) { transition-delay: .2s; }
+.timeline.in .clip:nth-child(4) { transition-delay: .3s; }
+.timeline.in .clip:nth-child(5) { transition-delay: .4s; }
+.timeline.in .clip:nth-child(6) { transition-delay: .5s; }
+.timeline.in .clip:nth-child(7) { transition-delay: .6s; }
+
+.playhead-area {
+    position: absolute;
+    top: 16px;
+    bottom: 20px;
+    left: 72px;
+    right: 16px;
+    pointer-events: none;
+}
+
+.playhead {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+}
+
+.playhead::before {
+    content: attr(data-year);
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #000;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+/* ---------- Experience list ---------- */
+
+.jobs {
+    border-top: 1px solid var(--line);
+}
+
+.job {
+    display: grid;
+    grid-template-columns: 180px 1fr auto;
+    gap: 32px;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+}
+
+.job::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .6s cubic-bezier(.65, 0, .35, 1);
+}
+
+.job:hover::before {
+    transform: scaleX(1);
+}
+
+.job-when {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    padding-top: 6px;
+}
+
+.job h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(24px, 3vw, 36px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px;
+}
+
+.job .role {
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.job .steps {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 12px;
+    font-size: 15px;
+}
+
+.job .steps li {
+    display: flex;
+    gap: 14px;
+}
+
+.job .steps li span {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    min-width: 150px;
+    padding-top: 3px;
+}
+
+.job p {
+    margin: 0;
+    color: var(--muted);
+    max-width: 640px;
+}
+
+.job-where {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    padding-top: 8px;
+    text-align: right;
+}
+
+/* ---------- Toolkit ---------- */
+
+.toolkit {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+}
+
+.tool {
+    background: var(--bg);
+    padding: 32px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transition: color .4s;
+}
+
+.tool::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateY(101%);
+    transition: transform .5s cubic-bezier(.65, 0, .35, 1);
+    z-index: 0;
+}
+
+.tool:hover::before {
+    transform: none;
+}
+
+.tool:hover {
+    color: #000;
+}
+
+.tool > * {
+    position: relative;
+    z-index: 1;
+}
+
+.tool .num {
+    font-family: var(--mono);
+    font-size: 12px;
+    opacity: .6;
+}
+
+.tool h4 {
+    font-family: var(--display);
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 24px 0 8px;
+}
+
+.tool p {
+    margin: 0;
+    font-size: 14px;
+    opacity: .75;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+.chips span {
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    transition: border-color .3s, color .3s;
+}
+
+.chips span:hover {
+    border-color: var(--accent);
+    color: var(--text);
+}
+
+/* ---------- Education ---------- */
+
+.edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.edu {
+    border: 1px solid var(--line);
+    padding: 32px;
+    background: var(--surface);
+}
+
+.edu .job-when {
+    padding: 0;
+    margin-bottom: 12px;
+}
+
+.edu h3 {
+    font-family: var(--display);
+    font-size: 26px;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+}
+
+.edu p {
+    margin: 0;
+    color: var(--muted);
+}
+
+/* ---------- Contact ---------- */
+
+.contact {
+    text-align: center;
+    padding-bottom: 64px;
+}
+
+.contact h2 {
+    font-size: clamp(44px, 10vw, 150px);
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    margin-bottom: 48px;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 28px var(--gutter);
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+    .nav-links {
+        display: none;
     }
-  </script>
+
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .frame {
+        max-width: 240px;
+    }
+
+    .timeline {
+        display: none;
+    }
+
+    .job {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 28px 0;
+    }
+
+    .job-when,
+    .job-where {
+        padding-top: 0;
+        text-align: left;
+    }
+
+    .job .steps li {
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 6px;
+    }
+
+    .toolkit {
+        grid-template-columns: 1fr;
+    }
+
+    .tool {
+        min-height: 0;
+    }
+
+    .edu-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .specs {
+        display: none;
+    }
+
+    .rec {
+        left: 36px;
+    }
+
+    .hero h1 .line:nth-child(2) span {
+        -webkit-text-stroke-width: 1.5px;
+    }
+
+    .tool,
+    .edu {
+        padding: 24px;
+    }
+}
+
+/* Without JavaScript, skip the intro and show everything */
+html:not(.js) .shutter {
+    display: none;
+}
+
+html:not(.js) .reveal,
+html:not(.js) .fade-up,
+html:not(.js) .hero h1 .line span,
+html:not(.js) .clip {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .shutter {
+        display: none;
+    }
+
+    .reveal,
+    .fade-up,
+    .hero h1 .line span,
+    .clip {
+        opacity: 1;
+        transform: none;
+    }
+}
+</style>
 </head>
 
-<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+<body>
 
-<div class="max-w-5xl mx-auto p-6 md:p-12 space-y-8">
+<canvas id="grain" aria-hidden="true"></canvas>
+<div class="shutter top" aria-hidden="true"></div>
+<div class="shutter bottom" aria-hidden="true"></div>
 
-  <!-- Dark Mode Toggle -->
-  <div class="flex justify-end">
-    <button onclick="toggleDarkMode()" 
-      class="px-4 py-2 rounded-xl bg-gray-200 dark:bg-gray-700 text-sm">
-      Toggle Dark Mode
-    </button>
-  </div>
-
-  <!-- Header -->
-<div class="text-center">
-  <h1 class="text-4xl font-bold">Guillaume Padlewski</h1>
-
-  <p class="text-lg text-gray-600 dark:text-gray-300 mt-2">
-    Content Creator • Event Production • Media
-  </p>
-
-  <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
-    Auvergne-Rhône-Alpes, France
-  </p>
-
-  <!-- Links -->
-  <div class="mt-6 flex flex-col items-center gap-4">
-
-  <!-- Download vCard -->
-  <a href="guillaume_padlewski.vcf" download
-     class="px-4 py-2 rounded-xl bg-gray-900 text-white dark:bg-white dark:text-black hover:opacity-80 transition">
-    Download Contact
-  </a>
-
-</div>
-</div>
-
-  <!-- Profile -->
-  <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
-    <h2 class="text-xl font-semibold mb-3">Profile</h2>
-    <p class="text-gray-600 dark:text-gray-300">
-      Creative professional with experience in content creation and large-scale event production.
-      Skilled at delivering engaging visual experiences across corporate and live environments.
-    </p>
-  </div>
-
-  <!-- Experience -->
-  <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
-    <h2 class="text-xl font-semibold mb-4">Experience</h2>
-
-    <div>
-      <h3 class="font-semibold">Dorier Group</h3>
-      <p class="text-sm text-gray-500 dark:text-gray-400">Geneva, Switzerland</p>
-      <ul class="list-disc list-inside mt-2 text-gray-600 dark:text-gray-300">
-        <li>Worked on large-scale event productions</li>
-        <li>Delivered audiovisual solutions for global clients</li>
-        <li>Contributed to international conferences and events</li>
-      </ul>
+<nav>
+    <a href="#top" class="logo">GP<span>.</span></a>
+    <div class="nav-links">
+        <a href="#about"><span class="roll"><span data-text="About">About</span></span></a>
+        <a href="#work"><span class="roll"><span data-text="Work">Work</span></span></a>
+        <a href="#toolkit"><span class="roll"><span data-text="Toolkit">Toolkit</span></span></a>
+        <a href="#contact"><span class="roll"><span data-text="Contact">Contact</span></span></a>
     </div>
-  </div>
+    <a href="#contact" class="btn"><span class="roll"><span data-text="Let’s talk">Let’s talk</span></span></a>
+</nav>
 
-  <!-- Projects -->
-  <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
-    <h2 class="text-xl font-semibold mb-4">Projects</h2>
+<header class="hero" id="top">
+    <div class="glow one"></div>
+    <div class="glow two"></div>
 
-    <div>
-      <h3 class="font-semibold">ALTRAN Video</h3>
-      <p class="text-sm text-gray-500 dark:text-gray-400">2015 – Present</p>
-      <ul class="list-disc list-inside mt-2 text-gray-600 dark:text-gray-300">
-        <li>Produced content around Solar Impulse initiative</li>
-        <li>Collaborated with creative teams</li>
-      </ul>
+    <div class="viewfinder" aria-hidden="true">
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+        <div class="rec"><i></i>REC<span class="timecode" id="timecode">00:00:00:00</span></div>
+        <div class="specs"><span>4K</span><span>25P</span><span>ISO 800</span><span>f/2.8</span></div>
     </div>
-  </div>
 
-  <!-- Skills -->
-  <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
-    <h2 class="text-xl font-semibold mb-4">Skills</h2>
-    <div class="flex flex-wrap gap-2">
-      <span class="px-3 py-1 rounded-xl bg-gray-200 dark:bg-gray-700">Content Creation</span>
-      <span class="px-3 py-1 rounded-xl bg-gray-200 dark:bg-gray-700">Event Production</span>
-      <span class="px-3 py-1 rounded-xl bg-gray-200 dark:bg-gray-700">Video Production</span>
-      <span class="px-3 py-1 rounded-xl bg-gray-200 dark:bg-gray-700">Creative Direction</span>
-      <span class="px-3 py-1 rounded-xl bg-gray-200 dark:bg-gray-700">Project Management</span>
+    <div class="hero-kicker fade-up">Head of Video Production · Dorier Group</div>
+    <h1>
+        <span class="line"><span>Guillaume</span></span>
+        <span class="line"><span>Padlewski</span></span>
+    </h1>
+    <div class="hero-foot">
+        <p class="fade-up">
+            <strong>Editing, motion design, colour and camera</strong>, from the edit suite to
+            live events in Geneva, London and beyond.
+        </p>
+        <a href="#work" class="btn solid fade-up"><span class="roll"><span data-text="See the reel ↓">See the reel ↓</span></span></a>
     </div>
-  </div>
+</header>
 
-  <!-- Education -->
-  <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
-    <h2 class="text-xl font-semibold mb-3">Education</h2>
-    <h3 class="font-semibold">Kingston University</h3>
-    <p class="text-sm text-gray-500 dark:text-gray-400">2010 – 2014</p>
-  </div>
-
-  <!-- Footer -->
-  <div class="text-center text-sm text-gray-400 pt-4">
-    © 2026 Guillaume Padlewski
-  </div>
-
+<div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+        <span>Video Production</span><span class="outline">Post-production</span><span>Motion Design</span><span class="outline">Colour Grading</span><span>Camera</span><span class="outline">Live Events</span>
+        <span>Video Production</span><span class="outline">Post-production</span><span>Motion Design</span><span class="outline">Colour Grading</span><span>Camera</span><span class="outline">Live Events</span>
+    </div>
 </div>
+
+<section id="about">
+    <div class="wrap about-grid">
+        <figure class="frame reveal">
+            <img src="guillaume.jpg" alt="Portrait of Guillaume Padlewski">
+            <figcaption><span>A001_C001</span><span>00:00:01:00</span></figcaption>
+        </figure>
+        <div class="about-text">
+            <div class="label reveal">About</div>
+            <p class="reveal">
+                Video producer and editor with more than a decade behind the camera and in the edit suite,
+                from science at CERN and the Solar Impulse round-the-world flight to luxury beauty in London.
+            </p>
+            <p class="reveal">
+                Today he heads video production at <em style="font-style:normal;color:var(--accent)">Dorier Group</em>,
+                creating the content behind conferences, ceremonies and immersive experiences.
+            </p>
+            <p class="small reveal">
+                Bilingual French–English. Trained at Kingston University (London) in television and video technology,
+                with advanced DaVinci Resolve and After Effects training from SOHO Editors.
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="marquee small reverse" aria-label="Organisations worked with">
+    <div class="marquee-track">
+        <span>Dorier Group</span><span>Green Park Content</span><span>Charlotte Tilbury Beauty</span><span>CERN</span><span>Solar Impulse</span><span>Altran</span><span>Kingston University</span>
+        <span aria-hidden="true">Dorier Group</span><span aria-hidden="true">Green Park Content</span><span aria-hidden="true">Charlotte Tilbury Beauty</span><span aria-hidden="true">CERN</span><span aria-hidden="true">Solar Impulse</span><span aria-hidden="true">Altran</span><span aria-hidden="true">Kingston University</span>
+    </div>
+</div>
+
+<section id="work">
+    <div class="wrap">
+        <div class="label reveal">Experience</div>
+        <h2 class="reveal">Thirteen years<br>on the <em>timeline</em>.</h2>
+
+        <div class="timeline reveal" id="timeline" aria-hidden="true">
+            <div class="ruler">
+                <span style="--y:2010">2010</span><span style="--y:2012">2012</span><span style="--y:2014">2014</span>
+                <span style="--y:2016">2016</span><span style="--y:2018">2018</span><span style="--y:2020">2020</span>
+                <span style="--y:2022">2022</span><span style="--y:2024">2024</span><span style="--y:2026">2026</span>
+            </div>
+            <div class="track" data-name="V1">
+                <div class="clip v" style="--s:2013.5;--e:2013.8" title="CERN – Video Technician (2013)"></div>
+                <div class="clip v" style="--s:2014.5;--e:2014.85" title="Geneva production company – Editor &amp; Camera (2014)"></div>
+                <div class="clip v" style="--s:2014.85;--e:2015.25" title="Solar Impulse – Graphic Video Editor &amp; Camera (2014–2015)"></div>
+                <div class="clip v" style="--s:2015.3;--e:2015.95" title="CERN – Video Editor &amp; Camera (2015)"></div>
+                <div class="clip v" style="--s:2016;--e:2019.5" title="Charlotte Tilbury Beauty – Video Editor &amp; Colourist (2016–2019)">Charlotte Tilbury</div>
+                <div class="clip v" style="--s:2019.5;--e:2021.25" title="Green Park Content (2019–2021)">Green Park</div>
+                <div class="clip v now" style="--s:2021.25;--e:2026.83" title="Dorier Group (2021–present)">Dorier Group</div>
+            </div>
+            <div class="track" data-name="A1">
+                <div class="clip edu" style="--s:2010.75;--e:2014.5" title="Kingston University – BSc (Hons) Television &amp; Video Technology">Kingston University</div>
+            </div>
+            <div class="playhead-area">
+                <div class="playhead" id="playhead" data-year="2010"></div>
+            </div>
+        </div>
+
+        <div class="jobs">
+            <article class="job reveal">
+                <div class="job-when">2021 — NOW</div>
+                <div>
+                    <h3>Dorier Group</h3>
+                    <ul class="steps">
+                        <li><span>Dec 2022 — now</span>Head of Video Production</li>
+                        <li><span>Feb — Dec 2022</span>Graphic Video Department Manager</li>
+                        <li><span>Apr 2021 — Feb 2022</span>Post-Production Manager</li>
+                    </ul>
+                    <p>Leads the video team at Geneva’s audiovisual production house for events, conferences and immersive experiences, from motion content to on-site production.</p>
+                </div>
+                <div class="job-where">Geneva</div>
+            </article>
+
+            <article class="job reveal">
+                <div class="job-when">2019 — 2021</div>
+                <div>
+                    <h3>Green Park Content</h3>
+                    <ul class="steps">
+                        <li><span>2021</span>Graphic Post-Production Manager</li>
+                        <li><span>2019 — 2021</span>Senior Videographer &amp; Motion Graphics Specialist</li>
+                    </ul>
+                    <p>Shooting, editing and motion graphics for brand content.</p>
+                </div>
+                <div class="job-where">London</div>
+            </article>
+
+            <article class="job reveal">
+                <div class="job-when">2016 — 2019</div>
+                <div>
+                    <h3>Charlotte Tilbury Beauty</h3>
+                    <div class="role">Video Editor &amp; Colourist</div>
+                    <p>Editing and colour grading for a luxury beauty brand.</p>
+                </div>
+                <div class="job-where">London</div>
+            </article>
+
+            <article class="job reveal">
+                <div class="job-when">2015</div>
+                <div>
+                    <h3>CERN</h3>
+                    <div class="role">Video Editor &amp; Camera Operator</div>
+                    <p>Video editing, archiving, graphic design and communications for an arts-focused division and the CMS experiment.</p>
+                </div>
+                <div class="job-where">Geneva</div>
+            </article>
+
+            <article class="job reveal">
+                <div class="job-when">2014 — 2015</div>
+                <div>
+                    <h3>Solar Impulse × Altran</h3>
+                    <div class="role">Graphic Video Editor &amp; Camera Operator</div>
+                    <p>Edits for engineering partner Altran, and part of the media coverage of Solar Impulse 2’s round-the-world departure on 9 March 2015, from Mission Control.</p>
+                </div>
+                <div class="job-where">Monaco</div>
+            </article>
+
+            <article class="job reveal">
+                <div class="job-when">2013 — 2014</div>
+                <div>
+                    <h3>Early career</h3>
+                    <ul class="steps">
+                        <li><span>2014</span>Editor &amp; Camera Operator, production company, Geneva</li>
+                        <li><span>2013</span>Video Technician, CERN</li>
+                    </ul>
+                </div>
+                <div class="job-where">Geneva</div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section id="toolkit">
+    <div class="wrap">
+        <div class="label reveal">Toolkit</div>
+        <h2 class="reveal">From shoot<br>to <em>final grade</em>.</h2>
+
+        <div class="toolkit reveal">
+            <div class="tool">
+                <span class="num">01</span>
+                <div><h4>Edit</h4><p>Story, pace and post-production workflows, from short social cuts to event content.</p></div>
+            </div>
+            <div class="tool">
+                <span class="num">02</span>
+                <div><h4>Motion</h4><p>Motion graphics and animated design that carry a brand on screen.</p></div>
+            </div>
+            <div class="tool">
+                <span class="num">03</span>
+                <div><h4>Colour</h4><p>Grading in DaVinci Resolve for a consistent, cinematic look.</p></div>
+            </div>
+            <div class="tool">
+                <span class="num">04</span>
+                <div><h4>Camera</h4><p>Shooting on location, in studio and at live events.</p></div>
+            </div>
+            <div class="tool">
+                <span class="num">05</span>
+                <div><h4>Design</h4><p>Graphic design for video, presentations and communications.</p></div>
+            </div>
+            <div class="tool">
+                <span class="num">06</span>
+                <div><h4>Lead</h4><p>Running a video department: planning, team and delivery.</p></div>
+            </div>
+        </div>
+
+        <div class="chips reveal">
+            <span>DaVinci Resolve</span><span>Adobe Premiere Pro</span><span>After Effects</span>
+            <span>Final Cut Pro</span><span>Photoshop</span><span>InDesign</span>
+        </div>
+    </div>
+</section>
+
+<section id="education" style="padding-top:0">
+    <div class="wrap">
+        <div class="label reveal">Education</div>
+        <div class="edu-grid">
+            <div class="edu reveal">
+                <div class="job-when">2010 — 2014</div>
+                <h3>Kingston University</h3>
+                <p>BSc (Hons) Television &amp; Video Technology · London</p>
+            </div>
+            <div class="edu reveal">
+                <div class="job-when">Professional training</div>
+                <h3>SOHO Editors</h3>
+                <p>DaVinci Resolve (introductory &amp; advanced) · After Effects (advanced)</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <div class="wrap">
+        <div class="label reveal" style="justify-content:center">Contact</div>
+        <h2 class="reveal">Let’s roll<em>.</em></h2>
+        <div class="contact-links reveal">
+            <a class="btn solid" href="mailto:guillaume_padlewski1@hotmail.com"><span class="roll"><span data-text="E-mail">E-mail</span></span></a>
+            <a class="btn" href="tel:+33603473927"><span class="roll"><span data-text="Phone">Phone</span></span></a>
+            <a class="btn" href="https://www.linkedin.com/in/guillaume-padlewski-1b9621a6/"><span class="roll"><span data-text="LinkedIn">LinkedIn</span></span></a>
+            <a class="btn" href="guillaume_padlewski.vcf" download><span class="roll"><span data-text="Save contact">Save contact</span></span></a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <span>© 2026 Guillaume Padlewski</span>
+    <span>Auvergne-Rhône-Alpes, France · Geneva</span>
+</footer>
 
 <script>
-  function toggleDarkMode() {
-    document.documentElement.classList.toggle('dark');
-  }
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+window.addEventListener('load', () => document.body.classList.add('loaded'));
+// fallback in case load is slow (fonts, images)
+setTimeout(() => document.body.classList.add('loaded'), 1500);
+
+// Nav background once scrolled
+const nav = document.querySelector('nav');
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// Running timecode (25 fps)
+const tc = document.getElementById('timecode');
+const start = performance.now();
+const pad = n => String(n).padStart(2, '0');
+function tick() {
+    const frames = Math.floor((performance.now() - start) / 40);
+    const f = frames % 25, s = Math.floor(frames / 25);
+    tc.textContent = `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}:${pad(f)}`;
+    requestAnimationFrame(tick);
+}
+if (!reduceMotion) requestAnimationFrame(tick);
+
+// Film grain
+const canvas = document.getElementById('grain');
+const ctx = canvas.getContext('2d');
+function sizeGrain() {
+    canvas.width = Math.ceil(window.innerWidth / 2);
+    canvas.height = Math.ceil(window.innerHeight / 2);
+}
+function drawGrain() {
+    const img = ctx.createImageData(canvas.width, canvas.height);
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+        const v = Math.random() * 255;
+        d[i] = d[i + 1] = d[i + 2] = v;
+        d[i + 3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+}
+sizeGrain();
+drawGrain();
+window.addEventListener('resize', sizeGrain);
+if (!reduceMotion) setInterval(drawGrain, 80);
+
+// Scroll reveals
+const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+        if (e.target.id === 'timeline') runPlayhead();
+    });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Playhead sweeps the career timeline once
+function runPlayhead() {
+    const head = document.getElementById('playhead');
+    const end = (2026.83 - 2010) / 17;
+    const duration = reduceMotion ? 0 : 2600;
+    const t0 = performance.now() + 500;
+    function step(now) {
+        const p = duration ? Math.min(Math.max((now - t0) / duration, 0), 1) : 1;
+        const eased = 1 - Math.pow(1 - p, 3);
+        head.style.left = (eased * end * 100) + '%';
+        head.dataset.year = Math.floor(2010 + eased * end * 17);
+        if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+}
 </script>
 
 </body>
