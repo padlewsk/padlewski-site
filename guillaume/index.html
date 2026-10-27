@@ -210,7 +210,29 @@ nav.scrolled {
     flex-direction: column;
     justify-content: flex-end;
     padding: 120px var(--gutter) 84px;
+}
+
+/* Only the glows are clipped to the hero; the portrait may trail into the next
+   section as it fades, so that section scrolls over it */
+.hero-bg {
+    position: absolute;
+    inset: 0;
     overflow: hidden;
+    pointer-events: none;
+}
+
+.hero-shot {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+
+.marquee,
+section,
+footer {
+    position: relative;
+    z-index: 1;
 }
 
 /* Radial gradients instead of filter: blur, which is very costly on phones */
@@ -360,26 +382,48 @@ nav.scrolled {
     overflow: hidden;
 }
 
-.hero h1 .line span {
+.hero h1 .line > span {
     display: inline-block;
     vertical-align: top;
     transform: translateY(105%);
     transition: transform 1.1s cubic-bezier(.2, .8, .2, 1);
 }
 
-.hero h1 .line:nth-child(2) span {
-    transition-delay: .12s;
+/* Solid G and P stack into a vertical "GP." logo; the rest of the name is outlined.
+   A hairline stroke in the fill colour evens out the pinch in Syne's G before its spur. */
+.hero h1 .line > span {
+    -webkit-text-stroke: .018em var(--text);
+}
+
+.hero h1 .outline {
     -webkit-text-stroke: 2px var(--text);
     color: transparent;
 }
 
-.loaded .hero h1 .line span {
+.hero h1 .dot-line {
+    height: .32em;
+}
+
+/* Square, like Syne's full stop in the logo. JS sizes it to the width of the P's stem
+   and places it directly beneath; these are fallbacks. */
+.title-dot {
+    width: .2em;
+    height: .2em;
+    margin: .09em 0 0 .06em;
+    background: var(--accent);
+}
+
+.loaded .hero h1 .line > span {
     transform: none;
     transition-delay: .45s;
 }
 
-.loaded .hero h1 .line:nth-child(2) span {
+.loaded .hero h1 .line:nth-child(2) > span {
     transition-delay: .55s;
+}
+
+.loaded .hero h1 .line:nth-child(3) > span {
+    transition-delay: .7s;
 }
 
 .hero-foot {
@@ -635,19 +679,45 @@ h2 em {
     align-items: center;
     overflow: hidden;
     white-space: nowrap;
-    cursor: default;
+    cursor: pointer;
     transform-origin: left;
     transform: scaleX(0);
     transition: transform .8s cubic-bezier(.2, .8, .2, 1), filter .2s;
 }
 
 .clip:hover {
-    filter: brightness(1.3);
+    filter: brightness(1.35);
+    box-shadow: 0 0 0 1px rgba(242, 240, 235, .6);
+}
+
+.clip:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 2px;
+}
+
+/* Clicking a timeline clip lands here: clear the fixed nav, then flash the entry */
+.job,
+.edu {
+    scroll-margin-top: 110px;
+}
+
+.job:target,
+.edu:target {
+    animation: landed 1.8s ease-out;
+}
+
+.job:target::before {
+    transform: scaleX(1);
+}
+
+@keyframes landed {
+    0%, 25% { background: rgba(255, 77, 46, .12); }
+    100%    { background: transparent; }
 }
 
 .clip.v { background: #7a2a1c; }
 .clip.v.now { background: var(--accent); color: #000; }
-.clip.edu { background: #5b4a1a; }
+.clip.school { background: #5b4a1a; }
 
 .timeline.in .clip {
     transform: none;
@@ -1012,7 +1082,7 @@ footer {
         left: 36px;
     }
 
-    .hero h1 .line:nth-child(2) span {
+    .hero h1 .outline {
         -webkit-text-stroke-width: 1.5px;
     }
 
@@ -1030,7 +1100,7 @@ html:not(.js) .shutter {
 html:not(.js) .reveal,
 html:not(.js) .fade-up,
 html:not(.js) .hero-portrait,
-html:not(.js) .hero h1 .line span,
+html:not(.js) .hero h1 .line > span,
 html:not(.js) .clip {
     opacity: 1;
     transform: none;
@@ -1051,7 +1121,7 @@ html:not(.js) .clip {
     .reveal,
     .fade-up,
     .hero-portrait,
-    .hero h1 .line span,
+    .hero h1 .line > span,
     .clip {
         opacity: 1;
         transform: none;
@@ -1078,9 +1148,13 @@ html:not(.js) .clip {
 </nav>
 
 <header class="hero" id="top">
-    <div class="glow one"></div>
-    <div class="glow two"></div>
-    <img class="hero-portrait" src="photo.jpg" alt="" aria-hidden="true">
+    <div class="hero-bg" aria-hidden="true">
+        <div class="glow one"></div>
+        <div class="glow two"></div>
+    </div>
+    <div class="hero-shot" aria-hidden="true">
+        <img class="hero-portrait" src="photo.jpg" alt="">
+    </div>
 
     <div class="viewfinder" aria-hidden="true">
         <div class="corner tl"></div>
@@ -1092,9 +1166,10 @@ html:not(.js) .clip {
     </div>
 
     <div class="hero-kicker fade-up">Head of Video Production · Dorier Group</div>
-    <h1>
-        <span class="line"><span>Guillaume</span></span>
-        <span class="line"><span>Padlewski</span></span>
+    <h1 aria-label="Guillaume Padlewski">
+        <span class="line"><span>G<span class="outline">uillaume</span></span></span>
+        <span class="line"><span>P<span class="outline">adlewski</span></span></span>
+        <span class="line dot-line" aria-hidden="true"><span class="title-dot"></span></span>
     </h1>
     <div class="hero-foot">
         <p class="fade-up">
@@ -1148,23 +1223,23 @@ html:not(.js) .clip {
         <div class="label reveal">Experience</div>
         <h2 class="reveal">Thirteen years<br>on the <em>timeline</em>.</h2>
 
-        <div class="timeline reveal" id="timeline" aria-hidden="true">
+        <div class="timeline reveal" id="timeline" role="navigation" aria-label="Career timeline">
             <div class="ruler">
                 <span style="--y:2010">2010</span><span style="--y:2012">2012</span><span style="--y:2014">2014</span>
                 <span style="--y:2016">2016</span><span style="--y:2018">2018</span><span style="--y:2020">2020</span>
                 <span style="--y:2022">2022</span><span style="--y:2024">2024</span><span style="--y:2026">2026</span>
             </div>
             <div class="track" data-name="V1">
-                <div class="clip v" style="--s:2013.5;--e:2013.8" title="CERN – Video Technician (2013)"></div>
-                <div class="clip v" style="--s:2014.5;--e:2014.85" title="Geneva production company – Editor &amp; Camera (2014)"></div>
-                <div class="clip v" style="--s:2014.85;--e:2015.25" title="Solar Impulse – Graphic Video Editor &amp; Camera (2014–2015)"></div>
-                <div class="clip v" style="--s:2015.3;--e:2015.95" title="CERN – Video Editor &amp; Camera (2015)"></div>
-                <div class="clip v" style="--s:2016;--e:2019.5" title="Charlotte Tilbury Beauty – Video Editor &amp; Colourist (2016–2019)">Charlotte Tilbury</div>
-                <div class="clip v" style="--s:2019.5;--e:2021.25" title="Green Park Content (2019–2021)">Green Park</div>
-                <div class="clip v now" style="--s:2021.25;--e:2026.83" title="Dorier Group (2021–present)">Dorier Group</div>
+                <a class="clip v" style="--s:2013.5;--e:2013.8" href="#job-early" title="CERN – Video Technician (2013)" aria-label="CERN – Video Technician (2013)"></a>
+                <a class="clip v" style="--s:2014.5;--e:2014.85" href="#job-early" title="Geneva production company – Editor &amp; Camera (2014)" aria-label="Geneva production company – Editor &amp; Camera (2014)"></a>
+                <a class="clip v" style="--s:2014.85;--e:2015.25" href="#job-solarimpulse" title="Solar Impulse – Graphic Video Editor &amp; Camera (2014–2015)" aria-label="Solar Impulse – Graphic Video Editor &amp; Camera (2014–2015)"></a>
+                <a class="clip v" style="--s:2015.3;--e:2015.95" href="#job-cern" title="CERN – Video Editor &amp; Camera (2015)" aria-label="CERN – Video Editor &amp; Camera (2015)"></a>
+                <a class="clip v" style="--s:2016;--e:2019.5" href="#job-tilbury" title="Charlotte Tilbury Beauty – Video Editor &amp; Colourist (2016–2019)" aria-label="Charlotte Tilbury Beauty – Video Editor &amp; Colourist (2016–2019)">Charlotte Tilbury</a>
+                <a class="clip v" style="--s:2019.5;--e:2021.25" href="#job-greenpark" title="Green Park Content (2019–2021)" aria-label="Green Park Content (2019–2021)">Green Park</a>
+                <a class="clip v now" style="--s:2021.25;--e:2026.83" href="#job-dorier" title="Dorier Group (2021–present)" aria-label="Dorier Group (2021–present)">Dorier Group</a>
             </div>
             <div class="track" data-name="A1">
-                <div class="clip edu" style="--s:2010.75;--e:2014.5" title="Kingston University – BSc (Hons) Television &amp; Video Technology">Kingston University</div>
+                <a class="clip school" style="--s:2010.75;--e:2014.5" href="#kingston" title="Kingston University – BSc (Hons) Television &amp; Video Technology" aria-label="Kingston University – BSc (Hons) Television &amp; Video Technology">Kingston University</a>
             </div>
             <div class="playhead-area">
                 <div class="playhead" id="playhead" data-year="2010"></div>
@@ -1172,7 +1247,7 @@ html:not(.js) .clip {
         </div>
 
         <div class="jobs">
-            <article class="job reveal">
+            <article class="job reveal" id="job-dorier">
                 <div class="job-when">2021 — NOW</div>
                 <div>
                     <h3>Dorier Group</h3>
@@ -1186,7 +1261,7 @@ html:not(.js) .clip {
                 <div class="job-where">Geneva</div>
             </article>
 
-            <article class="job reveal">
+            <article class="job reveal" id="job-greenpark">
                 <div class="job-when">2019 — 2021</div>
                 <div>
                     <h3>Green Park Content</h3>
@@ -1199,7 +1274,7 @@ html:not(.js) .clip {
                 <div class="job-where">London</div>
             </article>
 
-            <article class="job reveal">
+            <article class="job reveal" id="job-tilbury">
                 <div class="job-when">2016 — 2019</div>
                 <div>
                     <h3>Charlotte Tilbury Beauty</h3>
@@ -1209,7 +1284,7 @@ html:not(.js) .clip {
                 <div class="job-where">London</div>
             </article>
 
-            <article class="job reveal">
+            <article class="job reveal" id="job-cern">
                 <div class="job-when">2015</div>
                 <div>
                     <h3>CERN</h3>
@@ -1219,7 +1294,7 @@ html:not(.js) .clip {
                 <div class="job-where">Geneva</div>
             </article>
 
-            <article class="job reveal">
+            <article class="job reveal" id="job-solarimpulse">
                 <div class="job-when">2014 — 2015</div>
                 <div>
                     <h3>Solar Impulse × Altran</h3>
@@ -1229,7 +1304,7 @@ html:not(.js) .clip {
                 <div class="job-where">Monaco</div>
             </article>
 
-            <article class="job reveal">
+            <article class="job reveal" id="job-early">
                 <div class="job-when">2013 — 2014</div>
                 <div>
                     <h3>Early career</h3>
@@ -1287,7 +1362,7 @@ html:not(.js) .clip {
     <div class="wrap">
         <div class="label reveal">Education</div>
         <div class="edu-grid">
-            <div class="edu reveal">
+            <div class="edu reveal" id="kingston">
                 <div class="job-when">2010 — 2014</div>
                 <h3>Kingston University</h3>
                 <p>BSc (Hons) Television &amp; Video Technology · London</p>
@@ -1325,16 +1400,98 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 // Start the intro as soon as the first frame is painted; don't wait for fonts or images
 requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add('loaded')));
 
-// Size "GUILLAUME" so it spans exactly as wide as "PADLEWSKI"
-const [firstName, lastName] = document.querySelectorAll('.hero h1 .line span');
-function matchTitleWidths() {
-    firstName.style.fontSize = '';
-    const ratio = lastName.getBoundingClientRect().width / firstName.getBoundingClientRect().width;
-    firstName.style.fontSize = parseFloat(getComputedStyle(firstName).fontSize) * ratio + 'px';
+// Title layout: the solid G and P form a vertical "GP." logo. Both lines keep the same
+// size; the P is nudged so it sits centred under the G, the square goes under the P's
+// stem, and letter-spacing makes both lines end at the same point.
+const [firstName, lastName, dotLine] = document.querySelectorAll('.hero h1 .line > span');
+const inkCtx = document.createElement('canvas').getContext('2d');
+// Ink extent of a letter at 100px; `tail` is the blank space between its ink and its advance
+function ink(letter, family) {
+    inkCtx.font = `800 100px ${family}`;
+    const m = inkCtx.measureText(letter);
+    return { left: -m.actualBoundingBoxLeft, right: m.actualBoundingBoxRight, tail: m.width - m.actualBoundingBoxRight };
 }
-matchTitleWidths();
-document.fonts.ready.then(matchTitleWidths);
-window.addEventListener('resize', matchTitleWidths);
+// Left and right of the P's stem where it meets the baseline, at 100px
+function stemOfP(family) {
+    const c = document.createElement('canvas');
+    c.width = 200;
+    c.height = 160;
+    const ctx = c.getContext('2d');
+    ctx.font = `800 100px ${family}`;
+    ctx.fillText('P', 50, 130);
+    const row = ctx.getImageData(0, 128, 200, 1).data;
+    let left = -1, right = -1;
+    for (let x = 0; x < 200; x++) {
+        if (row[x * 4 + 3] > 127) {
+            if (left < 0) left = x;
+            right = x + 1;
+        }
+    }
+    return { left: left - 50, right: right - 50 };
+}
+function fitTitle() {
+    for (const el of [firstName, lastName, dotLine]) {
+        el.style.letterSpacing = el.style.marginLeft = el.style.width = el.style.height = '';
+    }
+    dotLine.parentElement.style.height = '';
+    const cs = getComputedStyle(lastName);
+    const family = cs.fontFamily;
+    const size = parseFloat(cs.fontSize);
+    const stroke = parseFloat(cs.webkitTextStrokeWidth) || 0;
+    const px = v => v * size / 100;
+
+    // centre the P under the G (the G is the wider letter)
+    const g = ink('G', family), p = ink('P', family);
+    const shift = px((g.left + g.right) / 2 - (p.left + p.right) / 2);
+    let pStart = 0;
+    if (shift > 0) {
+        lastName.style.marginLeft = shift + 'px';
+        pStart = shift;
+    } else {
+        firstName.style.marginLeft = -shift + 'px';
+    }
+
+    // square as wide as the base of the P's stem, directly beneath it
+    const stem = stemOfP(family);
+    const side = px(stem.right - stem.left) + stroke;
+    dotLine.style.width = dotLine.style.height = side + 'px';
+    dotLine.style.marginLeft = pStart + px(stem.left) - stroke / 2 + 'px';
+    dotLine.parentElement.style.height = 0.09 * size + side + 'px';
+
+    // widen the shorter line's 8 letter gaps so the final E and I end together.
+    // Letter-spacing is also added after the last letter, so take it back out.
+    const e = ink('E', family), i = ink('I', family);
+    const spacing = parseFloat(cs.letterSpacing) || 0;
+    const end1 = firstName.getBoundingClientRect().right - spacing - px(e.tail);
+    const end2 = lastName.getBoundingClientRect().right - spacing - px(i.tail);
+    const shorter = end1 < end2 ? firstName : lastName;
+    shorter.style.letterSpacing = spacing + Math.abs(end2 - end1) / 8 + 'px';
+}
+fitTitle();
+document.fonts.ready.then(fitTitle);
+window.addEventListener('resize', fitTitle);
+
+// Portrait parallax: drifts down at ~half the scroll speed and fades out, so the title
+// and the following sections slide over it
+const heroShot = document.querySelector('.hero-shot');
+const hero = document.querySelector('.hero');
+let parallaxQueued = false;
+function parallax() {
+    parallaxQueued = false;
+    const y = Math.max(window.scrollY, 0);
+    const fadeOver = hero.offsetHeight * 0.75;
+    heroShot.style.transform = `translate3d(0, ${y * 0.45}px, 0)`;
+    heroShot.style.opacity = Math.max(0, 1 - y / fadeOver);
+}
+if (!reduceMotion) {
+    window.addEventListener('scroll', () => {
+        if (!parallaxQueued) {
+            parallaxQueued = true;
+            requestAnimationFrame(parallax);
+        }
+    }, { passive: true });
+    parallax();
+}
 
 // Nav background once scrolled
 const nav = document.querySelector('nav');
