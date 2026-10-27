@@ -6,8 +6,10 @@ FN:Guillaume Padlewski
 EMAIL;type=INTERNET;type=WORK;type=pref:guillaume.padlewski@dorier-group.com
 EMAIL;type=INTERNET;type=HOME:guillaume_padlewski1@hotmail.com
 TEL;type=CELL;type=VOICE;type=pref:+33 6 03 47 39 27
-item1.URL;type=pref:https://www.linkedin.com/in/guillaume-padlewski-1b9621a6/
+item1.URL;type=pref:https://guillaume.padlewski.eu
 item1.X-ABLabel:_$!<HomePage>!$_
+item2.URL:https://www.linkedin.com/in/guillaume-padlewski-1b9621a6/
+item2.X-ABLabel:LinkedIn
 PHOTO;ENCODING=b;TYPE=JPEG:/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAA
  AAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAABkKADAAQAAAABAA
  ABkAAAAAD/wgARCAGQAZADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAwIEAQUABgcI
