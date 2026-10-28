@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 44">
+  <!-- sun rising over a rooftop -->
+  <g stroke="#f2a516" stroke-width="2.5" stroke-linecap="round">
+    <line x1="20" y1="9" x2="20" y2="4"/>
+    <line x1="9.4" y1="13.4" x2="6" y2="10"/>
+    <line x1="30.6" y1="13.4" x2="34" y2="10"/>
+    <line x1="5" y1="24" x2="1.5" y2="24"/>
+    <line x1="35" y1="24" x2="38.5" y2="24"/>
+  </g>
+  <path d="M10 28a10 10 0 0 1 20 0z" fill="#f2a516"/>
+  <path d="M2 38 20 30 38 38" fill="none" stroke="#0b5ea8" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="46" y="31" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="23" font-weight="800" letter-spacing="0.5" fill="#1b2430">PARK<tspan fill="#f2a516">SUN</tspan></text>
+</svg>

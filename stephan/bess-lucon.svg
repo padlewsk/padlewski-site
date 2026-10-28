@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 44">
+  <!-- charged battery -->
+  <rect x="3" y="11" width="34" height="22" rx="4" fill="none" stroke="#0b5ea8" stroke-width="2.5"/>
+  <rect x="38.5" y="17.5" width="4" height="9" rx="1.5" fill="#0b5ea8"/>
+  <g fill="#2e9e5b">
+    <rect x="7.5" y="15.5" width="7" height="13" rx="1.5"/>
+    <rect x="16.5" y="15.5" width="7" height="13" rx="1.5"/>
+    <rect x="25.5" y="15.5" width="7" height="13" rx="1.5"/>
+  </g>
+  <text x="52" y="30" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" fill="#1b2430"><tspan font-size="23" font-weight="800" letter-spacing="0.5">BESS</tspan><tspan dx="6" font-size="16" fill="#5b6676">Luçon 85</tspan></text>
+</svg>
