@@ -140,8 +140,13 @@ h1 .last {
     color: var(--muted);
 }
 
+.place a {
+    color: inherit;
+}
+
 /* shown in the PDF only */
-.place .print-only {
+.place .print-only,
+.contact .print-only {
     display: none;
 }
 
@@ -199,6 +204,46 @@ h1 .last {
 
 .contact a.primary:hover {
     background: var(--accent-ink);
+}
+
+/* Email and phone: link and copy button joined as one split pill */
+.contact .split {
+    display: flex;
+    gap: 2px;
+}
+
+.contact .split a {
+    border-radius: 999px 0 0 999px;
+}
+
+.contact .copy {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 36px;
+    padding: 0 3px 0 0;
+    border: 0;
+    border-radius: 0 999px 999px 0;
+    background: #fff;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+}
+
+.contact .copy:hover {
+    background: var(--accent-soft);
+}
+
+.contact .copy:active {
+    transform: scale(.94);
+}
+
+.contact .copy .check,
+.contact .copy.done .icon {
+    display: none;
+}
+
+.contact .copy.done .check {
+    display: block;
 }
 
 .photo {
@@ -580,6 +625,11 @@ abbr[title] {
         padding: 0 16px;
     }
 
+    .contact .copy {
+        width: 46px;
+        height: 44px;
+    }
+
     .contact .no-print {
         order: 1;
         flex-basis: 100%;
@@ -779,6 +829,7 @@ abbr[title] {
     .toolbar,
     .lang,
     .contact .no-print,
+    .contact .copy,
     .section > summary .knob,
     .section > summary .count,
     .sub > summary,
@@ -792,8 +843,13 @@ abbr[title] {
         content-visibility: visible;
     }
 
-    .place .print-only {
+    .place .print-only,
+    .contact .print-only {
         display: inline;
+    }
+
+    .contact .screen-only {
+        display: none;
     }
 
     .eyebrow {
@@ -939,21 +995,25 @@ abbr[title] {
         <p class="eyebrow" data-en="Physician · Curriculum vitae">Médecin · Curriculum vitæ</p>
         <h1>Yasmine <span class="last">Traboulsi Padlewski</span></h1>
         <p class="role" data-en="Geriatric physician · Board-certified in general internal medicine">Médecin en gériatrie · Spécialiste en médecine interne générale</p>
-        <p class="place"><span>Hôpital Bichat – Claude-Bernard, AP-HP, Paris</span><span class="sep print-only"> · </span><span class="print-only" data-en="French nationality">Nationalité française</span></p>
+        <p class="place"><span><a href="https://maps.app.goo.gl/ymHSukvp8V4CtS4P8">Hôpital Bichat – Claude-Bernard, AP-HP, Paris</a></span><span class="sep print-only"> · </span><span class="print-only" data-en="French nationality">Nationalité française</span></p>
 
         <ul class="contact">
             <li class="no-print"><a class="primary" href="yasmine_traboulsi_padlewski_cv.pdf" data-en-href="yasmine_traboulsi_padlewski_cv_en.pdf">
                 <svg viewBox="0 0 24 24"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg>
-                CV (PDF)</a></li>
-            <li><a href="mailto:yastraboulsi@gmail.com">
+                CV</a></li>
+            <li class="split"><a href="mailto:yastraboulsi@gmail.com" title="yastraboulsi@gmail.com">
                 <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-                yastraboulsi@gmail.com</a></li>
-            <li><a href="tel:+41791964529">
+                <span class="screen-only" data-en="Email">Courriel</span><span class="print-only">yastraboulsi@gmail.com</span></a><button class="copy" type="button" data-copy="yastraboulsi@gmail.com" aria-label="Copier l’adresse courriel" data-en-aria-label="Copy email address" title="Copier l’adresse" data-en-title="Copy address">
+                <svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>
+                <svg class="check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg></button></li>
+            <!-- <li><a href="tel:+41791964529">
                 <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
-                +41 79 196 45 29</a></li>
-            <li><a href="tel:+33671656925">
+                +41 79 196 45 29</a></li> -->
+            <li class="split"><a href="tel:+33671656925" title="+33 6 71 65 69 25">
                 <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
-                +33 6 71 65 69 25</a></li>
+                <span class="screen-only" data-en="Phone">Téléphone</span><span class="print-only">+33 6 71 65 69 25</span></a><button class="copy" type="button" data-copy="+33 6 71 65 69 25" aria-label="Copier le numéro de téléphone" data-en-aria-label="Copy phone number" title="Copier le numéro" data-en-title="Copy number">
+                <svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>
+                <svg class="check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg></button></li>
         </ul>
     </div>
 
@@ -1003,7 +1063,7 @@ abbr[title] {
         <div class="body">
             <div class="title" data-en="Senior physician (cheffe de clinique) in general internal medicine">Cheffe de clinique en médecine interne générale</div>
             <div class="desc" data-en="Inpatient wards: general internal medicine and geriatrics">Lits d’hospitalisation de médecine polyvalente et gériatrie</div>
-            <div class="inst" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</div>
+            <div class="inst"><a href="https://www.chuv.ch" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</a></div>
         </div>
     </div>
 
@@ -1012,7 +1072,7 @@ abbr[title] {
         <div class="body">
             <div class="title" data-en="Deputy senior physician (cheffe de clinique adjointe) in general internal medicine">Cheffe de clinique adjointe en médecine interne générale</div>
             <div class="desc" data-en="Inpatient wards: general internal medicine; emergency department">Lits d’hospitalisation de médecine polyvalente, urgences</div>
-            <div class="inst" data-en="Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Switzerland">Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Suisse</div>
+            <div class="inst"><a href="https://www.ehnv.ch" data-en="Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Switzerland">Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Suisse</a></div>
         </div>
     </div>
 
@@ -1021,7 +1081,7 @@ abbr[title] {
         <div class="body">
             <div class="title" data-en="<abbr title='Médecin assistante = resident physician (interne in France)'>Resident*</abbr> – specialty rotations"><abbr title="Médecin assistante = équivalent d’interne en France">Médecin assistante*</abbr> – tournus de spécialités</div>
             <div class="desc" data-en="Intensive care · Cardiology · General internal medicine · Emergency medicine">Soins intensifs · Cardiologie · Médecine interne générale · Urgences</div>
-            <div class="inst" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</div>
+            <div class="inst"><a href="https://www.chuv.ch" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</a></div>
 
             <details class="sub">
                 <summary>
@@ -1055,7 +1115,7 @@ abbr[title] {
         <div class="body">
             <div class="title" data-en="<abbr title='Médecin assistante = resident physician (interne in France)'>Resident*</abbr> in internal medicine"><abbr title="Médecin assistante = équivalent d’interne en France">Médecin assistante*</abbr> en médecine interne</div>
             <div class="desc" data-en="Inpatient wards: general internal medicine; emergency department">Lits d’hospitalisation de médecine polyvalente, urgences</div>
-            <div class="inst" data-en="Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Switzerland">Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Suisse</div>
+            <div class="inst"><a href="https://www.ehnv.ch" data-en="Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Switzerland">Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Suisse</a></div>
         </div>
     </div>
 
@@ -1073,7 +1133,7 @@ abbr[title] {
             <div class="date">2017 – 2019</div>
             <div class="body">
                 <div class="title" data-en="Clinical skills tutor for medical students">Monitrice de compétences cliniques pour étudiants en médecine</div>
-                <div class="inst" data-en="University of Geneva">Université de Genève</div>
+                <div class="inst"><a href="https://www.unige.ch" data-en="University of Geneva">Université de Genève</a></div>
             </div>
         </div>
 
@@ -1082,7 +1142,7 @@ abbr[title] {
             <div class="body">
                 <div class="title" data-en="Teacher at Medprep">Enseignante à Medprep</div>
                 <div class="desc" data-en="Tutoring for first-year medical students">Cours de soutien pour étudiants en première année de médecine</div>
-                <div class="inst" data-en="Etuprep, Geneva">Etuprep, Genève</div>
+                <div class="inst"><a href="https://www.etuprep.ch" data-en="Etuprep, Geneva">Etuprep, Genève</a></div>
             </div>
         </div>
     </details>
@@ -1108,7 +1168,7 @@ abbr[title] {
         <div class="date">10.2020</div>
         <div class="body">
             <div class="title" data-en="Swiss federal diploma in human medicine">Diplôme fédéral en médecine humaine</div>
-            <div class="inst" data-en="University of Geneva, Switzerland">Université de Genève, Suisse</div>
+            <div class="inst"><a href="https://www.unige.ch" data-en="University of Geneva, Switzerland">Université de Genève, Suisse</a></div>
         </div>
     </div>
 </details>
@@ -1125,7 +1185,7 @@ abbr[title] {
         <div class="date">06.2025</div>
         <div class="body">
             <div class="title">Advanced Trauma Life Support (ATLS)</div>
-            <div class="inst" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</div>
+            <div class="inst"><a href="https://www.chuv.ch" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</a></div>
         </div>
     </div>
 
@@ -1134,7 +1194,7 @@ abbr[title] {
         <div class="body">
             <div class="title" data-en="Point-of-Care Ultrasound (POCUS) training">Formation Point-Of-Care Ultrasound (POCUS)</div>
             <div class="desc" data-en="Certificate of additional training in ultrasound, module 1 (emergency medicine basics) <b>in progress</b>">Attestation de formation complémentaire en échographie, composante 1 (bases de médecine d’urgences) <b>en cours</b></div>
-            <div class="inst" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</div>
+            <div class="inst"><a href="https://www.chuv.ch" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</a></div>
         </div>
     </div>
 
@@ -1142,7 +1202,7 @@ abbr[title] {
         <div class="date">03.2022</div>
         <div class="body">
             <div class="title">Advanced Cardiovascular Life Support (ACLS)</div>
-            <div class="inst" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</div>
+            <div class="inst"><a href="https://www.chuv.ch" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</a></div>
         </div>
     </div>
 </details>
@@ -1172,7 +1232,7 @@ const UI = {
     fr: { expand: 'Tout déplier', collapse: 'Tout replier' },
     en: { expand: 'Expand all', collapse: 'Collapse all' }
 };
-const ATTRS = ['href', 'alt', 'aria-label', 'content'];
+const ATTRS = ['href', 'alt', 'aria-label', 'title', 'content'];
 const camel = s => s.replace(/-(\w)/g, (_, c) => c.toUpperCase());
 const cap = s => s[0].toUpperCase() + s.slice(1);
 let lang = 'fr';
@@ -1205,6 +1265,18 @@ document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click
         document.querySelectorAll('.intro, main, .foot').forEach(el =>
             el.animate([{ opacity: .35 }, { opacity: 1 }], { duration: 260, easing: 'ease-out' }));
     }
+}));
+
+// Copy the email address or phone number, with a brief check mark as confirmation
+document.querySelectorAll('.copy').forEach(copy => copy.addEventListener('click', async () => {
+    try {
+        await navigator.clipboard.writeText(copy.dataset.copy);
+    } catch (e) {
+        return;
+    }
+    copy.classList.add('done');
+    clearTimeout(copy.timer);
+    copy.timer = setTimeout(() => copy.classList.remove('done'), 1600);
 }));
 
 const all = [...document.querySelectorAll('details')];
