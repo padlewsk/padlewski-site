@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yasmine Traboulsi Padlewski – CV</title>
+<meta name="description" content="Dre Yasmine Traboulsi Padlewski – Médecin en gériatrie à l’Hôpital Bichat – Claude-Bernard (AP-HP), Paris. Spécialiste FMH en médecine interne générale." data-en-content="Dr Yasmine Traboulsi Padlewski – Geriatric physician at Hôpital Bichat – Claude-Bernard (AP-HP), Paris. Board-certified (FMH) in general internal medicine.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="180x180" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+
+<style>
+:root {
+    --bg: #ffffff;
+    --card: #ffffff;
+    --band-top: #e8e8ed;
+    --band-bottom: #f5f5f7;
+    --ink: #1d1d1f;
+    --muted: #6e6e73;
+    --faint: #86868b;
+    --line: rgba(0, 0, 0, .09);
+    --fill: #f5f5f7;
+    --accent: #bd4c45;
+    --accent-ink: #a33b35;
+    --accent-soft: rgba(189, 76, 69, .1);
+    --thumb: #ffffff;
+    color-scheme: light;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    /* overscroll above and below the page matches the grey bands */
+    background: var(--band-bottom);
+}
+
+/* the footer band always reaches the bottom of the window */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+    letter-spacing: -.003em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+a {
+    color: var(--accent-ink);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* Two tones: a soft grey band for the introduction, white for the CV, grey again to close */
+.hero {
+    background: linear-gradient(180deg, var(--band-top), var(--band-bottom));
+}
+
+.hero .wrap {
+    position: relative;
+    padding-top: 72px;
+}
+
+.content {
+    flex: 1;
+    width: 100%;
+    padding-top: 56px;
+    padding-bottom: 72px;
+}
+
+.foot {
+    background: var(--band-bottom);
+}
+
+.foot .wrap {
+    padding-top: 28px;
+    padding-bottom: 28px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+}
+
+.intro {
+    padding-bottom: 64px;
+}
+
+.eyebrow {
+    margin: 0 0 16px;
+    line-height: 16px;
+    color: var(--accent-ink);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin: 0;
+    font-size: 56px;
+    line-height: 1.04;
+    font-weight: 700;
+    letter-spacing: -.04em;
+}
+
+h1 .last {
+    display: block;
+    color: var(--faint);
+}
+
+.role {
+    margin: 24px 0 0;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -.015em;
+}
+
+.place {
+    margin: 4px 0 0;
+    color: var(--muted);
+}
+
+/* shown in the PDF only */
+.place .print-only {
+    display: none;
+}
+
+.contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 32px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.contact a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 36px;
+    padding: 0 15px;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink);
+    font-size: 13.5px;
+    transition: background .2s, transform .2s;
+}
+
+.contact a:hover {
+    text-decoration: none;
+    background: var(--accent-soft);
+}
+
+.contact a:active {
+    transform: scale(.97);
+}
+
+.contact svg {
+    width: 14px;
+    height: 14px;
+    flex: none;
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.contact a.primary {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 500;
+}
+
+.contact a.primary svg {
+    stroke: #fff;
+}
+
+.contact a.primary:hover {
+    background: var(--accent-ink);
+}
+
+.photo {
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: zoom-in;
+    flex: none;
+}
+
+.photo picture {
+    display: block;
+}
+
+/* cut-out portrait standing on the bottom edge of the band; the top of the hair
+   (76/900 down the image) is level with the top of the Y */
+.photo img {
+    display: block;
+    width: 374px;
+    height: 346px;
+    object-fit: contain;
+    object-position: 50% 100%;
+}
+
+.lightbox {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
+}
+
+.lightbox::backdrop {
+    background: rgba(0, 0, 0, .75);
+    backdrop-filter: blur(8px);
+}
+
+.lightbox img {
+    display: block;
+    max-width: min(90vw, 520px);
+    max-height: 90vh;
+    border-radius: 18px;
+    background: linear-gradient(180deg, var(--band-top), var(--band-bottom));
+    cursor: zoom-out;
+}
+
+/* Key facts */
+.facts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0;
+    padding: 0 0 24px;
+    list-style: none;
+    border-bottom: 1px solid var(--line);
+}
+
+.facts li {
+    padding: 0 18px;
+    border-left: 1px solid var(--line);
+}
+
+.facts li:first-child {
+    padding-left: 0;
+    border-left: 0;
+}
+
+.facts b {
+    display: block;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -.025em;
+    line-height: 1.2;
+}
+
+.facts span {
+    display: block;
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+/* Toolbar */
+.toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin: 18px 0 -6px;
+}
+
+.toolbar button {
+    font: inherit;
+    font-size: 13px;
+    color: var(--accent-ink);
+    background: none;
+    border: 0;
+    padding: 4px 0;
+    cursor: pointer;
+}
+
+.toolbar button:hover {
+    text-decoration: underline;
+}
+
+/* Collapsible sections */
+details {
+    interpolate-size: allow-keywords;
+}
+
+details::details-content {
+    block-size: 0;
+    overflow: hidden;
+    transition: block-size .3s cubic-bezier(.16, 1, .3, 1), content-visibility .3s allow-discrete;
+}
+
+details[open]::details-content {
+    block-size: auto;
+}
+
+summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+.chev {
+    width: 14px;
+    height: 14px;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform .3s cubic-bezier(.16, 1, .3, 1);
+}
+
+.section {
+    border-bottom: 1px solid var(--line);
+}
+
+.section > summary {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 26px 0;
+}
+
+.section > summary h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -.025em;
+}
+
+.section > summary .count {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.section > summary .knob {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    border-radius: 50%;
+    background: var(--fill);
+    color: var(--muted);
+    transition: background .2s, color .2s;
+}
+
+.section > summary:hover .knob {
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+}
+
+.section[open] > summary .chev {
+    transform: rotate(180deg);
+}
+
+.section > .entry:last-of-type,
+.studies > .entry:last-of-type {
+    padding-bottom: 8px;
+}
+
+/* Entries */
+.entry {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    column-gap: 28px;
+}
+
+.entry .date {
+    padding-top: 1px;
+    color: var(--muted);
+    font-size: 13.5px;
+    font-variant-numeric: tabular-nums;
+}
+
+.entry .body {
+    position: relative;
+    padding: 0 0 26px 26px;
+    border-left: 1px solid var(--line);
+}
+
+.entry .body::before {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: 6px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--card);
+    box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.entry.current .body::before {
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.title {
+    font-size: 15.5px;
+    font-weight: 600;
+    letter-spacing: -.012em;
+}
+
+.badge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    font-size: 11.5px;
+    font-weight: 600;
+    vertical-align: 1px;
+}
+
+.desc {
+    margin-top: 1px;
+    color: var(--muted);
+}
+
+.desc b {
+    color: var(--ink);
+    font-weight: 500;
+}
+
+.inst {
+    margin-top: 2px;
+    color: var(--accent-ink);
+    font-size: 14px;
+}
+
+abbr[title] {
+    text-decoration: none;
+    cursor: help;
+}
+
+/* Nested drop-downs */
+.sub {
+    margin-top: 12px;
+}
+
+.sub > summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent-ink);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.sub > summary:hover,
+.studies > summary:hover .label {
+    text-decoration: underline;
+}
+
+.sub > summary .chev,
+.studies > summary .chev {
+    width: 12px;
+    height: 12px;
+}
+
+.sub[open] > summary .chev,
+.studies[open] > summary .chev {
+    transform: rotate(90deg);
+}
+
+.rotations {
+    margin: 12px 0 0;
+    padding: 4px 16px;
+    list-style: none;
+    background: var(--fill);
+    border-radius: 14px;
+}
+
+.rotations li {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.rotations li:last-child {
+    border-bottom: 0;
+}
+
+.rotations .date {
+    color: var(--muted);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.rotations .title {
+    font-size: 14.5px;
+}
+
+/* "Pendant les études": a collapsible row on the timeline */
+.studies > summary .body {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent-ink);
+    font-size: 14.5px;
+    font-weight: 500;
+}
+
+.studies > summary .body::before {
+    box-shadow: inset 0 0 0 2px var(--faint);
+}
+
+.studies[open] > summary .body::before {
+    box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.studies > summary .count {
+    padding: 0 7px;
+    border-radius: 999px;
+    background: var(--fill);
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.footnote {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12.5px;
+}
+
+/* Mobile */
+@media (max-width: 680px) {
+    .wrap {
+        padding: 0 20px;
+    }
+
+    .hero .wrap {
+        padding-top: 88px;
+    }
+
+    .content {
+        padding-top: 40px;
+        padding-bottom: 48px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .intro {
+        padding-bottom: 0;
+    }
+
+    .photo {
+        align-self: center;
+    }
+
+    .photo img {
+        width: 292px;
+        height: 270px;
+    }
+
+    /* thumb-sized targets; the PDF button becomes a full-width row at the end */
+    .contact a {
+        height: 44px;
+        padding: 0 16px;
+    }
+
+    .contact .no-print {
+        order: 1;
+        flex-basis: 100%;
+    }
+
+    .contact .no-print a {
+        display: flex;
+        justify-content: center;
+    }
+
+    .lang button {
+        min-width: 48px;
+        min-height: 38px;
+    }
+
+    .toolbar button {
+        padding: 10px 0;
+    }
+
+    /* larger touch area for the nested toggle, same visual position */
+    .sub {
+        margin-top: 2px;
+    }
+
+    .sub > summary {
+        padding: 10px 0;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    .role {
+        font-size: 17px;
+    }
+
+    .place span {
+        display: block;
+    }
+
+    .place .sep {
+        display: none;
+    }
+
+    .facts {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 18px;
+        margin-top: 32px;
+    }
+
+    .facts li:nth-child(3) {
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    .facts b {
+        font-size: 21px;
+    }
+
+    .section > summary {
+        padding: 22px 0;
+    }
+
+    .section > summary h2 {
+        font-size: 21px;
+    }
+
+    .section > summary .count {
+        display: none;
+    }
+
+    .entry {
+        grid-template-columns: 1fr;
+        margin-left: 5px;
+    }
+
+    .entry .date {
+        padding: 0 0 2px 26px;
+        border-left: 1px solid var(--line);
+        font-size: 13px;
+    }
+
+    .section > .entry:first-of-type .date {
+        border-left-color: transparent;
+    }
+
+    .rotations li {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
+/* Language switch */
+.lang {
+    position: absolute;
+    top: 24px;
+    right: 40px;
+    z-index: 1;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    padding: 3px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, .06);
+}
+
+.lang::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    bottom: 3px;
+    left: 3px;
+    width: calc(50% - 3px);
+    border-radius: 999px;
+    background: var(--thumb);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 0 0 .5px rgba(0, 0, 0, .04);
+    transition: transform .35s cubic-bezier(.16, 1, .3, 1);
+}
+
+.lang[data-active="en"]::before {
+    transform: translateX(100%);
+}
+
+.lang button {
+    position: relative;
+    min-width: 40px;
+    padding: 4px 10px;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    cursor: pointer;
+    transition: color .2s;
+}
+
+.lang button[aria-pressed="true"] {
+    color: var(--ink);
+}
+
+/* Entrance: a quick staggered fade-up, opacity and transform only */
+@media (prefers-reduced-motion: no-preference) {
+    .hero {
+        animation: settle .5s cubic-bezier(.16, 1, .3, 1) both;
+    }
+
+    .reveal {
+        animation: rise .55s cubic-bezier(.16, 1, .3, 1) both;
+        animation-delay: calc(40ms + var(--i, 0) * 30ms);
+    }
+
+    .reveal-photo img {
+        animation: focus .7s cubic-bezier(.16, 1, .3, 1) 80ms both;
+    }
+}
+
+@keyframes settle {
+    from { opacity: 0; }
+}
+
+@keyframes rise {
+    from { opacity: 0; transform: translateY(8px); }
+}
+
+@keyframes focus {
+    from { opacity: 0; transform: scale(1.03); }
+}
+
+/* Print / PDF */
+@media print {
+    .hero,
+    .reveal,
+    .reveal-photo img {
+        animation: none;
+    }
+
+    @page {
+        size: A4;
+        margin: 8mm 14mm;
+    }
+
+    :root {
+        --bg: #fff;
+        --card: #fff;
+        --ink: #000;
+        --muted: #555;
+        --faint: #86868b;
+        --line: #dcdce0;
+        --fill: #f3f3f5;
+    }
+
+    body {
+        display: block;
+        min-height: 0;
+        font-size: 11px;
+        line-height: 1.4;
+    }
+
+    html,
+    .hero,
+    .foot {
+        background: none;
+    }
+
+    .content {
+        flex: none;
+    }
+
+    .wrap,
+    .hero .wrap,
+    .foot .wrap,
+    .content {
+        max-width: none;
+        padding: 0;
+    }
+
+    .header {
+        align-items: flex-start;
+    }
+
+    .intro {
+        padding-bottom: 0;
+    }
+
+    .facts {
+        border-top: 1px solid var(--line);
+    }
+
+    .toolbar,
+    .lang,
+    .contact .no-print,
+    .section > summary .knob,
+    .section > summary .count,
+    .sub > summary,
+    .studies > summary .count,
+    .studies > summary .chev {
+        display: none;
+    }
+
+    details::details-content {
+        block-size: auto;
+        content-visibility: visible;
+    }
+
+    .place .print-only {
+        display: inline;
+    }
+
+    .eyebrow {
+        margin-bottom: 4px;
+        font-size: 9px;
+        line-height: 12px;
+    }
+
+    .photo {
+        margin-top: 13px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .role {
+        margin-top: 8px;
+        font-size: 13.5px;
+    }
+
+    .contact {
+        margin-top: 10px;
+    }
+
+    .contact a {
+        height: auto;
+        padding: 0 10px 0 0;
+        background: none;
+        font-size: 11px;
+    }
+
+    .photo img {
+        width: 114px;
+        height: 105px;
+    }
+
+    .facts {
+        margin-top: 12px;
+        padding: 7px 0;
+    }
+
+    .facts b {
+        font-size: 15px;
+    }
+
+    .facts span {
+        font-size: 10px;
+    }
+
+    .section > summary {
+        padding: 7px 0 4px;
+        break-after: avoid;
+    }
+
+    .section > summary h2 {
+        font-size: 15px;
+    }
+
+    .section > .entry:last-of-type,
+    .studies > .entry:last-of-type {
+        padding-bottom: 2px;
+    }
+
+    .entry {
+        break-inside: avoid;
+    }
+
+    .entry .date,
+    .rotations .date {
+        font-size: 10.5px;
+    }
+
+    .entry .body {
+        padding-bottom: 5px;
+    }
+
+    .entry .body::before {
+        top: 4px;
+    }
+
+    .title {
+        font-size: 11.5px;
+    }
+
+    .inst {
+        font-size: 10.5px;
+    }
+
+    .sub {
+        margin-top: 4px;
+    }
+
+    .rotations {
+        margin-top: 2px;
+        padding: 2px 10px;
+        border-radius: 8px;
+    }
+
+    .rotations li {
+        padding: 1px 0;
+        border-bottom: 0;
+    }
+
+    .rotations .title {
+        font-size: 11px;
+    }
+
+    .studies > summary .body {
+        color: var(--muted);
+        font-size: 10.5px;
+        font-style: italic;
+    }
+
+    .studies > summary .date {
+        visibility: hidden;
+    }
+
+    .studies > summary .body::before {
+        display: none;
+    }
+
+    .footnote {
+        margin-top: 8px;
+        font-size: 9.5px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+<div class="wrap">
+
+<div class="lang reveal" style="--i:0" role="group" aria-label="Langue / Language" data-active="fr">
+    <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+</div>
+
+<header class="header">
+    <div class="intro">
+        <p class="eyebrow reveal" style="--i:0" data-en="Physician · Curriculum vitae">Médecin · Curriculum vitæ</p>
+        <h1 class="reveal" style="--i:1">Yasmine <span class="last">Traboulsi Padlewski</span></h1>
+        <p class="role reveal" style="--i:2" data-en="Geriatric physician · Board-certified in general internal medicine">Médecin en gériatrie · Spécialiste en médecine interne générale</p>
+        <p class="place reveal" style="--i:3"><span>Hôpital Bichat – Claude-Bernard, AP-HP, Paris</span><span class="sep print-only"> · </span><span class="print-only" data-en="French nationality">Nationalité française</span></p>
+
+        <ul class="contact reveal" style="--i:4">
+            <li class="no-print"><a class="primary" href="yasmine_traboulsi_padlewski_cv.pdf" data-en-href="yasmine_traboulsi_padlewski_cv_en.pdf">
+                <svg viewBox="0 0 24 24"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg>
+                CV (PDF)</a></li>
+            <li><a href="mailto:yastraboulsi@gmail.com">
+                <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                yastraboulsi@gmail.com</a></li>
+            <li><a href="tel:+41791964529">
+                <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+                +41 79 196 45 29</a></li>
+            <li><a href="tel:+33671656925">
+                <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+                +33 6 71 65 69 25</a></li>
+        </ul>
+    </div>
+
+    <button class="photo reveal-photo" type="button" aria-label="Agrandir la photo" data-en-aria-label="Enlarge photo">
+        <picture>
+            <source srcset="yasmine-portrait-studio.webp" type="image/webp">
+            <img src="yasmine-portrait-studio.png" alt="Portrait de Yasmine Traboulsi Padlewski" data-en-alt="Portrait of Yasmine Traboulsi Padlewski">
+        </picture>
+    </button>
+</header>
+
+</div>
+</div>
+
+<main class="wrap content">
+
+<ul class="facts reveal" style="--i:5">
+    <li><b>FMH</b><span data-en="Board-certified in general internal medicine">Spécialiste en médecine interne générale</span></li>
+    <li><b data-en="6 years">6 ans</b><span data-en="of hospital practice in Switzerland">de pratique hospitalière en Suisse</span></li>
+    <li><b>AP-HP</b><span data-en="Geriatrics, Hôpital Bichat since 2026">Gériatrie, Hôpital Bichat depuis 2026</span></li>
+    <li><b>ATLS · ACLS</b><span data-en="and POCUS training">et formation POCUS</span></li>
+</ul>
+
+<div class="toolbar reveal" style="--i:6">
+    <button type="button" id="toggle-all">Tout déplier</button>
+</div>
+
+<!-- Expériences -->
+<details class="section reveal" style="--i:7" open>
+    <summary>
+        <h2 data-en="Professional experience">Expériences professionnelles</h2>
+        <span class="count" data-en="2020 – present">2020 – aujourd’hui</span>
+        <span class="knob"><svg class="chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span>
+    </summary>
+
+    <div class="entry current">
+        <div class="date" data-en="Since 11.2026">Depuis 11.2026</div>
+        <div class="body">
+            <div class="title" data-en="Geriatric physician (equivalent to cheffe de clinique) <span class='badge'>Current</span>">Médecin en gériatrie – poste équivalent cheffe de clinique <span class="badge">Actuel</span></div>
+            <div class="desc" data-en="Department of Geriatrics">Service de gériatrie</div>
+            <div class="inst"><a href="https://www.aphp.fr/bichat-claude-bernard/service-de-geriatrie">Hôpital Bichat – Claude-Bernard, AP-HP, Paris, France</a></div>
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="date">05.2026 – 10.2026</div>
+        <div class="body">
+            <div class="title" data-en="Senior physician (cheffe de clinique) in general internal medicine">Cheffe de clinique en médecine interne générale</div>
+            <div class="desc" data-en="Inpatient wards: general internal medicine and geriatrics">Lits d’hospitalisation de médecine polyvalente et gériatrie</div>
+            <div class="inst" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</div>
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="date">11.2024 – 10.2025</div>
+        <div class="body">
+            <div class="title" data-en="Deputy senior physician (cheffe de clinique adjointe) in general internal medicine">Cheffe de clinique adjointe en médecine interne générale</div>
+            <div class="desc" data-en="Inpatient wards: general internal medicine; emergency department">Lits d’hospitalisation de médecine polyvalente, urgences</div>
+            <div class="inst" data-en="Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Switzerland">Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Suisse</div>
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="date">11.2022 – 10.2024</div>
+        <div class="body">
+            <div class="title" data-en="<abbr title='Médecin assistante = resident physician (interne in France)'>Resident*</abbr> – specialty rotations"><abbr title="Médecin assistante = équivalent d’interne en France">Médecin assistante*</abbr> – tournus de spécialités</div>
+            <div class="desc" data-en="Intensive care · Cardiology · General internal medicine · Emergency medicine">Soins intensifs · Cardiologie · Médecine interne générale · Urgences</div>
+            <div class="inst" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</div>
+
+            <details class="sub">
+                <summary>
+                    <span data-en="Details of the 4 rotations">Détail des 4 rotations</span>
+                    <svg class="chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg>
+                </summary>
+                <ul class="rotations">
+                    <li>
+                        <span class="date">05.2024 – 10.2024</span>
+                        <span class="title" data-en="Intensive care">Soins intensifs</span>
+                    </li>
+                    <li>
+                        <span class="date">02.2024 – 05.2024</span>
+                        <span class="title" data-en="Cardiology">Cardiologie</span>
+                    </li>
+                    <li>
+                        <span class="date">05.2023 – 01.2024</span>
+                        <span data-en="<span class='title'>General internal medicine</span> <span class='desc'>(general medical ward)</span>"><span class="title">Médecine interne générale</span> <span class="desc">(médecine polyvalente)</span></span>
+                    </li>
+                    <li>
+                        <span class="date">11.2022 – 04.2023</span>
+                        <span data-en="<span class='title'>Emergency department</span> <span class='desc'>(ambulatory and inpatient)</span>"><span class="title">Urgences</span> <span class="desc">(urgences ambulatoires et couchées)</span></span>
+                    </li>
+                </ul>
+            </details>
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="date">11.2020 – 10.2022</div>
+        <div class="body">
+            <div class="title" data-en="<abbr title='Médecin assistante = resident physician (interne in France)'>Resident*</abbr> in internal medicine"><abbr title="Médecin assistante = équivalent d’interne en France">Médecin assistante*</abbr> en médecine interne</div>
+            <div class="desc" data-en="Inpatient wards: general internal medicine; emergency department">Lits d’hospitalisation de médecine polyvalente, urgences</div>
+            <div class="inst" data-en="Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Switzerland">Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Suisse</div>
+        </div>
+    </div>
+
+    <details class="studies">
+        <summary class="entry">
+            <span class="date">2015 – 2019</span>
+            <span class="body">
+                <span class="label" data-en="During medical school">Pendant les études</span>
+                <span class="count">2</span>
+                <svg class="chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg>
+            </span>
+        </summary>
+
+        <div class="entry">
+            <div class="date">2017 – 2019</div>
+            <div class="body">
+                <div class="title" data-en="Clinical skills tutor for medical students">Monitrice de compétences cliniques pour étudiants en médecine</div>
+                <div class="inst" data-en="University of Geneva">Université de Genève</div>
+            </div>
+        </div>
+
+        <div class="entry">
+            <div class="date">2015 – 2019</div>
+            <div class="body">
+                <div class="title" data-en="Teacher at Medprep">Enseignante à Medprep</div>
+                <div class="desc" data-en="Tutoring for first-year medical students">Cours de soutien pour étudiants en première année de médecine</div>
+                <div class="inst" data-en="Etuprep, Geneva">Etuprep, Genève</div>
+            </div>
+        </div>
+    </details>
+</details>
+
+<!-- Diplômes -->
+<details class="section reveal" style="--i:8">
+    <summary>
+        <h2 data-en="Degrees">Diplômes</h2>
+        <span class="count">2</span>
+        <span class="knob"><svg class="chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span>
+    </summary>
+
+    <div class="entry current">
+        <div class="date">26.02.2026</div>
+        <div class="body">
+            <div class="title" data-en="Specialist title in general internal medicine">Titre de spécialiste en médecine interne générale</div>
+            <div class="inst" data-en="Swiss Medical Association (FMH), Switzerland">Fédération des Médecins Helvétiques (FMH), Suisse</div>
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="date">10.2020</div>
+        <div class="body">
+            <div class="title" data-en="Swiss federal diploma in human medicine">Diplôme fédéral en médecine humaine</div>
+            <div class="inst" data-en="University of Geneva, Switzerland">Université de Genève, Suisse</div>
+        </div>
+    </div>
+</details>
+
+<!-- Formations -->
+<details class="section reveal" style="--i:9">
+    <summary>
+        <h2 data-en="Additional training">Formations complémentaires</h2>
+        <span class="count">3</span>
+        <span class="knob"><svg class="chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span>
+    </summary>
+
+    <div class="entry">
+        <div class="date">06.2025</div>
+        <div class="body">
+            <div class="title">Advanced Trauma Life Support (ATLS)</div>
+            <div class="inst" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</div>
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="date">08.2024</div>
+        <div class="body">
+            <div class="title" data-en="Point-of-Care Ultrasound (POCUS) training">Formation Point-Of-Care Ultrasound (POCUS)</div>
+            <div class="desc" data-en="Certificate of additional training in ultrasound, module 1 (emergency medicine basics) <b>in progress</b>">Attestation de formation complémentaire en échographie, composante 1 (bases de médecine d’urgences) <b>en cours</b></div>
+            <div class="inst" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</div>
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="date">03.2022</div>
+        <div class="body">
+            <div class="title">Advanced Cardiovascular Life Support (ACLS)</div>
+            <div class="inst" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</div>
+        </div>
+    </div>
+</details>
+
+</main>
+
+<footer class="foot">
+<div class="wrap">
+<p class="footnote reveal" style="--i:10" data-en="* médecin assistante = resident physician (“interne” in France)">* médecin assistante = équivalent d’interne en France</p>
+</div>
+</footer>
+
+<dialog class="lightbox" aria-label="Photo de Yasmine Traboulsi Padlewski" data-en-aria-label="Photo of Yasmine Traboulsi Padlewski">
+    <picture>
+        <source srcset="yasmine-portrait-studio.webp" type="image/webp">
+        <img src="yasmine-portrait-studio.png" alt="Portrait de Yasmine Traboulsi Padlewski" data-en-alt="Portrait of Yasmine Traboulsi Padlewski">
+    </picture>
+</dialog>
+
+<script>
+const lightbox = document.querySelector('.lightbox');
+document.querySelector('.photo').addEventListener('click', () => lightbox.showModal());
+lightbox.addEventListener('click', () => lightbox.close());
+
+// Language: French is the markup; English lives in data-en / data-en-* attributes
+const UI = {
+    fr: { expand: 'Tout déplier', collapse: 'Tout replier' },
+    en: { expand: 'Expand all', collapse: 'Collapse all' }
+};
+const ATTRS = ['href', 'alt', 'aria-label', 'content'];
+const camel = s => s.replace(/-(\w)/g, (_, c) => c.toUpperCase());
+const cap = s => s[0].toUpperCase() + s.slice(1);
+let lang = 'fr';
+
+const applyLang = next => {
+    lang = next;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-en]').forEach(el => {
+        if (el.dataset.fr === undefined) el.dataset.fr = el.innerHTML;
+        el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.fr;
+    });
+    ATTRS.forEach(attr => {
+        const en = 'en' + cap(camel(attr)), fr = 'fr' + cap(camel(attr));
+        document.querySelectorAll(`[data-en-${attr}]`).forEach(el => {
+            if (el.dataset[fr] === undefined) el.dataset[fr] = el.getAttribute(attr);
+            el.setAttribute(attr, lang === 'en' ? el.dataset[en] : el.dataset[fr]);
+        });
+    });
+    const switcher = document.querySelector('.lang');
+    switcher.dataset.active = lang;
+    switcher.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+    sync();
+};
+
+document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => {
+    if (b.dataset.lang === lang) return;
+    applyLang(b.dataset.lang);
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.intro, main, .foot').forEach(el =>
+            el.animate([{ opacity: .35 }, { opacity: 1 }], { duration: 260, easing: 'ease-out' }));
+    }
+}));
+
+const all = [...document.querySelectorAll('details')];
+const toggle = document.getElementById('toggle-all');
+function sync() {
+    toggle.textContent = all.every(d => d.open) ? UI[lang].collapse : UI[lang].expand;
+}
+toggle.addEventListener('click', () => {
+    const open = !all.every(d => d.open);
+    all.forEach(d => d.open = open);
+    sync();
+});
+all.forEach(d => d.addEventListener('toggle', sync));
+
+let initial = new URLSearchParams(location.search).get('lang');
+if (!initial) {
+    try { initial = localStorage.getItem('lang'); } catch (e) {}
+}
+applyLang(initial === 'en' ? 'en' : 'fr');
+
+// Expand everything when printing, then restore
+let saved;
+addEventListener('beforeprint', () => {
+    saved = all.map(d => d.open);
+    all.forEach(d => d.open = true);
+});
+addEventListener('afterprint', () => {
+    all.forEach((d, i) => d.open = saved[i]);
+});
+</script>
+
+</body>
+</html>
