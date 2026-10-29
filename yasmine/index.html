@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yasmine Traboulsi Padlewski – CV</title>
-<meta name="description" content="Dre Yasmine Traboulsi Padlewski – Médecin en gériatrie à l’Hôpital Bichat – Claude-Bernard (AP-HP), Paris. Spécialiste FMH en médecine interne générale." data-en-content="Dr Yasmine Traboulsi Padlewski – Geriatric physician at Hôpital Bichat – Claude-Bernard (AP-HP), Paris. Board-certified (FMH) in general internal medicine.">
+<meta name="description" content="Dre Yasmine Traboulsi Padlewski – Médecin en gériatrie à l’Hôpital Bichat – Claude-Bernard (AP-HP), Paris. Spécialiste FMH (Suisse) en médecine interne générale." data-en-content="Dr Yasmine Traboulsi Padlewski – Geriatric physician at Hôpital Bichat – Claude-Bernard (AP-HP), Paris. Swiss board-certified (FMH) in general internal medicine.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="180x180" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
@@ -301,21 +301,7 @@ h1 .last {
     text-decoration: underline;
 }
 
-/* Collapsible sections */
-details {
-    interpolate-size: allow-keywords;
-}
-
-details::details-content {
-    block-size: 0;
-    overflow: hidden;
-    transition: block-size .3s cubic-bezier(.16, 1, .3, 1), content-visibility .3s allow-discrete;
-}
-
-details[open]::details-content {
-    block-size: auto;
-}
-
+/* Collapsible sections (open/close height is animated in the script) */
 summary {
     list-style: none;
     cursor: pointer;
@@ -334,7 +320,7 @@ summary::-webkit-details-marker {
     stroke-width: 2.2;
     stroke-linecap: round;
     stroke-linejoin: round;
-    transition: transform .3s cubic-bezier(.16, 1, .3, 1);
+    transition: transform .25s cubic-bezier(.16, 1, .3, 1);
 }
 
 .section {
@@ -377,7 +363,7 @@ summary::-webkit-details-marker {
     color: var(--accent-ink);
 }
 
-.section[open] > summary .chev {
+.section[open]:not(.closing) > summary .chev {
     transform: rotate(180deg);
 }
 
@@ -487,8 +473,8 @@ abbr[title] {
     height: 12px;
 }
 
-.sub[open] > summary .chev,
-.studies[open] > summary .chev {
+.sub[open]:not(.closing) > summary .chev,
+.studies[open]:not(.closing) > summary .chev {
     transform: rotate(90deg);
 }
 
@@ -736,42 +722,8 @@ abbr[title] {
     color: var(--ink);
 }
 
-/* Entrance: a quick staggered fade-up, opacity and transform only */
-@media (prefers-reduced-motion: no-preference) {
-    .hero {
-        animation: settle .5s cubic-bezier(.16, 1, .3, 1) both;
-    }
-
-    .reveal {
-        animation: rise .55s cubic-bezier(.16, 1, .3, 1) both;
-        animation-delay: calc(40ms + var(--i, 0) * 30ms);
-    }
-
-    .reveal-photo img {
-        animation: focus .7s cubic-bezier(.16, 1, .3, 1) 80ms both;
-    }
-}
-
-@keyframes settle {
-    from { opacity: 0; }
-}
-
-@keyframes rise {
-    from { opacity: 0; transform: translateY(8px); }
-}
-
-@keyframes focus {
-    from { opacity: 0; transform: scale(1.03); }
-}
-
 /* Print / PDF */
 @media print {
-    .hero,
-    .reveal,
-    .reveal-photo img {
-        animation: none;
-    }
-
     @page {
         size: A4;
         margin: 8mm 14mm;
@@ -977,19 +929,19 @@ abbr[title] {
 <div class="hero">
 <div class="wrap">
 
-<div class="lang reveal" style="--i:0" role="group" aria-label="Langue / Language" data-active="fr">
+<div class="lang" role="group" aria-label="Langue / Language" data-active="fr">
     <button type="button" data-lang="fr" aria-pressed="true">FR</button>
     <button type="button" data-lang="en" aria-pressed="false">EN</button>
 </div>
 
 <header class="header">
     <div class="intro">
-        <p class="eyebrow reveal" style="--i:0" data-en="Physician · Curriculum vitae">Médecin · Curriculum vitæ</p>
-        <h1 class="reveal" style="--i:1">Yasmine <span class="last">Traboulsi Padlewski</span></h1>
-        <p class="role reveal" style="--i:2" data-en="Geriatric physician · Board-certified in general internal medicine">Médecin en gériatrie · Spécialiste en médecine interne générale</p>
-        <p class="place reveal" style="--i:3"><span>Hôpital Bichat – Claude-Bernard, AP-HP, Paris</span><span class="sep print-only"> · </span><span class="print-only" data-en="French nationality">Nationalité française</span></p>
+        <p class="eyebrow" data-en="Physician · Curriculum vitae">Médecin · Curriculum vitæ</p>
+        <h1>Yasmine <span class="last">Traboulsi Padlewski</span></h1>
+        <p class="role" data-en="Geriatric physician · Board-certified in general internal medicine">Médecin en gériatrie · Spécialiste en médecine interne générale</p>
+        <p class="place"><span>Hôpital Bichat – Claude-Bernard, AP-HP, Paris</span><span class="sep print-only"> · </span><span class="print-only" data-en="French nationality">Nationalité française</span></p>
 
-        <ul class="contact reveal" style="--i:4">
+        <ul class="contact">
             <li class="no-print"><a class="primary" href="yasmine_traboulsi_padlewski_cv.pdf" data-en-href="yasmine_traboulsi_padlewski_cv_en.pdf">
                 <svg viewBox="0 0 24 24"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg>
                 CV (PDF)</a></li>
@@ -1005,7 +957,7 @@ abbr[title] {
         </ul>
     </div>
 
-    <button class="photo reveal-photo" type="button" aria-label="Agrandir la photo" data-en-aria-label="Enlarge photo">
+    <button class="photo" type="button" aria-label="Agrandir la photo" data-en-aria-label="Enlarge photo">
         <picture>
             <source srcset="yasmine-portrait-studio.webp" type="image/webp">
             <img src="yasmine-portrait-studio.png" alt="Portrait de Yasmine Traboulsi Padlewski" data-en-alt="Portrait of Yasmine Traboulsi Padlewski">
@@ -1018,19 +970,19 @@ abbr[title] {
 
 <main class="wrap content">
 
-<ul class="facts reveal" style="--i:5">
-    <li><b>FMH</b><span data-en="Board-certified in general internal medicine">Spécialiste en médecine interne générale</span></li>
+<ul class="facts">
+    <li><b>FMH</b><span data-en="Swiss board certification in general internal medicine">Spécialiste en médecine interne générale (Suisse)</span></li>
     <li><b data-en="6 years">6 ans</b><span data-en="of hospital practice in Switzerland">de pratique hospitalière en Suisse</span></li>
-    <li><b>AP-HP</b><span data-en="Geriatrics, Hôpital Bichat since 2026">Gériatrie, Hôpital Bichat depuis 2026</span></li>
+    <li><b>AP-HP</b><span data-en="Geriatrics, Hôpital Bichat, Paris, since 2026">Gériatrie, Hôpital Bichat, Paris, depuis 2026</span></li>
     <li><b>ATLS · ACLS</b><span data-en="and POCUS training">et formation POCUS</span></li>
 </ul>
 
-<div class="toolbar reveal" style="--i:6">
+<div class="toolbar">
     <button type="button" id="toggle-all">Tout déplier</button>
 </div>
 
 <!-- Expériences -->
-<details class="section reveal" style="--i:7" open>
+<details class="section" open>
     <summary>
         <h2 data-en="Professional experience">Expériences professionnelles</h2>
         <span class="count" data-en="2020 – present">2020 – aujourd’hui</span>
@@ -1137,7 +1089,7 @@ abbr[title] {
 </details>
 
 <!-- Diplômes -->
-<details class="section reveal" style="--i:8">
+<details class="section">
     <summary>
         <h2 data-en="Degrees">Diplômes</h2>
         <span class="count">2</span>
@@ -1162,7 +1114,7 @@ abbr[title] {
 </details>
 
 <!-- Formations -->
-<details class="section reveal" style="--i:9">
+<details class="section">
     <summary>
         <h2 data-en="Additional training">Formations complémentaires</h2>
         <span class="count">3</span>
@@ -1199,7 +1151,7 @@ abbr[title] {
 
 <footer class="foot">
 <div class="wrap">
-<p class="footnote reveal" style="--i:10" data-en="* médecin assistante = resident physician (“interne” in France)">* médecin assistante = équivalent d’interne en France</p>
+<p class="footnote" data-en="* médecin assistante = resident physician (“interne” in France)">* médecin assistante = équivalent d’interne en France</p>
 </div>
 </footer>
 
@@ -1260,9 +1212,52 @@ const toggle = document.getElementById('toggle-all');
 function sync() {
     toggle.textContent = all.every(d => d.open) ? UI[lang].collapse : UI[lang].expand;
 }
+// Smooth open/close: animate the height between the summary alone and the full content
+const motion = matchMedia('(prefers-reduced-motion: no-preference)');
+function setOpen(d, open, done) {
+    const from = d.getBoundingClientRect().height;
+    const running = d.anim;
+    d.anim?.cancel();
+    d.anim = null;
+    d.classList.remove('closing');
+    d.style.overflow = '';
+    const hidden = d.parentElement.closest('details:not([open])');
+    if (!motion.matches || hidden || (d.open === open && !running)) {
+        d.open = open;
+        done?.();
+        return;
+    }
+    d.open = open;
+    const to = d.getBoundingClientRect().height;
+    d.open = true;
+    d.classList.toggle('closing', !open);
+    d.style.overflow = 'hidden';
+    d.anim = d.animate({ height: [from + 'px', to + 'px'] },
+        { duration: open ? 280 : 220, easing: 'cubic-bezier(.16, 1, .3, 1)' });
+    d.anim.onfinish = () => {
+        d.anim = null;
+        d.style.overflow = '';
+        d.classList.remove('closing');
+        d.open = open;
+        done?.();
+    };
+}
+all.forEach(d => d.querySelector(':scope > summary').addEventListener('click', e => {
+    e.preventDefault();
+    setOpen(d, !d.open || d.classList.contains('closing'));
+}));
+
 toggle.addEventListener('click', () => {
     const open = !all.every(d => d.open);
-    all.forEach(d => d.open = open);
+    const outer = all.filter(d => !d.parentElement.closest('details'));
+    const inner = all.filter(d => !outer.includes(d));
+    if (open) {
+        // open nested ones first (animated only if already visible) so sections measure their full height
+        inner.forEach(d => setOpen(d, true));
+        outer.forEach(d => setOpen(d, true));
+    } else {
+        outer.forEach(d => setOpen(d, false, () => inner.forEach(i => d.contains(i) && setOpen(i, false))));
+    }
     sync();
 });
 all.forEach(d => d.addEventListener('toggle', sync));
