@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-en="Dr. Yasmine Traboulsi Padlewski – CV">Dre Yasmine Traboulsi Padlewski – CV</title>
-<meta name="description" content="Dre Yasmine Traboulsi Padlewski – Médecin en gériatrie à l’Hôpital Bichat – Claude-Bernard (AP-HP), Paris. Spécialiste FMH (Suisse) en médecine interne générale." data-en-content="Dr. Yasmine Traboulsi Padlewski – Geriatric physician at Hôpital Bichat – Claude-Bernard (AP-HP), Paris. Swiss board-certified (FMH) in general internal medicine.">
+<title data-en="Dr. Yasmine Traboulsi Padlewski – CV" data-ar="د. ياسمين طرابلسي بادلفسكي – السيرة الذاتية">Dre Yasmine Traboulsi Padlewski – CV</title>
+<meta name="description" content="Dre Yasmine Traboulsi Padlewski – Médecin en gériatrie à l’Hôpital Bichat – Claude-Bernard (AP-HP), Paris. Spécialiste FMH (Suisse) en médecine interne générale." data-en-content="Dr. Yasmine Traboulsi Padlewski – Geriatric physician at Hôpital Bichat – Claude-Bernard (AP-HP), Paris. Swiss board-certified (FMH) in general internal medicine." data-ar-content="د. ياسمين طرابلسي بادلفسكي – طبيبة في طب الشيخوخة في مستشفى Bichat – Claude-Bernard ‏(AP-HP)، باريس. اختصاصية في الطب الباطني العام معتمدة من FMH ‏(سويسرا).">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="180x180" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
@@ -206,14 +206,25 @@ h1 .last {
     background: var(--accent-ink);
 }
 
-/* Email and phone: link and copy button joined as one split pill */
+/* Email and phone: link and copy button joined as one split pill, both pills as wide as the wider one */
+.intro .contact {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 .contact .split {
     display: flex;
     gap: 2px;
 }
 
 .contact .split a {
+    flex: 1;
+    justify-content: center;
     border-radius: 999px 0 0 999px;
+}
+
+[dir="rtl"] .contact .split a {
+    border-radius: 0 999px 999px 0;
 }
 
 .contact .copy {
@@ -221,12 +232,17 @@ h1 .last {
     place-items: center;
     width: 38px;
     height: 36px;
-    padding: 0 3px 0 0;
+    padding: 0;
+    padding-inline-end: 3px;
     border: 0;
     border-radius: 0 999px 999px 0;
     background: #fff;
     cursor: pointer;
     transition: background .2s, transform .2s;
+}
+
+[dir="rtl"] .contact .copy {
+    border-radius: 999px 0 0 999px;
 }
 
 .contact .copy:hover {
@@ -301,12 +317,12 @@ h1 .last {
 
 .facts li {
     padding: 0 18px;
-    border-left: 1px solid var(--line);
+    border-inline-start: 1px solid var(--line);
 }
 
 .facts li:first-child {
-    padding-left: 0;
-    border-left: 0;
+    padding-inline-start: 0;
+    border-inline-start: 0;
 }
 
 .facts b {
@@ -396,7 +412,7 @@ summary::-webkit-details-marker {
     place-items: center;
     width: 30px;
     height: 30px;
-    margin-left: auto;
+    margin-inline-start: auto;
     border-radius: 50%;
     background: var(--fill);
     color: var(--muted);
@@ -433,14 +449,15 @@ summary::-webkit-details-marker {
 
 .entry .body {
     position: relative;
-    padding: 0 0 26px 26px;
-    border-left: 1px solid var(--line);
+    padding: 0 0 26px;
+    padding-inline-start: 26px;
+    border-inline-start: 1px solid var(--line);
 }
 
 .entry .body::before {
     content: "";
     position: absolute;
-    left: -5px;
+    inset-inline-start: -5px;
     top: 6px;
     width: 9px;
     height: 9px;
@@ -462,7 +479,7 @@ summary::-webkit-details-marker {
 
 .badge {
     display: inline-block;
-    margin-left: 8px;
+    margin-inline-start: 8px;
     padding: 2px 8px;
     border-radius: 999px;
     background: var(--accent-soft);
@@ -516,6 +533,12 @@ abbr[title] {
 .studies > summary .chev {
     width: 12px;
     height: 12px;
+}
+
+/* the closed chevron points along the reading direction */
+[dir="rtl"] .sub > summary .chev,
+[dir="rtl"] .studies > summary .chev {
+    transform: scaleX(-1);
 }
 
 .sub[open]:not(.closing) > summary .chev,
@@ -671,8 +694,8 @@ abbr[title] {
     }
 
     .facts li:nth-child(3) {
-        padding-left: 0;
-        border-left: 0;
+        padding-inline-start: 0;
+        border-inline-start: 0;
     }
 
     .facts b {
@@ -693,17 +716,18 @@ abbr[title] {
 
     .entry {
         grid-template-columns: 1fr;
-        margin-left: 5px;
+        margin-inline-start: 5px;
     }
 
     .entry .date {
-        padding: 0 0 2px 26px;
-        border-left: 1px solid var(--line);
+        padding: 0 0 2px;
+        padding-inline-start: 26px;
+        border-inline-start: 1px solid var(--line);
         font-size: 13px;
     }
 
     .section > .entry:first-of-type .date {
-        border-left-color: transparent;
+        border-inline-start-color: transparent;
     }
 
     .rotations li {
@@ -724,6 +748,7 @@ abbr[title] {
     padding: 3px;
     border-radius: 999px;
     background: rgba(0, 0, 0, .06);
+    direction: ltr;
 }
 
 .lang::before {
@@ -732,7 +757,7 @@ abbr[title] {
     top: 3px;
     bottom: 3px;
     left: 3px;
-    width: calc(50% - 3px);
+    width: calc((100% - 6px) / 3);
     border-radius: 999px;
     background: var(--thumb);
     box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 0 0 .5px rgba(0, 0, 0, .04);
@@ -741,6 +766,10 @@ abbr[title] {
 
 .lang[data-active="en"]::before {
     transform: translateX(100%);
+}
+
+.lang[data-active="ar"]::before {
+    transform: translateX(200%);
 }
 
 .lang button {
@@ -760,6 +789,32 @@ abbr[title] {
 
 .lang button[aria-pressed="true"] {
     color: var(--ink);
+}
+
+/* letter-spacing pulls Arabic letters apart */
+:root:lang(ar) * {
+    letter-spacing: normal;
+}
+
+/* Arabic letters only: the system Arabic faces run small next to Latin text, so scale them up */
+@font-face {
+    font-family: "Arabic";
+    src: local("Geeza Pro"), local("GeezaPro"), local("Noto Sans Arabic"), local("Segoe UI"), local("Tahoma");
+    font-weight: 400 500;
+    unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF;
+    size-adjust: 118%;
+}
+
+@font-face {
+    font-family: "Arabic";
+    src: local("Geeza Pro Bold"), local("GeezaPro-Bold"), local("Noto Sans Arabic Bold"), local("Segoe UI Bold"), local("Tahoma Bold");
+    font-weight: 600 700;
+    unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF;
+    size-adjust: 118%;
+}
+
+:root:lang(ar) body {
+    font-family: "Arabic", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 /* Print / PDF */
@@ -863,6 +918,14 @@ abbr[title] {
 
     .contact {
         margin-top: 10px;
+    }
+
+    .intro .contact {
+        display: flex;
+    }
+
+    .contact .split a {
+        justify-content: flex-start;
     }
 
     .contact a {
@@ -975,22 +1038,23 @@ abbr[title] {
 <div class="hero">
 <div class="wrap">
 
-<div class="lang" role="group" aria-label="Langue / Language" data-active="fr">
+<div class="lang" role="group" aria-label="Langue / Language / اللغة" data-active="fr">
     <button type="button" data-lang="fr" aria-pressed="true">FR</button>
     <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    <button type="button" data-lang="ar" aria-pressed="false" title="العربية">AR</button>
 </div>
 
 <header class="header">
     <div class="intro">
-        <p class="eyebrow" data-en="Physician · Curriculum vitae">Médecin · Curriculum vitæ</p>
-        <h1><span data-en="Dr.">Dre</span>&nbsp;Yasmine <span class="last">Traboulsi Padlewski</span></h1>
-        <p class="role" data-en="Geriatric physician · Board-certified in general internal medicine">Médecin en gériatrie · Spécialiste en médecine interne générale</p>
-        <p class="place"><span><a href="https://maps.app.goo.gl/ymHSukvp8V4CtS4P8">Hôpital Bichat – Claude-Bernard, AP-HP, Paris</a></span><span class="sep print-only"> · </span><span class="print-only" data-en="French nationality">Nationalité française</span></p>
+        <p class="eyebrow" data-en="Physician · Curriculum vitae" data-ar="طبيبة · السيرة الذاتية">Médecin · Curriculum vitæ</p>
+        <h1><span data-en="Dr." data-ar="د.">Dre</span>&nbsp;<span data-en="Yasmine" data-ar="ياسمين">Yasmine</span> <span class="last" data-en="Traboulsi Padlewski" data-ar="طرابلسي بادلفسكي">Traboulsi Padlewski</span></h1>
+        <p class="role" data-en="Geriatric physician · Board-certified in general internal medicine" data-ar="طبيبة في طب الشيخوخة · اختصاصية في الطب الباطني العام">Médecin en gériatrie · Spécialiste en médecine interne générale</p>
+        <p class="place"><span><a href="https://maps.app.goo.gl/ymHSukvp8V4CtS4P8">Hôpital Bichat – Claude-Bernard, AP-HP, Paris</a></span><span class="sep print-only"> · </span><span class="print-only" data-en="French nationality" data-ar="الجنسية الفرنسية">Nationalité française</span></p>
 
         <ul class="contact">
             <li class="split"><a href="mailto:yastraboulsi@gmail.com" title="yastraboulsi@gmail.com">
                 <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-                <span class="screen-only" data-en="Email">Courriel</span><span class="print-only">yastraboulsi@gmail.com</span></a><button class="copy" type="button" data-copy="yastraboulsi@gmail.com" aria-label="Copier l’adresse courriel" data-en-aria-label="Copy email address" title="Copier l’adresse" data-en-title="Copy address">
+                <span class="screen-only" data-en="Email" data-ar="البريد">Courriel</span><span class="print-only">yastraboulsi@gmail.com</span></a><button class="copy" type="button" data-copy="yastraboulsi@gmail.com" aria-label="Copier l’adresse courriel" data-en-aria-label="Copy email address" data-ar-aria-label="نسخ عنوان البريد الإلكتروني" title="Copier l’adresse" data-en-title="Copy address" data-ar-title="نسخ العنوان">
                 <svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>
                 <svg class="check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg></button></li>
             <!-- <li><a href="tel:+41791964529">
@@ -998,16 +1062,16 @@ abbr[title] {
                 +41 79 196 45 29</a></li> -->
             <li class="split"><a href="tel:+33671656925" title="+33 6 71 65 69 25">
                 <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
-                <span class="screen-only" data-en="Phone">Téléphone</span><span class="print-only">+33 6 71 65 69 25</span></a><button class="copy" type="button" data-copy="+33 6 71 65 69 25" aria-label="Copier le numéro de téléphone" data-en-aria-label="Copy phone number" title="Copier le numéro" data-en-title="Copy number">
+                <span class="screen-only" data-en="Phone" data-ar="الهاتف">Téléphone</span><span class="print-only">+33 6 71 65 69 25</span></a><button class="copy" type="button" data-copy="+33 6 71 65 69 25" aria-label="Copier le numéro de téléphone" data-en-aria-label="Copy phone number" data-ar-aria-label="نسخ رقم الهاتف" title="Copier le numéro" data-en-title="Copy number" data-ar-title="نسخ الرقم">
                 <svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>
                 <svg class="check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg></button></li>
         </ul>
     </div>
 
-    <button class="photo" type="button" aria-label="Agrandir la photo" data-en-aria-label="Enlarge photo">
+    <button class="photo" type="button" aria-label="Agrandir la photo" data-en-aria-label="Enlarge photo" data-ar-aria-label="تكبير الصورة">
         <picture>
             <source srcset="yasmine-portrait-studio.webp" type="image/webp">
-            <img src="yasmine-portrait-studio.png" alt="Portrait de Yasmine Traboulsi Padlewski" data-en-alt="Portrait of Yasmine Traboulsi Padlewski">
+            <img src="yasmine-portrait-studio.png" alt="Portrait de Yasmine Traboulsi Padlewski" data-en-alt="Portrait of Yasmine Traboulsi Padlewski" data-ar-alt="صورة ياسمين طرابلسي بادلفسكي">
         </picture>
     </button>
 </header>
@@ -1018,10 +1082,10 @@ abbr[title] {
 <main class="wrap content">
 
 <ul class="facts">
-    <li><b>FMH</b><span data-en="Swiss board certification in general internal medicine">Spécialiste en médecine interne générale (Suisse)</span></li>
-    <li><b data-en="6 years">6 ans</b><span data-en="of hospital practice in Switzerland">de pratique hospitalière en Suisse</span></li>
-    <li><b>AP-HP</b><span data-en="Geriatrics, Hôpital Bichat, Paris, since 2026">Gériatrie, Hôpital Bichat, Paris, depuis 2026</span></li>
-    <li><b>ATLS · ACLS</b><span data-en="and POCUS training">et formation POCUS</span></li>
+    <li><b>FMH</b><span data-en="Swiss board certification in general internal medicine" data-ar="اختصاصية في الطب الباطني العام (سويسرا)">Spécialiste en médecine interne générale (Suisse)</span></li>
+    <li><b data-en="6 years" data-ar="6 سنوات">6 ans</b><span data-en="of hospital practice in Switzerland" data-ar="من العمل في مستشفيات سويسرا">de pratique hospitalière en Suisse</span></li>
+    <li><b>AP-HP</b><span data-en="Geriatrics, Hôpital Bichat, Paris, since 2026" data-ar="طب الشيخوخة، مستشفى Bichat، باريس، منذ 2026">Gériatrie, Hôpital Bichat, Paris, depuis 2026</span></li>
+    <li><b>ATLS · ACLS</b><span data-en="and POCUS training" data-ar="وتدريب على POCUS">et formation POCUS</span></li>
 </ul>
 
 <div class="toolbar">
@@ -1031,16 +1095,16 @@ abbr[title] {
 <!-- Expériences -->
 <details class="section" open>
     <summary>
-        <h2 data-en="Professional experience">Expériences professionnelles</h2>
-        <span class="count" data-en="2020 – present">2020 – aujourd’hui</span>
+        <h2 data-en="Professional experience" data-ar="الخبرة المهنية">Expériences professionnelles</h2>
+        <span class="count" data-en="2020 – present" data-ar="2020 – حتى الآن">2020 – aujourd’hui</span>
         <span class="knob"><svg class="chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span>
     </summary>
 
     <div class="entry current">
-        <div class="date" data-en="Since 11.2026">Depuis 11.2026</div>
+        <div class="date" data-en="Since 11.2026" data-ar="منذ 11.2026">Depuis 11.2026</div>
         <div class="body">
-            <div class="title" data-en="Geriatric physician (equivalent to cheffe de clinique) <span class='badge'>Current</span>">Médecin en gériatrie – poste équivalent cheffe de clinique <span class="badge">Actuel</span></div>
-            <div class="desc" data-en="Department of Geriatrics">Service de gériatrie</div>
+            <div class="title" data-en="Geriatric physician (equivalent to cheffe de clinique) <span class='badge'>Current</span>" data-ar="طبيبة في طب الشيخوخة – منصب يعادل رئيسة عيادة <span class='badge'>حالياً</span>">Médecin en gériatrie – poste équivalent cheffe de clinique <span class="badge">Actuel</span></div>
+            <div class="desc" data-en="Department of Geriatrics" data-ar="قسم طب الشيخوخة">Service de gériatrie</div>
             <div class="inst"><a href="https://www.aphp.fr/bichat-claude-bernard/service-de-geriatrie">Hôpital Bichat – Claude-Bernard, AP-HP, Paris, France</a></div>
         </div>
     </div>
@@ -1048,49 +1112,49 @@ abbr[title] {
     <div class="entry">
         <div class="date">05.2026 – 10.2026</div>
         <div class="body">
-            <div class="title" data-en="Senior physician (cheffe de clinique) in general internal medicine">Cheffe de clinique en médecine interne générale</div>
-            <div class="desc" data-en="Inpatient wards: general internal medicine and geriatrics">Lits d’hospitalisation de médecine polyvalente et gériatrie</div>
-            <div class="inst"><a href="https://www.chuv.ch" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</a></div>
+            <div class="title" data-en="Senior physician (cheffe de clinique) in general internal medicine" data-ar="رئيسة عيادة في الطب الباطني العام">Cheffe de clinique en médecine interne générale</div>
+            <div class="desc" data-en="Inpatient wards: general internal medicine and geriatrics" data-ar="أقسام الاستشفاء: الطب الباطني العام وطب الشيخوخة">Lits d’hospitalisation de médecine polyvalente et gériatrie</div>
+            <div class="inst"><a href="https://www.chuv.ch" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland" data-ar="المستشفى الجامعي لكانتون فو (CHUV)، لوزان، سويسرا">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</a></div>
         </div>
     </div>
 
     <div class="entry">
         <div class="date">11.2024 – 10.2025</div>
         <div class="body">
-            <div class="title" data-en="Deputy senior physician (cheffe de clinique adjointe) in general internal medicine">Cheffe de clinique adjointe en médecine interne générale</div>
-            <div class="desc" data-en="Inpatient wards: general internal medicine; emergency department">Lits d’hospitalisation de médecine polyvalente, urgences</div>
-            <div class="inst"><a href="https://www.ehnv.ch" data-en="Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Switzerland">Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Suisse</a></div>
+            <div class="title" data-en="Deputy senior physician (cheffe de clinique adjointe) in general internal medicine" data-ar="رئيسة عيادة مساعدة في الطب الباطني العام">Cheffe de clinique adjointe en médecine interne générale</div>
+            <div class="desc" data-en="Inpatient wards: general internal medicine; emergency department" data-ar="أقسام الاستشفاء: الطب الباطني العام؛ الطوارئ">Lits d’hospitalisation de médecine polyvalente, urgences</div>
+            <div class="inst"><a href="https://www.ehnv.ch" data-en="Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Switzerland" data-ar="مستشفيات شمال فو (eHnv)، إيفردون-ليه-بان، سويسرا">Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Suisse</a></div>
         </div>
     </div>
 
     <div class="entry">
         <div class="date">11.2022 – 10.2024</div>
         <div class="body">
-            <div class="title" data-en="<abbr title='Médecin assistante = resident physician (interne in France)'>Resident*</abbr> – specialty rotations"><abbr title="Médecin assistante = équivalent d’interne en France">Médecin assistante*</abbr> – tournus de spécialités</div>
-            <div class="desc" data-en="Intensive care · Cardiology · General internal medicine · Emergency medicine">Soins intensifs · Cardiologie · Médecine interne générale · Urgences</div>
-            <div class="inst"><a href="https://www.chuv.ch" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</a></div>
+            <div class="title" data-en="<abbr title='Médecin assistante = resident physician (interne in France)'>Resident*</abbr> – specialty rotations" data-ar="<abbr title='Médecin assistante = طبيبة مقيمة (interne في فرنسا)'>طبيبة مقيمة*</abbr> – تناوب بين الاختصاصات"><abbr title="Médecin assistante = équivalent d’interne en France">Médecin assistante*</abbr> – tournus de spécialités</div>
+            <div class="desc" data-en="Intensive care · Cardiology · General internal medicine · Emergency medicine" data-ar="العناية المركزة · أمراض القلب · الطب الباطني العام · طب الطوارئ">Soins intensifs · Cardiologie · Médecine interne générale · Urgences</div>
+            <div class="inst"><a href="https://www.chuv.ch" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland" data-ar="المستشفى الجامعي لكانتون فو (CHUV)، لوزان، سويسرا">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</a></div>
 
             <details class="sub">
                 <summary>
-                    <span data-en="Details of the 4 rotations">Détail des 4 rotations</span>
+                    <span data-en="Details of the 4 rotations" data-ar="تفاصيل الدورات الأربع">Détail des 4 rotations</span>
                     <svg class="chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg>
                 </summary>
                 <ul class="rotations">
                     <li>
                         <span class="date">05.2024 – 10.2024</span>
-                        <span class="title" data-en="Intensive care">Soins intensifs</span>
+                        <span class="title" data-en="Intensive care" data-ar="العناية المركزة">Soins intensifs</span>
                     </li>
                     <li>
                         <span class="date">02.2024 – 05.2024</span>
-                        <span class="title" data-en="Cardiology">Cardiologie</span>
+                        <span class="title" data-en="Cardiology" data-ar="أمراض القلب">Cardiologie</span>
                     </li>
                     <li>
                         <span class="date">05.2023 – 01.2024</span>
-                        <span data-en="<span class='title'>General internal medicine</span> <span class='desc'>(general medical ward)</span>"><span class="title">Médecine interne générale</span> <span class="desc">(médecine polyvalente)</span></span>
+                        <span data-en="<span class='title'>General internal medicine</span> <span class='desc'>(general medical ward)</span>" data-ar="<span class='title'>الطب الباطني العام</span> <span class='desc'>(قسم الطب العام)</span>"><span class="title">Médecine interne générale</span> <span class="desc">(médecine polyvalente)</span></span>
                     </li>
                     <li>
                         <span class="date">11.2022 – 04.2023</span>
-                        <span data-en="<span class='title'>Emergency department</span> <span class='desc'>(ambulatory and inpatient)</span>"><span class="title">Urgences</span> <span class="desc">(urgences ambulatoires et couchées)</span></span>
+                        <span data-en="<span class='title'>Emergency department</span> <span class='desc'>(ambulatory and inpatient)</span>" data-ar="<span class='title'>الطوارئ</span> <span class='desc'>(الطوارئ الخارجية والاستشفائية)</span>"><span class="title">Urgences</span> <span class="desc">(urgences ambulatoires et couchées)</span></span>
                     </li>
                 </ul>
             </details>
@@ -1100,9 +1164,9 @@ abbr[title] {
     <div class="entry">
         <div class="date">11.2020 – 10.2022</div>
         <div class="body">
-            <div class="title" data-en="<abbr title='Médecin assistante = resident physician (interne in France)'>Resident*</abbr> in internal medicine"><abbr title="Médecin assistante = équivalent d’interne en France">Médecin assistante*</abbr> en médecine interne</div>
-            <div class="desc" data-en="Inpatient wards: general internal medicine; emergency department">Lits d’hospitalisation de médecine polyvalente, urgences</div>
-            <div class="inst"><a href="https://www.ehnv.ch" data-en="Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Switzerland">Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Suisse</a></div>
+            <div class="title" data-en="<abbr title='Médecin assistante = resident physician (interne in France)'>Resident*</abbr> in internal medicine" data-ar="<abbr title='Médecin assistante = طبيبة مقيمة (interne في فرنسا)'>طبيبة مقيمة*</abbr> في الطب الباطني"><abbr title="Médecin assistante = équivalent d’interne en France">Médecin assistante*</abbr> en médecine interne</div>
+            <div class="desc" data-en="Inpatient wards: general internal medicine; emergency department" data-ar="أقسام الاستشفاء: الطب الباطني العام؛ الطوارئ">Lits d’hospitalisation de médecine polyvalente, urgences</div>
+            <div class="inst"><a href="https://www.ehnv.ch" data-en="Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Switzerland" data-ar="مستشفيات شمال فو (eHnv)، إيفردون-ليه-بان، سويسرا">Etablissements hospitaliers du Nord Vaudois, Yverdon-les-Bains, Suisse</a></div>
         </div>
     </div>
 
@@ -1110,7 +1174,7 @@ abbr[title] {
         <summary class="entry">
             <span class="date">2015 – 2019</span>
             <span class="body">
-                <span class="label" data-en="During medical school">Pendant les études</span>
+                <span class="label" data-en="During medical school" data-ar="خلال دراسة الطب">Pendant les études</span>
                 <span class="count">2</span>
                 <svg class="chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg>
             </span>
@@ -1119,17 +1183,17 @@ abbr[title] {
         <div class="entry">
             <div class="date">2017 – 2019</div>
             <div class="body">
-                <div class="title" data-en="Clinical skills tutor for medical students">Monitrice de compétences cliniques pour étudiants en médecine</div>
-                <div class="inst"><a href="https://www.unige.ch" data-en="University of Geneva">Université de Genève</a></div>
+                <div class="title" data-en="Clinical skills tutor for medical students" data-ar="مدرّبة مهارات سريرية لطلاب الطب">Monitrice de compétences cliniques pour étudiants en médecine</div>
+                <div class="inst"><a href="https://www.unige.ch" data-en="University of Geneva" data-ar="جامعة جنيف">Université de Genève</a></div>
             </div>
         </div>
 
         <div class="entry">
             <div class="date">2015 – 2019</div>
             <div class="body">
-                <div class="title" data-en="Teacher at Medprep">Enseignante à Medprep</div>
-                <div class="desc" data-en="Tutoring for first-year medical students">Cours de soutien pour étudiants en première année de médecine</div>
-                <div class="inst"><a href="https://www.etuprep.ch" data-en="Etuprep, Geneva">Etuprep, Genève</a></div>
+                <div class="title" data-en="Teacher at Medprep" data-ar="مدرّسة في Medprep">Enseignante à Medprep</div>
+                <div class="desc" data-en="Tutoring for first-year medical students" data-ar="دروس دعم لطلاب السنة الأولى في الطب">Cours de soutien pour étudiants en première année de médecine</div>
+                <div class="inst"><a href="https://www.etuprep.ch" data-en="Etuprep, Geneva" data-ar="Etuprep، جنيف">Etuprep, Genève</a></div>
             </div>
         </div>
     </details>
@@ -1138,7 +1202,7 @@ abbr[title] {
 <!-- Diplômes -->
 <details class="section">
     <summary>
-        <h2 data-en="Degrees">Diplômes</h2>
+        <h2 data-en="Degrees" data-ar="الشهادات">Diplômes</h2>
         <span class="count">2</span>
         <span class="knob"><svg class="chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span>
     </summary>
@@ -1146,16 +1210,16 @@ abbr[title] {
     <div class="entry current">
         <div class="date">02.2026</div>
         <div class="body">
-            <div class="title" data-en="Specialist title in general internal medicine">Titre de spécialiste en médecine interne générale</div>
-            <div class="inst"><a href="https://fmh.ch/fr/a-propos-de-la-fmh.cfm" data-en="Swiss Medical Association (FMH), Switzerland">Fédération des Médecins Helvétiques (FMH), Suisse</a></div>
+            <div class="title" data-en="Specialist title in general internal medicine" data-ar="لقب اختصاصية في الطب الباطني العام">Titre de spécialiste en médecine interne générale</div>
+            <div class="inst"><a href="https://fmh.ch/fr/a-propos-de-la-fmh.cfm" data-en="Swiss Medical Association (FMH), Switzerland" data-ar="الاتحاد الطبي السويسري (FMH)، سويسرا">Fédération des Médecins Helvétiques (FMH), Suisse</a></div>
         </div>
     </div>
 
     <div class="entry">
         <div class="date">10.2020</div>
         <div class="body">
-            <div class="title" data-en="Swiss federal diploma in human medicine">Diplôme fédéral en médecine humaine</div>
-            <div class="inst"><a href="https://www.unige.ch" data-en="University of Geneva, Switzerland">Université de Genève, Suisse</a></div>
+            <div class="title" data-en="Swiss federal diploma in human medicine" data-ar="الدبلوم الفدرالي السويسري في الطب البشري">Diplôme fédéral en médecine humaine</div>
+            <div class="inst"><a href="https://www.unige.ch" data-en="University of Geneva, Switzerland" data-ar="جامعة جنيف، سويسرا">Université de Genève, Suisse</a></div>
         </div>
     </div>
 </details>
@@ -1163,7 +1227,7 @@ abbr[title] {
 <!-- Formations -->
 <details class="section">
     <summary>
-        <h2 data-en="Additional training">Formations complémentaires</h2>
+        <h2 data-en="Additional training" data-ar="تدريبات إضافية">Formations complémentaires</h2>
         <span class="count">3</span>
         <span class="knob"><svg class="chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span>
     </summary>
@@ -1172,16 +1236,16 @@ abbr[title] {
         <div class="date">06.2025</div>
         <div class="body">
             <div class="title">Advanced Trauma Life Support (ATLS)</div>
-            <div class="inst"><a href="https://www.chuv.ch" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</a></div>
+            <div class="inst"><a href="https://www.chuv.ch" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland" data-ar="المستشفى الجامعي لكانتون فو (CHUV)، لوزان، سويسرا">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</a></div>
         </div>
     </div>
 
     <div class="entry">
         <div class="date">08.2024</div>
         <div class="body">
-            <div class="title" data-en="Point-of-Care Ultrasound (POCUS) training">Formation Point-Of-Care Ultrasound (POCUS)</div>
-            <div class="desc" data-en="Certificate of additional training in ultrasound, module 1 (emergency medicine basics) <b>in progress</b>">Attestation de formation complémentaire en échographie, composante 1 (bases de médecine d’urgences) <b>en cours</b></div>
-            <div class="inst"><a href="https://www.chuv.ch" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</a></div>
+            <div class="title" data-en="Point-of-Care Ultrasound (POCUS) training" data-ar="تدريب على التصوير بالموجات فوق الصوتية بجانب السرير (POCUS)">Formation Point-Of-Care Ultrasound (POCUS)</div>
+            <div class="desc" data-en="Certificate of additional training in ultrasound, module 1 (emergency medicine basics) <b>in progress</b>" data-ar="شهادة تدريب إضافي في التصوير بالموجات فوق الصوتية، الوحدة 1 (أساسيات طب الطوارئ) <b>قيد الإنجاز</b>">Attestation de formation complémentaire en échographie, composante 1 (bases de médecine d’urgences) <b>en cours</b></div>
+            <div class="inst"><a href="https://www.chuv.ch" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland" data-ar="المستشفى الجامعي لكانتون فو (CHUV)، لوزان، سويسرا">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</a></div>
         </div>
     </div>
 
@@ -1189,14 +1253,14 @@ abbr[title] {
         <div class="date">03.2022</div>
         <div class="body">
             <div class="title">Advanced Cardiovascular Life Support (ACLS)</div>
-            <div class="inst"><a href="https://www.chuv.ch" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</a></div>
+            <div class="inst"><a href="https://www.chuv.ch" data-en="Lausanne University Hospital (CHUV), Lausanne, Switzerland" data-ar="المستشفى الجامعي لكانتون فو (CHUV)، لوزان، سويسرا">Centre Hospitalier Universitaire Vaudois, Lausanne, Suisse</a></div>
         </div>
     </div>
 </details>
 
 <!-- CV download, after the last section -->
 <ul class="contact cv-end">
-    <li><a class="primary" href="yasmine_traboulsi_padlewski_cv.pdf" data-en-href="yasmine_traboulsi_padlewski_cv_en.pdf">
+    <li><a class="primary" href="yasmine_traboulsi_padlewski_cv.pdf" data-en-href="yasmine_traboulsi_padlewski_cv_en.pdf" data-ar-href="yasmine_traboulsi_padlewski_cv_en.pdf">
         <svg viewBox="0 0 24 24"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg>
         CV</a></li>
 </ul>
@@ -1205,14 +1269,14 @@ abbr[title] {
 
 <footer class="foot">
 <div class="wrap">
-<p class="footnote" data-en="* médecin assistante = resident physician (“interne” in France)">* médecin assistante = équivalent d’interne en France</p>
+<p class="footnote" data-en="* médecin assistante = resident physician (“interne” in France)" data-ar="* طبيبة مقيمة = médecin assistante في سويسرا (ما يعادل «interne» في فرنسا)">* médecin assistante = équivalent d’interne en France</p>
 </div>
 </footer>
 
-<dialog class="lightbox" aria-label="Photo de Yasmine Traboulsi Padlewski" data-en-aria-label="Photo of Yasmine Traboulsi Padlewski">
+<dialog class="lightbox" aria-label="Photo de Yasmine Traboulsi Padlewski" data-en-aria-label="Photo of Yasmine Traboulsi Padlewski" data-ar-aria-label="صورة ياسمين طرابلسي بادلفسكي">
     <picture>
         <source srcset="yasmine-portrait-studio.webp" type="image/webp">
-        <img src="yasmine-portrait-studio.png" alt="Portrait de Yasmine Traboulsi Padlewski" data-en-alt="Portrait of Yasmine Traboulsi Padlewski">
+        <img src="yasmine-portrait-studio.png" alt="Portrait de Yasmine Traboulsi Padlewski" data-en-alt="Portrait of Yasmine Traboulsi Padlewski" data-ar-alt="صورة ياسمين طرابلسي بادلفسكي">
     </picture>
 </dialog>
 
@@ -1221,10 +1285,12 @@ const lightbox = document.querySelector('.lightbox');
 document.querySelector('.photo').addEventListener('click', () => lightbox.showModal());
 lightbox.addEventListener('click', () => lightbox.close());
 
-// Language: French is the markup; English lives in data-en / data-en-* attributes
+// Language: French is the markup; English and Arabic live in data-en / data-ar (and data-en-* / data-ar-*) attributes
+const LANGS = ['fr', 'en', 'ar'];
 const UI = {
     fr: { expand: 'Tout déplier', collapse: 'Tout replier' },
-    en: { expand: 'Expand all', collapse: 'Collapse all' }
+    en: { expand: 'Expand all', collapse: 'Collapse all' },
+    ar: { expand: 'توسيع الكل', collapse: 'طي الكل' }
 };
 const ATTRS = ['href', 'alt', 'aria-label', 'title', 'content'];
 const camel = s => s.replace(/-(\w)/g, (_, c) => c.toUpperCase());
@@ -1234,15 +1300,16 @@ let lang = 'fr';
 const applyLang = next => {
     lang = next;
     document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
     document.querySelectorAll('[data-en]').forEach(el => {
         if (el.dataset.fr === undefined) el.dataset.fr = el.innerHTML;
-        el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.fr;
+        el.innerHTML = el.dataset[lang] ?? el.dataset.en;
     });
     ATTRS.forEach(attr => {
-        const en = 'en' + cap(camel(attr)), fr = 'fr' + cap(camel(attr));
+        const key = l => l + cap(camel(attr));
         document.querySelectorAll(`[data-en-${attr}]`).forEach(el => {
-            if (el.dataset[fr] === undefined) el.dataset[fr] = el.getAttribute(attr);
-            el.setAttribute(attr, lang === 'en' ? el.dataset[en] : el.dataset[fr]);
+            if (el.dataset[key('fr')] === undefined) el.dataset[key('fr')] = el.getAttribute(attr);
+            el.setAttribute(attr, el.dataset[key(lang)] ?? el.dataset[key('en')]);
         });
     });
     const switcher = document.querySelector('.lang');
@@ -1332,7 +1399,7 @@ let initial = new URLSearchParams(location.search).get('lang');
 if (!initial) {
     try { initial = localStorage.getItem('lang'); } catch (e) {}
 }
-applyLang(initial === 'en' ? 'en' : 'fr');
+applyLang(LANGS.includes(initial) ? initial : 'fr');
 
 // Expand everything when printing, then restore
 let saved;
