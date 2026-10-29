@@ -1054,7 +1054,7 @@ abbr[title] {
         <ul class="contact">
             <li class="split"><a href="mailto:yastraboulsi@gmail.com" title="yastraboulsi@gmail.com">
                 <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-                <span class="screen-only" data-en="Email" data-ar="البريد">Courriel</span><span class="print-only">yastraboulsi@gmail.com</span></a><button class="copy" type="button" data-copy="yastraboulsi@gmail.com" aria-label="Copier l’adresse courriel" data-en-aria-label="Copy email address" data-ar-aria-label="نسخ عنوان البريد الإلكتروني" title="Copier l’adresse" data-en-title="Copy address" data-ar-title="نسخ العنوان">
+                <span class="screen-only" data-en="Email" data-ar="البريد">Courriel</span><span class="print-only" dir="ltr">yastraboulsi@gmail.com</span></a><button class="copy" type="button" data-copy="yastraboulsi@gmail.com" aria-label="Copier l’adresse courriel" data-en-aria-label="Copy email address" data-ar-aria-label="نسخ عنوان البريد الإلكتروني" title="Copier l’adresse" data-en-title="Copy address" data-ar-title="نسخ العنوان">
                 <svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>
                 <svg class="check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg></button></li>
             <!-- <li><a href="tel:+41791964529">
@@ -1062,7 +1062,7 @@ abbr[title] {
                 +41 79 196 45 29</a></li> -->
             <li class="split"><a href="tel:+33671656925" title="+33 6 71 65 69 25">
                 <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
-                <span class="screen-only" data-en="Phone" data-ar="الهاتف">Téléphone</span><span class="print-only">+33 6 71 65 69 25</span></a><button class="copy" type="button" data-copy="+33 6 71 65 69 25" aria-label="Copier le numéro de téléphone" data-en-aria-label="Copy phone number" data-ar-aria-label="نسخ رقم الهاتف" title="Copier le numéro" data-en-title="Copy number" data-ar-title="نسخ الرقم">
+                <span class="screen-only" data-en="Phone" data-ar="الهاتف">Téléphone</span><span class="print-only" dir="ltr">+33 6 71 65 69 25</span></a><button class="copy" type="button" data-copy="+33 6 71 65 69 25" aria-label="Copier le numéro de téléphone" data-en-aria-label="Copy phone number" data-ar-aria-label="نسخ رقم الهاتف" title="Copier le numéro" data-en-title="Copy number" data-ar-title="نسخ الرقم">
                 <svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>
                 <svg class="check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg></button></li>
         </ul>
@@ -1260,7 +1260,7 @@ abbr[title] {
 
 <!-- CV download, after the last section -->
 <ul class="contact cv-end">
-    <li><a class="primary" href="yasmine_traboulsi_padlewski_cv.pdf" data-en-href="yasmine_traboulsi_padlewski_cv_en.pdf" data-ar-href="yasmine_traboulsi_padlewski_cv_en.pdf">
+    <li><a class="primary" href="yasmine_traboulsi_padlewski_cv.pdf" data-en-href="yasmine_traboulsi_padlewski_cv_en.pdf" data-ar-href="yasmine_traboulsi_padlewski_cv_ar.pdf">
         <svg viewBox="0 0 24 24"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg>
         CV</a></li>
 </ul>
@@ -1322,6 +1322,7 @@ document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click
     if (b.dataset.lang === lang) return;
     applyLang(b.dataset.lang);
     try { localStorage.setItem('lang', lang); } catch (e) {}
+    try { history.pushState(null, '', langURL(lang)); } catch (e) {}
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.querySelectorAll('.intro, main, .foot').forEach(el =>
             el.animate([{ opacity: .35 }, { opacity: 1 }], { duration: 260, easing: 'ease-out' }));
@@ -1395,11 +1396,27 @@ toggle.addEventListener('click', () => {
 });
 all.forEach(d => d.addEventListener('toggle', sync));
 
-let initial = new URLSearchParams(location.search).get('lang');
+// Each language has its own address, <page>/<lang>/: copies of this file made by build-langs.sh
+// (with <base href="../">). The address picks the language; the bare page falls back to ?lang=,
+// then the saved choice, then the default, and shows the matching address.
+const pathLang = () => {
+    const l = location.pathname.split('/').filter(p => p && p !== 'index.html').pop();
+    return LANGS.includes(l) ? l : null;
+};
+const langURL = l => new URL(l + '/', document.baseURI).href + location.hash;
+addEventListener('popstate', () => {
+    const l = pathLang();
+    if (l && l !== lang) applyLang(l);
+});
+
+let initial = pathLang() ?? new URLSearchParams(location.search).get('lang');
 if (!initial) {
     try { initial = localStorage.getItem('lang'); } catch (e) {}
 }
 applyLang(LANGS.includes(initial) ? initial : 'fr');
+if (pathLang() !== lang) {
+    try { history.replaceState(null, '', langURL(lang)); } catch (e) {}
+}
 
 // Expand everything when printing, then restore
 let saved;

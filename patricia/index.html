@@ -1128,6 +1128,7 @@ document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click
     if (b.dataset.lang === lang) return;
     applyLang(b.dataset.lang);
     try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+    try { history.pushState(null, '', langURL(lang)); } catch (e) {}
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.querySelectorAll('.intro, main, .foot').forEach(el =>
             el.animate([{ opacity: .35 }, { opacity: 1 }], { duration: 260, easing: 'ease-out' }));
@@ -1178,11 +1179,27 @@ toggle.addEventListener('click', () => {
 });
 all.forEach(d => d.addEventListener('toggle', sync));
 
-let initial = new URLSearchParams(location.search).get('lang');
+// Each language has its own address, <page>/<lang>/: copies of this file made by build-langs.sh
+// (with <base href="../">). The address picks the language; the bare page falls back to ?lang=,
+// then the saved choice, then the default, and shows the matching address.
+const pathLang = () => {
+    const l = location.pathname.split('/').filter(p => p && p !== 'index.html').pop();
+    return LANGS.includes(l) ? l : null;
+};
+const langURL = l => new URL(l + '/', document.baseURI).href + location.hash;
+addEventListener('popstate', () => {
+    const l = pathLang();
+    if (l && l !== lang) applyLang(l);
+});
+
+let initial = pathLang() ?? new URLSearchParams(location.search).get('lang');
 if (!initial) {
     try { initial = localStorage.getItem(LANG_KEY); } catch (e) {}
 }
 applyLang(LANGS.includes(initial) ? initial : 'en');
+if (pathLang() !== lang) {
+    try { history.replaceState(null, '', langURL(lang)); } catch (e) {}
+}
 
 // Expand everything when printing, then restore
 let saved;
