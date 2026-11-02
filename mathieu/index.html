@@ -119,6 +119,27 @@ h2 {
     padding-bottom: 2px;
 }
 
+summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary h2::after {
+    content: "▾";
+    float: right;
+    color: #bbb;
+    font-weight: normal;
+    transition: transform 0.15s;
+}
+
+details:not([open]) summary h2::after {
+    transform: rotate(-90deg);
+}
+
 .entry {
     margin-bottom: 8px;
 }
@@ -281,6 +302,10 @@ a:hover {
         break-after: avoid;
     }
 
+    summary h2::after {
+        display: none;
+    }
+
     .entry,
     .pub {
         margin-bottom: 6px;
@@ -325,7 +350,8 @@ a:hover {
 <span>Active metamaterials</span> · <span>Topological physics</span> · <span>Wave-based computing</span>
 </div>
 
-<h2>Positions</h2>
+<details open>
+<summary><h2>Positions</h2></summary>
 
 <div class="entry">
 <strong>ESPCI Paris, PSL University</strong> – Postdoc
@@ -342,7 +368,7 @@ Advisors: Prof. M. Fink, Prof. E. Fort
 <span class="date">Nov. 2025 – Aug. 2026</span>
 <div class="details">
 <a href="https://www.epfl.ch/labs/lwe/">Laboratory of Wave Engineering (LWE)</a><br>
-Project: <a href="https://arxiv.org/abs/2601.02977"><em>Classical Emulation of Quantum Phenomena</em></a>
+Project: <a href="https://doi.org/10.1103/1d5g-5s8g"><em>Classical Emulation of Quantum Phenomena</em></a>
 </div>
 </div>
 
@@ -366,7 +392,10 @@ Advisors: Dr. C. Putzke, Prof. P. Moll
 </div>
 </div>
 
-<h2>Education</h2>
+</details>
+
+<details open>
+<summary><h2>Education</h2></summary>
 
 <div class="entry">
 <strong>EPFL</strong> – PhD in Physics
@@ -395,10 +424,13 @@ Advisors: Dr. E. Martino, Prof. L. Forró
 
 <div class="clear"></div>
 
-<h2>Awards and Grants</h2>
+</details>
+
+<details open>
+<summary><h2>Awards and Grants</h2></summary>
 
 <div class="entry">
-<strong>Seal of Excellence</strong> – European Commission
+<strong><a href="https://commission.europa.eu/funding-and-tenders/find-funding/seal-excellence_en">Seal of Excellence</a></strong> – European Commission
 <span class="date">Feb. 2026</span>
 <div class="details">
 Horizon Europe MSCA Postdoctoral Fellowship 2025, with CNRS<br>
@@ -406,7 +438,22 @@ Project: <em>Wavebits: Analog Quantum-Inspired Computing</em>
 </div>
 </div>
 
-<h2>Publications</h2>
+</details>
+
+<details open>
+<summary><h2>Publications</h2></summary>
+
+<div class="pub">
+<a href="https://doi.org/10.1103/1d5g-5s8g">Classical analog emulation of quantum circuits via time-averaged dynamic states</a> <span class="date">Oct. 2026</span><br>
+M. Valle, T. Tuuva, B. Apffel, H. Lissek, R. Fleury, <strong>M. Padlewski</strong>,
+<em>Phys. Rev. Applied</em> (2026)
+</div>
+
+<div class="pub">
+<a href="https://doi.org/10.1103/9rfv-s8s2">Coexistence of broadband conduction and amplitude-driven topological confinement in synthetic acoustic matter</a> <span class="date">Oct. 2026</span><br>
+<strong>M. Padlewski</strong>, M. Volery, R. Fleury, et al.,
+<em>Phys. Rev. Applied</em> (2026)
+</div>
 
 <div class="pub">
 <a href="https://doi.org/10.1103/PhysRevB.111.125156">Observation of amplitude-driven nonreciprocity for energy guiding</a> <span class="date">Mar. 2025</span><br>
@@ -438,7 +485,11 @@ D. Santos-Cottin, <strong>M. Padlewski</strong>, E. Martino, et al.,
 <em>Phys. Rev. B</em> <strong>101</strong>, 125205
 </div>
 
-<h2>Preprints</h2>
+</details>
+
+<!-- Preprints hidden (none currently)
+<details open>
+<summary><h2>Preprints</h2></summary>
 
 <div class="pub">
 <a href="https://doi.org/10.48550/arXiv.2601.02977">Classical analog emulation of quantum circuits via time-averaged dynamic states</a> <span class="date">Jul. 2026</span><br>
@@ -451,8 +502,11 @@ arXiv:2601.02977
 <strong>M. Padlewski</strong>, X. Guo, M. Volery, R. Fleury, H. Lissek,
 arXiv:2408.16801
 </div>
+</details>
+-->
 
-<h2>Talks and Conferences</h2>
+<details open>
+<summary><h2>Talks and Conferences</h2></summary>
 
 <div class="entry">
 <a href="https://www.institut-langevin.espci.fr/seminars">Institut Langevin, ESPCI Paris, France</a>
@@ -490,7 +544,10 @@ arXiv:2408.16801
 <div class="details">Conference talk</div>
 </div>
 
-<h2>Outreach</h2>
+</details>
+
+<details open>
+<summary><h2>Outreach</h2></summary>
 
 <div class="entry">
 <a href="https://actu.epfl.ch/news/listen-to-quantum-atoms-talk-together-thanks-to-ac/">Listen to quantum atoms talk together thanks to acoustics</a>
@@ -517,17 +574,31 @@ arXiv:2408.16801
 <div class="details">Shaastra – IIT Madras</div>
 </div>
 
-<h2>Peer Review</h2>
+</details>
+
+<details open>
+<summary><h2>Peer Review</h2></summary>
 <div class="details">Physical Review Letters, Physical Review B, Communications Physics</div>
 
-<h2>Programming</h2>
+</details>
+
+<details open>
+<summary><h2>Programming</h2></summary>
 <div class="details">Python, Qiskit, MATLAB, Simulink, LabVIEW, Mathematica, COMSOL, Inventor, EAGLE</div>
 
-<h2>Languages</h2>
+</details>
+
+<details open>
+<summary><h2>Languages</h2></summary>
 <div class="details">French (native), English (native)</div>
 
-<h2>Activities</h2>
+</details>
+
+<details open>
+<summary><h2>Activities</h2></summary>
 <div class="details">Music (composition, guitar); endurance sports; useless Arduino projects</div>
+
+</details>
 
 </div>
 
@@ -539,6 +610,14 @@ arXiv:2408.16801
 const lightbox = document.querySelector('.lightbox');
 document.querySelector('.photo button').addEventListener('click', () => lightbox.showModal());
 lightbox.addEventListener('click', () => lightbox.close());
+
+// Expand every section when printing, then restore what was collapsed
+let collapsed = [];
+addEventListener('beforeprint', () => {
+    collapsed = [...document.querySelectorAll('details:not([open])')];
+    collapsed.forEach(d => d.open = true);
+});
+addEventListener('afterprint', () => collapsed.forEach(d => d.open = false));
 </script>
 
 </body>
