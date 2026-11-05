@@ -1,0 +1,47 @@
+# Keeps the CV PDFs in step with their pages, whether the edit was pushed or made on github.com.
+# Runs on macOS because the pages use Mac fonts (Georgia, Geeza Pro, SF); Linux would print them differently.
+name: Build CV PDFs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'mathieu/**'
+      - 'stephan/**'
+      - 'yasmine/**'
+      - '!**/*.pdf'
+      - 'build-pdfs.sh'
+      - 'build-langs.sh'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-pdfs
+
+jobs:
+  build:
+    runs-on: macos-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Only the pages that changed, so an edit to one CV doesn't rewrite the others' PDFs.
+      # No page found (a change to the scripts, or a manual run) rebuilds them all.
+      - name: Rebuild the PDFs
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: ./build-pdfs.sh $(git diff --name-only "$BEFORE" HEAD -- mathieu stephan yasmine 2> /dev/null | cut -d/ -f1 | sort -u)
+
+      - name: Commit the result
+        run: |
+          git add -A
+          git diff --cached --quiet && exit 0
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Rebuild CV PDFs'
+          git pull --rebase origin main
+          git push
