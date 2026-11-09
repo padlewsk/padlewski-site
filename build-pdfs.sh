@@ -1,8 +1,7 @@
 #!/bin/sh
 # Rebuilds the CV PDFs by printing each page with headless Chrome, so a PDF always matches its page.
-# GitHub runs this after every push to main (.github/workflows/build-pdfs.yml), so edit the page,
-# never the PDF. To preview a PDF on your own Mac: ./build-pdfs.sh [page ...], e.g. ./build-pdfs.sh mathieu
-# With no page named, every PDF is rebuilt.
+# Edit the page, never the PDF, then run this on the Mac before committing and commit the PDFs with the page.
+# Usage: ./build-pdfs.sh [page ...], e.g. ./build-pdfs.sh mathieu. With no page named, every PDF is rebuilt.
 set -e
 cd "$(dirname "$0")"
 
