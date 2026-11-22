@@ -1,6 +1,6 @@
 // Shared by every recipe page (each one loads it with <script src="../recipe.js" defer>; its look is in ../style.css).
 // Adds a bar with a link back to the home page and a print button, the page's cuisine and source chips,
-// read from its <meta name="recipe:cuisine"> and <meta name="recipe:source"> tags, and the visit counter.
+// read from its <meta name="recipe:cuisine"> and <meta name="recipe:source"> tags, and loads fast.js.
 (function () {
   function tags(name) {
     var m = document.querySelector('meta[name="recipe:' + name + '"]');
@@ -56,9 +56,8 @@
   var after = document.querySelector(".meta") || h1;
   if (row.firstChild && after) after.parentNode.insertBefore(row, after.nextSibling);
 
-  var gc = document.createElement("script");
-  gc.async = true;
-  gc.src = "//gc.zgo.at/count.js";
-  gc.dataset.goatcounter = "https://padlewski.goatcounter.com/count";
-  document.body.appendChild(gc);
+  // Instant page loads, offline cache and the visit counter, shared with the home page.
+  var fast = document.createElement("script");
+  fast.src = "../fast.js";
+  document.body.appendChild(fast);
 })();
