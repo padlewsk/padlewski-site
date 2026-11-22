@@ -5,6 +5,11 @@ recipe; PATCH: fixes and small edits (wording, quantities, a quote). The version
 (`VERSION`), shown at the bottom of every page, and names the offline cache, so bumping it also makes
 every visitor fetch the new files.
 
+## 2.5.0, 22.11.2026
+- Ten family recipes: Gâteau au chocolat de Mercedes; Banana cake, Carrot cake, Meatloaf, Guacamole and
+  Moussakhachi de Sylvie; Cake au rhum et raisins secs, Couscous, Soupe chinoise and Dolmas de Vincente.
+- New cuisines, with their air force insignia: Algérienne, Chinoise, Mexicaine, Turque.
+
 ## 2.4.2, 22.11.2026
 - Changes show up on the next visit: with a connection, pages come from the site; the copy kept on
   the device is only used offline. (Before, the saved copy came first, so updates appeared late.)

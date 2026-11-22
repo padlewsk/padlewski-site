@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Couscous de Vincente</title>
+<style>
+  :root {
+    --green: #3f9b35;
+    --pale: #f7f9cf;
+    --glow: #eef3b8;
+    --ink: #1a1a1a;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #fff; color: var(--ink); }
+  body {
+    font-family: Verdana, "DejaVu Sans", Tahoma, Geneva, sans-serif;
+    padding: 28px 24px 40px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 34px; margin: 0 0 6px 6px; letter-spacing: -0.4px; }
+  .meta { color: #555; font-size: 15px; margin: 0 0 16px 6px; }
+  .swipe { display: none; font-size: 13px; color: #888; font-style: italic; margin: 0 0 8px 6px; }
+  a { color: #2f7a27; }
+
+  .controls {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
+    margin: 0 0 20px 6px; font-size: 16px; color: #444;
+  }
+  .stepper { display: inline-flex; align-items: center; gap: 10px; }
+  .stepper button {
+    width: 40px; height: 40px; border-radius: 10px;
+    border: 2px solid var(--green); background: var(--pale); color: var(--ink);
+    font: inherit; font-size: 22px; line-height: 1; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    touch-action: manipulation;
+  }
+  .stepper button:hover { background: #eef3b8; }
+  .stepper button:active { transform: translateY(1px); }
+  .stepper button:disabled { opacity: 0.35; cursor: default; }
+  .stepper input {
+    width: 64px; height: 40px; text-align: center;
+    border: 2px solid var(--green); border-radius: 10px;
+    font: inherit; font-size: 20px; font-weight: bold; color: var(--ink); background: #fff;
+    -moz-appearance: textfield; appearance: textfield;
+  }
+  .stepper input::-webkit-outer-spin-button,
+  .stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .stepper input:focus { outline: 3px solid var(--glow); }
+
+  .card {
+    background: var(--pale); border-radius: 14px; padding: 9px;
+    box-shadow: 0 0 6px 3px var(--glow);
+  }
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table {
+    width: 100%; min-width: 820px;
+    border-collapse: collapse; background: #fff; table-layout: fixed;
+    font-size: 16px; line-height: 1.25;
+  }
+  td { border: 3px solid var(--green); padding: 8px 9px; vertical-align: middle; }
+  td.full { text-align: center; }
+  td.op { text-align: center; padding: 6px 4px; }
+  .ing { display: flex; align-items: flex-start; }
+  .q {
+    flex: 0 0 104px; margin-right: 10px; text-align: right; white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .q.changed { animation: flash 0.6s ease-out; }
+  @keyframes flash { from { color: var(--green); } to { color: var(--ink); } }
+
+  .footer { font-size: 12.5px; color: #666; margin: 16px 0 0 6px; line-height: 1.6; }
+
+  @media (max-width: 640px) {
+    body { padding: 18px 12px 28px; }
+    h1 { font-size: 26px; }
+    .swipe { display: block; }
+    table { font-size: 14px; min-width: 760px; }
+    .q { flex-basis: 92px; }
+  }
+  @media print {
+    @page { size: A4 landscape; margin: 14mm; }
+    body { padding: 0; max-width: none; }
+    .stepper button { display: none; }
+    .stepper input { border: none; width: 2.2em; padding: 0; height: auto; }
+    .hint { display: none; }
+    .card, td, .stepper input { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .scroll { overflow: visible; }
+    table { min-width: 0; }
+  }
+</style>
+<meta name="recipe:cuisine" content="Algérienne">
+<meta name="recipe:source" content="Vincente">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../style.css">
+<script src="../recipe.js" defer></script>
+</head>
+<body>
+  <h1>Couscous de Vincente</h1>
+  <div class="meta">préparation 30 min &nbsp;·&nbsp; cuisson 1 h 30</div>
+
+  <div class="controls">
+    <span>Pour</span>
+    <span class="stepper">
+      <button type="button" id="minus" aria-label="Moins de personnes">−</button>
+      <input id="servings" type="number" inputmode="numeric" min="1" max="40" step="1" value="6" aria-label="Nombre de personnes">
+      <button type="button" id="plus" aria-label="Plus de personnes">+</button>
+    </span>
+    <span id="people">personnes</span>
+  </div>
+
+  <div class="swipe">Faites glisser le tableau sur le côté pour voir toutes les étapes →</div>
+  <div class="card"><div class="scroll">
+  <table>
+    <colgroup><col style="width:27%"><col style="width:15%"><col style="width:16%"><col style="width:16%"><col style="width:16%"><col style="width:10%"></colgroup>
+    <tr><td><div class="ing"><span class="q" data-base="1200" data-unit="g"></span><span>agneau&nbsp;: collier, poitrine, épaule («&nbsp;tous les morceaux sont bons&nbsp;»)</span></div></td><td class="op">couper en morceaux</td><td class="op" rowspan="2">mettre à bouillir dans une cocotte remplie d’eau à moitié&nbsp;; bien écumer</td><td class="op" rowspan="5">ajouter&nbsp;; laisser cuire un peu la viande (environ 30&nbsp;min)</td><td class="op" rowspan="14">ajouter&nbsp;; mettre un peu de beurre dans le bouillon, saler, poivrer&nbsp;; laisser mijoter jusqu’à ce que les légumes soient tendres (environ 45&nbsp;min)</td><td class="op" rowspan="17">servir la semoule beurrée avec la viande, les légumes et le bouillon</td></tr>
+    <tr><td><div class="ing"><span class="q"></span><span>eau (la moitié de la cocotte)</span></div></td><td></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="1" data-unit="" data-step="0.5"></span><span data-one="oignon" data-many="oignons">oignons</span></div></td><td class="op">émincer</td><td></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="1" data-unit="" data-step="0.5"></span><span data-one="tomate" data-many="tomates">tomates</span></div></td><td class="op">couper en 4</td><td></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="400" data-unit="g"></span><span>pois chiches cuits (1 boîte)</span></div></td><td class="op">égoutter, rincer</td><td></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="4" data-unit="" data-step="0.5"></span><span data-one="navet" data-many="navets (4 ou 5)">navets (4 ou 5)</span></div></td><td class="op" rowspan="4">éplucher, couper en morceaux</td><td rowspan="4" colspan="2"></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="4" data-unit="" data-step="0.5"></span><span data-one="carotte" data-many="carottes">carottes</span></div></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="500" data-unit="g"></span><span>courgettes</span></div></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="300" data-unit="g"></span><span>potiron</span></div></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="1" data-unit="" data-step="0.5"></span><span data-one="poignée d’haricots verts" data-many="poignées d’haricots verts">poignées d’haricots verts</span></div></td><td class="op">équeuter, couper en deux</td><td colspan="2"></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="0.5" data-unit="c. à c." data-step="0.25"></span><span>cannelle en poudre</span></div></td><td colspan="3"></td></tr>
+    <tr><td><div class="ing"><span class="q"></span><span>safran, une pincée</span></div></td><td colspan="3"></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="20" data-unit="g"></span><span>beurre (un morceau)</span></div></td><td colspan="3"></td></tr>
+    <tr><td><div class="ing"><span class="q"></span><span>sel, poivre</span></div></td><td colspan="3"></td></tr>
+    <tr><td class="full" colspan="5">La semoule</td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="500" data-unit="g"></span><span>semoule moyenne</span></div></td><td></td><td class="op">la mouiller d’un peu d’eau salée, la laisser gonfler, l’égrener</td><td class="op">la mettre dans le haut du couscoussier, sur le bouillon, quand la vapeur sort bien&nbsp;; cuire ¼&nbsp;d’heure&nbsp;; la refaire gonfler dans le saladier, puis encore ¼&nbsp;d’heure à la vapeur</td><td class="op" rowspan="2">quand elle est cuite, y mettre le beurre</td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="30" data-unit="g"></span><span>beurre</span></div></td><td></td><td colspan="2"></td></tr>
+  </table>
+  </div></div>
+
+  <div class="footer">
+    La recette de Vincente, écrite à la main (la fin de la feuille manque). Les quantités, les temps de cuisson et la deuxième cuisson de la semoule sont des équivalences habituelles.
+  </div>
+
+<script>
+(function () {
+  var BASE = 6, MIN = 1, MAX = 40;
+  var FRACTIONS = { 0.25: "¼", 0.5: "½", 0.75: "¾" };
+  var input = document.getElementById("servings");
+  var minus = document.getElementById("minus");
+  var plus = document.getElementById("plus");
+  var people = document.getElementById("people");
+  var qs = Array.prototype.slice.call(document.querySelectorAll(".q[data-base]"));
+
+  // Grams and millilitres round to whole numbers (to 5 or 10 when large); spoons and pieces
+  // (data-step) to the nearest quarter or half, written as a fraction, and never below one step.
+  function amount(v, step) {
+    if (step) {
+      var r = Math.max(step, Math.round(v / step) * step), whole = Math.floor(r), frac = FRACTIONS[r - whole];
+      return { n: r, text: whole && frac ? whole + " " + frac : frac || String(whole) };
+    }
+    var n = v < 20 ? Math.round(v) : v < 1000 ? Math.round(v / 5) * 5 : Math.round(v / 10) * 10;
+    return { n: n, text: String(n) };
+  }
+
+  function render(n, animate) {
+    qs.forEach(function (el) {
+      var a = amount(el.dataset.base * n / BASE, parseFloat(el.dataset.step) || 0);
+      var many = a.n >= 2; // French: "1 ½ tomate", "2 tomates"
+      var unit = many && el.dataset.units ? el.dataset.units : el.dataset.unit;
+      var txt = unit ? a.text + " " + unit : a.text;
+      var label = el.nextElementSibling;
+      if (label.dataset.many) label.textContent = many ? label.dataset.many : label.dataset.one;
+      if (el.textContent !== txt) {
+        el.textContent = txt;
+        if (animate) { el.classList.remove("changed"); void el.offsetWidth; el.classList.add("changed"); }
+      }
+    });
+    people.textContent = n === 1 ? "personne" : "personnes";
+    minus.disabled = n <= MIN;
+    plus.disabled = n >= MAX;
+  }
+
+  function current() {
+    var n = parseInt(input.value, 10);
+    return isNaN(n) ? null : Math.min(MAX, Math.max(MIN, n));
+  }
+
+  function set(n) { input.value = n; render(n, true); }
+
+  input.addEventListener("input", function () { var n = current(); if (n !== null) render(n, true); });
+  input.addEventListener("change", function () { set(current() || BASE); });
+  minus.addEventListener("click", function () { set(Math.max(MIN, (current() || BASE) - 1)); });
+  plus.addEventListener("click", function () { set(Math.min(MAX, (current() || BASE) + 1)); });
+
+  render(BASE, false);
+})();
+</script>
+</body>
+</html>

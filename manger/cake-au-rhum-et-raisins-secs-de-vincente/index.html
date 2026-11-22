@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cake au rhum et raisins secs de Vincente</title>
+<style>
+  :root {
+    --green: #3f9b35;
+    --pale: #f7f9cf;
+    --glow: #eef3b8;
+    --ink: #1a1a1a;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #fff; color: var(--ink); }
+  body {
+    font-family: Verdana, "DejaVu Sans", Tahoma, Geneva, sans-serif;
+    padding: 28px 24px 40px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 34px; margin: 0 0 6px 6px; letter-spacing: -0.4px; }
+  .meta { color: #555; font-size: 15px; margin: 0 0 16px 6px; }
+  .swipe { display: none; font-size: 13px; color: #888; font-style: italic; margin: 0 0 8px 6px; }
+  a { color: #2f7a27; }
+
+  .controls {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
+    margin: 0 0 20px 6px; font-size: 16px; color: #444;
+  }
+  .stepper { display: inline-flex; align-items: center; gap: 10px; }
+  .stepper button {
+    width: 40px; height: 40px; border-radius: 10px;
+    border: 2px solid var(--green); background: var(--pale); color: var(--ink);
+    font: inherit; font-size: 22px; line-height: 1; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    touch-action: manipulation;
+  }
+  .stepper button:hover { background: #eef3b8; }
+  .stepper button:active { transform: translateY(1px); }
+  .stepper button:disabled { opacity: 0.35; cursor: default; }
+  .stepper input {
+    width: 64px; height: 40px; text-align: center;
+    border: 2px solid var(--green); border-radius: 10px;
+    font: inherit; font-size: 20px; font-weight: bold; color: var(--ink); background: #fff;
+    -moz-appearance: textfield; appearance: textfield;
+  }
+  .stepper input::-webkit-outer-spin-button,
+  .stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .stepper input:focus { outline: 3px solid var(--glow); }
+
+  .card {
+    background: var(--pale); border-radius: 14px; padding: 9px;
+    box-shadow: 0 0 6px 3px var(--glow);
+  }
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table {
+    width: 100%; min-width: 820px;
+    border-collapse: collapse; background: #fff; table-layout: fixed;
+    font-size: 16px; line-height: 1.25;
+  }
+  td { border: 3px solid var(--green); padding: 8px 9px; vertical-align: middle; }
+  td.full { text-align: center; }
+  td.op { text-align: center; padding: 6px 4px; }
+  .ing { display: flex; align-items: flex-start; }
+  .q {
+    flex: 0 0 104px; margin-right: 10px; text-align: right; white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .q.changed { animation: flash 0.6s ease-out; }
+  @keyframes flash { from { color: var(--green); } to { color: var(--ink); } }
+
+  .footer { font-size: 12.5px; color: #666; margin: 16px 0 0 6px; line-height: 1.6; }
+
+  @media (max-width: 640px) {
+    body { padding: 18px 12px 28px; }
+    h1 { font-size: 26px; }
+    .swipe { display: block; }
+    table { font-size: 14px; min-width: 760px; }
+    .q { flex-basis: 92px; }
+  }
+  @media print {
+    @page { size: A4 landscape; margin: 14mm; }
+    body { padding: 0; max-width: none; }
+    .stepper button { display: none; }
+    .stepper input { border: none; width: 2.2em; padding: 0; height: auto; }
+    .hint { display: none; }
+    .card, td, .stepper input { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .scroll { overflow: visible; }
+    table { min-width: 0; }
+  }
+</style>
+<meta name="recipe:cuisine" content="Française">
+<meta name="recipe:source" content="Vincente">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../style.css">
+<script src="../recipe.js" defer></script>
+</head>
+<body>
+  <h1>Cake au rhum et raisins secs de Vincente</h1>
+  <div class="meta">préparation 20 min &nbsp;·&nbsp; cuisson 45 min à 1 h</div>
+
+  <div class="controls">
+    <span>Pour</span>
+    <span class="stepper">
+      <button type="button" id="minus" aria-label="Moins de personnes">−</button>
+      <input id="servings" type="number" inputmode="numeric" min="1" max="40" step="1" value="12" aria-label="Nombre de personnes">
+      <button type="button" id="plus" aria-label="Plus de personnes">+</button>
+    </span>
+    <span id="people">personnes</span>
+  </div>
+
+  <div class="swipe">Faites glisser le tableau sur le côté pour voir toutes les étapes →</div>
+  <div class="card"><div class="scroll">
+  <table>
+    <colgroup><col style="width:27%"><col style="width:18%"><col style="width:9%"><col style="width:15%"><col style="width:13%"><col style="width:9%"><col style="width:9%"></colgroup>
+    <tr><td class="full" colspan="7">Préchauffer le four à 170&nbsp;°C (350&nbsp;°F)&nbsp;; huiler et fariner deux moules à cake</td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="6" data-unit="" data-step="1"></span><span data-one="œuf" data-many="œufs (6 à 8)">œufs (6 à 8)</span></div></td><td></td><td class="op" rowspan="3">mélanger</td><td class="op" rowspan="6">ajouter, faire une pâte consistante, pas trop molle&nbsp;; goûter&nbsp;: «&nbsp;il faut que ça soit assez doux&nbsp;»</td><td class="op" rowspan="7">si besoin, ajouter un peu de farine si elle est trop molle, ou un peu de lait si elle est trop dure</td><td class="op" rowspan="9">incorporer à la cuillère, au dernier moment</td><td class="op" rowspan="9">remplir les moules aux trois quarts&nbsp;; cuire au moins 45&nbsp;min à 1&nbsp;h</td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="200" data-unit="mL"></span><span>huile (1 bon verre)</span></div></td><td></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="170" data-unit="g"></span><span>sucre (autant que d’huile&nbsp;: 1 verre)</span></div></td><td></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="500" data-unit="g"></span><span>farine (1 livre)</span></div></td><td colspan="2"></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="1" data-unit="sachet" data-step="0.5" data-units="sachets"></span><span>de levure chimique</span></div></td><td colspan="2"></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="1" data-unit="" data-step="0.5"></span><span data-one="citron (le zeste)" data-many="citrons (le zeste)">citrons (le zeste)</span></div></td><td class="op">râper le zeste</td><td></td></tr>
+    <tr><td><div class="ing"><span class="q"></span><span>un peu de lait, si besoin</span></div></td><td></td><td colspan="2"></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="150" data-unit="g"></span><span>raisins secs</span></div></td><td class="op" rowspan="2">faire tremper dans le rhum (ou dans de l’eau chaude, au micro-ondes)&nbsp;; égoutter, rouler dans un peu de farine</td><td rowspan="2" colspan="3"></td></tr>
+    <tr><td><div class="ing"><span class="q"></span><span>rhum, pour les faire tremper (ou de l’eau chaude)</span></div></td></tr>
+  </table>
+  </div></div>
+
+  <div class="footer">
+    D’après un e-mail de Vincente à Sylvie, le 13 février 1997&nbsp;: «&nbsp;oui le cake c’est bon et très facile à faire&nbsp;». Elle compte un paquet de levure pour une livre de farine&nbsp;; cuisson «&nbsp;à 7 ou à 170 degrés&nbsp;». Les quantités en grammes et les deux moules sont des équivalences.
+  </div>
+
+<script>
+(function () {
+  var BASE = 12, MIN = 1, MAX = 40;
+  var FRACTIONS = { 0.25: "¼", 0.5: "½", 0.75: "¾" };
+  var input = document.getElementById("servings");
+  var minus = document.getElementById("minus");
+  var plus = document.getElementById("plus");
+  var people = document.getElementById("people");
+  var qs = Array.prototype.slice.call(document.querySelectorAll(".q[data-base]"));
+
+  // Grams and millilitres round to whole numbers (to 5 or 10 when large); spoons and pieces
+  // (data-step) to the nearest quarter or half, written as a fraction, and never below one step.
+  function amount(v, step) {
+    if (step) {
+      var r = Math.max(step, Math.round(v / step) * step), whole = Math.floor(r), frac = FRACTIONS[r - whole];
+      return { n: r, text: whole && frac ? whole + " " + frac : frac || String(whole) };
+    }
+    var n = v < 20 ? Math.round(v) : v < 1000 ? Math.round(v / 5) * 5 : Math.round(v / 10) * 10;
+    return { n: n, text: String(n) };
+  }
+
+  function render(n, animate) {
+    qs.forEach(function (el) {
+      var a = amount(el.dataset.base * n / BASE, parseFloat(el.dataset.step) || 0);
+      var many = a.n >= 2; // French: "1 ½ tomate", "2 tomates"
+      var unit = many && el.dataset.units ? el.dataset.units : el.dataset.unit;
+      var txt = unit ? a.text + " " + unit : a.text;
+      var label = el.nextElementSibling;
+      if (label.dataset.many) label.textContent = many ? label.dataset.many : label.dataset.one;
+      if (el.textContent !== txt) {
+        el.textContent = txt;
+        if (animate) { el.classList.remove("changed"); void el.offsetWidth; el.classList.add("changed"); }
+      }
+    });
+    people.textContent = n === 1 ? "personne" : "personnes";
+    minus.disabled = n <= MIN;
+    plus.disabled = n >= MAX;
+  }
+
+  function current() {
+    var n = parseInt(input.value, 10);
+    return isNaN(n) ? null : Math.min(MAX, Math.max(MIN, n));
+  }
+
+  function set(n) { input.value = n; render(n, true); }
+
+  input.addEventListener("input", function () { var n = current(); if (n !== null) render(n, true); });
+  input.addEventListener("change", function () { set(current() || BASE); });
+  minus.addEventListener("click", function () { set(Math.max(MIN, (current() || BASE) - 1)); });
+  plus.addEventListener("click", function () { set(Math.min(MAX, (current() || BASE) + 1)); });
+
+  render(BASE, false);
+})();
+</script>
+</body>
+</html>
