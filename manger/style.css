@@ -55,7 +55,6 @@ h1 { font-size: 48px; line-height: 1.06; font-weight: 700; letter-spacing: -.04e
 
 /* Cuisine roundels (manger/flags/<cuisine>.svg) */
 .flag { width: 1.2em; height: 1.2em; margin-right: 7px; border-radius: 50%; flex: none; }
-.home h2 .flag { width: 24px; height: 24px; margin-right: 2px; }
 
 /* Grey band: a soft gradient across the whole window, as on yasmine/ */
 .hero, .rx-hero { background: linear-gradient(180deg, var(--band-top), var(--band-bottom)); }
@@ -72,29 +71,44 @@ h1 { font-size: 48px; line-height: 1.06; font-weight: 700; letter-spacing: -.04e
 .hero .wrap { padding-top: 72px; padding-bottom: 48px; }
 .home h1 { margin: 0 0 32px; font-size: 56px; line-height: 1.04; }
 
+/* "Recettes" and, on phones, the button that unfolds the cuisine and source filters */
+.title-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 32px; }
+.title-row h1 { margin: 0; }
+.more-toggle {
+  display: none; flex: none; align-items: center; gap: 6px; height: 36px; padding: 0 15px; border: 0; border-radius: 999px;
+  background: #fff; color: var(--ink); font: inherit; font-size: 14px; cursor: pointer; box-shadow: 0 0 0 1px var(--line);
+}
+.more-toggle[aria-expanded="true"] { background: var(--accent-soft); color: var(--accent-ink); box-shadow: none; }
+.badge {
+  display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px;
+  background: var(--accent); color: #fff; font-size: 11px; font-weight: 600;
+}
 .filters { display: grid; gap: 10px; }
 .filter { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .label { width: 84px; color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
 
 .content { flex: 1; padding-top: 48px; padding-bottom: 64px; }
-.home section { margin-bottom: 44px; }
+.home section { margin-bottom: 36px; }
 .home h2 {
-  display: flex; align-items: center; gap: 10px; margin: 0 0 18px; padding-bottom: 14px;
+  display: flex; align-items: center; gap: 10px; margin: 0 0 14px; padding-bottom: 12px;
   border-bottom: 1px solid var(--line); font-size: 24px; font-weight: 600; letter-spacing: -.025em;
 }
 .home h2 .count { margin-left: 4px; color: var(--muted); font-size: 14px; font-weight: 400; letter-spacing: 0; }
 
 .recipes {
   list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px;
 }
+/* a tile: the cuisine's flag and the name on top, the source below */
 .recipes li {
-  position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 18px;
-  min-height: 128px; padding: 22px 22px 20px; border-radius: 18px; background: var(--fill);
+  position: relative; display: grid; grid-template-columns: auto 1fr; align-content: space-between; gap: 12px 9px;
+  min-height: 92px; padding: 16px 18px 14px; border-radius: 14px; background: var(--fill);
   transition: transform .3s cubic-bezier(.16, 1, .3, 1), box-shadow .3s;
 }
 .recipes li:hover { transform: scale(1.015); box-shadow: 0 12px 32px rgba(0, 0, 0, .08); }
-.name { color: var(--ink); font-size: 19px; font-weight: 600; letter-spacing: -.02em; line-height: 1.25; text-decoration: none; }
+.recipes .flag { width: 20px; height: 20px; margin: 1px 0 0; }
+.recipes .tags { grid-column: 1 / -1; }
+.name { color: var(--ink); font-size: 17px; font-weight: 600; letter-spacing: -.02em; line-height: 1.25; text-decoration: none; }
 .name:hover { text-decoration: none; }
 .name::after { content: ""; position: absolute; inset: 0; border-radius: inherit; } /* the whole tile opens the recipe */
 .tags { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 6px; }
@@ -149,6 +163,33 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
 .q { color: var(--accent-ink); font-weight: 600; }
 @keyframes flash { from { background: var(--accent-soft); } }
 .footer { margin-top: 18px; color: var(--muted); }
+/* "Voir la recette originale": the scans of a handwritten recipe, under the table, in a full-screen viewer */
+.rx-original {
+  display: inline-flex; align-items: center; gap: 8px; margin: 16px 0 0; padding: 9px 15px 9px 12px; border: 0;
+  border-radius: 12px; background: var(--fill); color: var(--accent-ink); font: inherit; font-size: 14.5px;
+  cursor: pointer; transition: background .2s, transform .2s;
+}
+.rx-original:hover { background: var(--accent-soft); }
+.rx-original:active { transform: scale(.98); }
+.rx-original svg { width: 19px; height: 19px; flex: none; }
+.rx-pages { color: var(--faint); }
+.rx-original + .footer { margin-top: 14px; }
+.rx-viewer {
+  width: min(920px, 100vw); max-width: 100vw; max-height: 100dvh; height: 100dvh; margin: 0 auto; padding: 0 16px 24px;
+  border: 0; background: transparent; overflow-y: auto; overscroll-behavior: contain;
+}
+.rx-viewer::backdrop { background: rgba(20, 20, 22, .88); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.rx-viewer-top {
+  position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 0 12px; color: rgba(255, 255, 255, .8); font-size: 14px;
+}
+.rx-viewer-top button {
+  height: 34px; padding: 0 16px; border: 0; border-radius: 999px; background: rgba(255, 255, 255, .16); color: #fff;
+  font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+.rx-viewer-top button:hover { background: rgba(255, 255, 255, .26); }
+.rx-viewer a { display: block; margin: 0 0 14px; }
+.rx-viewer img { display: block; width: 100%; height: auto; min-height: 200px; border-radius: 10px; background: #fff; cursor: zoom-in; }
 /* The chef's tips, with their photo in black and white:
    <aside class="chef"><img class="avatar"> <div><h2>Conseils du chef</h2> <p class="who">Name</p> <ul><li>« … »</li></ul></div></aside> */
 .chef {
@@ -193,11 +234,31 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
 .rx-uses .q { margin-right: 5px; }
 .rx-uses .q:empty { display: none; }
 
+/* ticked off while cooking (a tap on an ingredient or a step) */
+.rx-ings li, .rx-step-list li:not(.rx-note) { cursor: pointer; -webkit-tap-highlight-color: transparent; transition: opacity .2s; }
+.rx-ings li:focus-visible, .rx-step-list li:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 2px; }
+.rx-ings li.rx-done { opacity: .38; }
+.rx-ings li.rx-done .rx-ing > span:last-child { text-decoration: line-through; }
+.rx-step-list li.rx-done { opacity: .45; }
+.rx-step-list li.rx-done::before { content: "✓"; background: var(--accent); color: #fff; }
+.rx-steps h2 { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.rx-reset {
+  padding: 0; border: 0; background: none; color: var(--accent-ink); font: inherit; font-size: 14px;
+  font-weight: 400; letter-spacing: 0; cursor: pointer;
+}
 [data-view="steps"] .rx-steps { display: block; margin: 0 2px; }
 [data-view="steps"] body:not(.home) .card, [data-view="steps"] body:not(.home) .swipe { display: none; }
 
 /* Servings and the Tableau / Étapes switch share a row; the switch is an Apple-style segmented control */
 .rx-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; }
+.rx-right { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.rx-awake {
+  display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 13px; border: 0; border-radius: 11px;
+  background: rgba(0, 0, 0, .07); color: var(--muted); font: inherit; font-size: 13.5px; cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.rx-awake svg { width: 16px; height: 16px; }
+.rx-awake[aria-pressed="true"] { background: var(--accent); color: #fff; }
 .rx-mode { display: inline-flex; padding: 3px; border-radius: 11px; background: rgba(0, 0, 0, .07); }
 .rx-mode button {
   min-width: 92px; height: 30px; padding: 0 16px; border: 0; border-radius: 8px; background: none;
@@ -209,8 +270,20 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
 @media (max-width: 640px) {
   .wrap { padding-left: 20px; padding-right: 20px; }
   .hero .wrap { padding-top: 44px; padding-bottom: 36px; }
-  .home h1 { font-size: 40px; margin-bottom: 24px; }
+  .home h1 { font-size: 40px; }
+  .title-row { margin-bottom: 24px; }
   .label { width: 100%; }
+  .more-toggle { display: inline-flex; }
+  .filters:not(.open) .filter.more { display: none; }
+  /* the chips of a row scroll sideways instead of wrapping onto several lines */
+  .filter { flex-wrap: nowrap; overflow-x: auto; margin: 0 -20px; padding: 0 20px; scrollbar-width: none; }
+  .filter::-webkit-scrollbar { display: none; }
+  .filter .label { display: none; }
+  .filter.more .label { display: block; flex: none; width: auto; margin-right: 4px; }
+  .recipes { gap: 8px; }
+  .recipes li { grid-template-columns: auto 1fr auto; align-items: center; min-height: 0; padding: 14px 16px; }
+  .recipes .flag { margin: 0; }
+  .recipes .tags { grid-column: auto; }
   h1 { font-size: 34px; }
   .rx-bar { margin-bottom: 24px; }
   .chef { gap: 16px; padding: 22px 20px; }
@@ -219,7 +292,7 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
 
 @media print {
   .version { display: none; }
-  .rx-mode { display: none; }
+  .rx-mode, .rx-awake, .rx-original, .rx-viewer { display: none; }
   .rx-steps { display: none !important; }
   body:not(.home) .card { display: block !important; }
   /* Kept simple so it fits whatever page the browser gives: recipe.js asks for landscape A4 (wide

@@ -1,6 +1,6 @@
 // Shared by every recipe page (each one loads it with <script src="../recipe.js" defer>; its look is in ../style.css).
-// Adds a bar with a link back to the home page and a print button, the page's cuisine and source chips,
-// read from its <meta name="recipe:cuisine"> and <meta name="recipe:source"> tags, and loads fast.js.
+// Adds a bar with a link back to the home page and a print button, the page's type, cuisine and source
+// chips, read from its <meta name="recipe:course">, "recipe:cuisine" and "recipe:source" tags, and loads fast.js.
 (function () {
   function tags(name) {
     var m = document.querySelector('meta[name="recipe:' + name + '"]');
@@ -53,6 +53,7 @@
     a.appendChild(document.createTextNode(value));
     row.appendChild(a);
   }
+  tags("course").forEach(function (v) { chip("course", v); });
   tags("cuisine").forEach(function (v) { chip("cuisine", v); });
   tags("source").forEach(function (v) { chip("source", v); });
   var after = document.querySelector(".meta") || h1;
@@ -196,6 +197,37 @@
     sync();
     new MutationObserver(sync).observe(table, { subtree: true, childList: true, characterData: true });
 
+    // While cooking: a tap ticks off an ingredient (got it out) or a step (done). Kept for this tab only,
+    // so the recipe starts fresh next time; "Tout décocher" clears it.
+    var DONE = "manger-done:" + location.pathname, ticks = {};
+    var marks = [].slice.call(list.children).concat([].slice.call(steps.querySelectorAll("li:not(.rx-note)")));
+    var reset = document.createElement("button");
+    reset.type = "button";
+    reset.className = "rx-reset";
+    reset.textContent = "Tout décocher";
+    h2.appendChild(reset);
+    function tick(save) {
+      var any = false;
+      marks.forEach(function (li, i) { var on = !!ticks[i]; li.classList.toggle("rx-done", on); li.setAttribute("aria-checked", String(on)); any = any || on; });
+      reset.hidden = !any;
+      if (save) { try { sessionStorage.setItem(DONE, JSON.stringify(ticks)); } catch (e) {} }
+    }
+    marks.forEach(function (li, i) {
+      li.setAttribute("role", "checkbox");
+      li.tabIndex = 0;
+      li.addEventListener("click", function () {
+        if (window.getSelection && String(window.getSelection())) return; // selecting text, not ticking
+        ticks[i] = !ticks[i];
+        tick(true);
+      });
+      li.addEventListener("keydown", function (e) {
+        if (e.key === " " || e.key === "Enter") { e.preventDefault(); li.click(); }
+      });
+    });
+    reset.addEventListener("click", function () { ticks = {}; tick(true); });
+    try { ticks = JSON.parse(sessionStorage.getItem(DONE)) || {}; } catch (e) {}
+    tick(false);
+
     // The Tableau / Étapes switch, next to the servings; the choice is remembered on this device.
     var KEY = "manger-view", views = [["table", "Tableau"], ["steps", "Étapes"]];
     var root = document.documentElement, saved = null;
@@ -221,15 +253,97 @@
     var phone = window.matchMedia && matchMedia("(max-width: 700px)").matches;
     show(saved === "steps" || saved === "table" ? saved : phone ? "steps" : "table", false);
     var controls = document.querySelector(".controls");
+    var right = document.createElement("div");
+    right.className = "rx-right";
+    right.appendChild(toggle);
     if (controls) {
       var tools = document.createElement("div");
       tools.className = "rx-tools";
       controls.parentNode.insertBefore(tools, controls);
       tools.appendChild(controls);
-      tools.appendChild(toggle);
+      tools.appendChild(right);
     } else {
-      card.parentNode.insertBefore(toggle, card);
+      card.parentNode.insertBefore(right, card);
     }
+
+    // On phones and tablets, a switch keeps the screen on while the recipe is open (it would otherwise
+    // go dark between two steps, hands covered in flour). Remembered on this device.
+    if ("wakeLock" in navigator && window.matchMedia && matchMedia("(pointer: coarse)").matches) {
+      var AWAKE = "manger-awake", lock = null, want = false;
+      var awake = document.createElement("button");
+      awake.type = "button";
+      awake.className = "rx-awake";
+      awake.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" ' +
+        'aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Écran allumé';
+      var hold = function () {
+        if (!want || lock || document.visibilityState !== "visible") return;
+        navigator.wakeLock.request("screen").then(function (l) {
+          lock = l;
+          l.addEventListener("release", function () { lock = null; });
+        }).catch(function () {});
+      };
+      var setAwake = function (on, remember) {
+        want = on;
+        awake.setAttribute("aria-pressed", String(on));
+        if (on) hold(); else if (lock) lock.release();
+        if (remember) { try { localStorage.setItem(AWAKE, on ? "1" : ""); } catch (e) {} }
+      };
+      awake.addEventListener("click", function () { setAwake(!want, true); });
+      document.addEventListener("visibilitychange", hold); // the lock ends when the page is hidden
+      right.insertBefore(awake, toggle);
+      var was = false;
+      try { was = localStorage.getItem(AWAKE) === "1"; } catch (e) {}
+      setAwake(was, false);
+    }
+  }
+
+  // The original, when the recipe was handwritten (or annotated by hand): <meta name="recipe:original"
+  // content="original-1.jpg, original-2.jpg"> lists its scans, kept next to the page. A link under the
+  // recipe opens them full screen; each page opens on its own for zooming.
+  var scans = tags("original");
+  if (scans.length) {
+    var see = document.createElement("button");
+    see.type = "button";
+    see.className = "rx-original";
+    see.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" ' +
+      'stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>' +
+      '<path d="M14 3v5h5"/><path d="M9 13c1-1 2 1 3 0s2 1 3 0M9 17h4"/></svg>Voir la recette originale' +
+      (scans.length > 1 ? ' <span class="rx-pages">' + scans.length + " pages</span>" : "");
+    var viewer = document.createElement("dialog");
+    viewer.className = "rx-viewer";
+    viewer.setAttribute("aria-label", "Recette originale");
+    var head = document.createElement("div");
+    head.className = "rx-viewer-top";
+    var cap = document.createElement("span");
+    cap.textContent = (h1 ? h1.textContent + " · " : "") + "l’original";
+    var close = document.createElement("button");
+    close.type = "button";
+    close.textContent = "Fermer";
+    head.appendChild(cap);
+    head.appendChild(close);
+    viewer.appendChild(head);
+    scans.forEach(function (src, i) {
+      var a = document.createElement("a");
+      a.href = src;
+      a.target = "_blank";
+      var img = document.createElement("img");
+      img.alt = "Page " + (i + 1) + " de la recette originale";
+      img.loading = "lazy";
+      a.appendChild(img);
+      viewer.appendChild(a);
+    });
+    see.addEventListener("click", function () {
+      [].forEach.call(viewer.querySelectorAll("img"), function (img, i) { if (!img.src) img.src = scans[i]; });
+      if (viewer.showModal) viewer.showModal(); else window.open(scans[0]);
+    });
+    close.addEventListener("click", function () { viewer.close(); });
+    viewer.addEventListener("click", function (e) { if (e.target === viewer) viewer.close(); }); // outside the pages
+    var under = document.querySelector(".footer");
+    var last = document.querySelector(".rx-steps") || document.querySelector(".card");
+    if (under) under.parentNode.insertBefore(see, under);
+    else if (last) last.parentNode.insertBefore(see, last.nextSibling);
+    else document.body.appendChild(see);
+    document.body.appendChild(viewer);
   }
 
   // For printing on a portrait page in Safari, which ignores the landscape request above: everything
@@ -244,7 +358,7 @@
   first.className = "rx-page";
   first.appendChild(sheet);
   var kids = [].slice.call(document.body.children).filter(function (el) {
-    return el.tagName !== "SCRIPT" && !el.classList.contains("chef");
+    return el.tagName !== "SCRIPT" && el.tagName !== "DIALOG" && !el.classList.contains("chef");
   });
   document.body.insertBefore(first, kids[0] || null);
   kids.forEach(function (el) { sheet.appendChild(el); });

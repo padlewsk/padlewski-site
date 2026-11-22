@@ -5,6 +5,29 @@ recipe; PATCH: fixes and small edits (wording, quantities, a quote). The version
 (`VERSION`), shown at the bottom of every page, and names the offline cache, so bumping it also makes
 every visitor fetch the new files.
 
+## 3.2.0, 22.11.2026
+- Handwritten recipes (or recipes annotated by hand) have a "Voir la recette originale" link under the
+  table, which shows the scan full screen: Gâteau au chocolat de Mercedes, Banana cake and Carrot cake de
+  Sylvie, Carrot cake de Sébastien, Couscous, Soupe chinoise and Dolmas de Vincente. The scans are
+  original-1.jpg, original-2.jpg… in each recipe's folder, listed in <meta name="recipe:original">.
+
+## 3.1.0, 22.11.2026
+- Phones: the cuisine and source filters fold behind a "Filtres" button (with the number of filters on),
+  and each row of chips scrolls sideways instead of taking several lines. Section counts follow the filters.
+- Étapes view: a tap ticks off an ingredient or a step; "Tout décocher" clears them. Kept until the tab
+  is closed.
+- Phones and tablets: an "Écran allumé" switch keeps the screen from going dark while cooking.
+
+## 3.0.0, 22.11.2026
+- The home page lists recipes by type: Entrées, Plats, Desserts. Each tile shows its cuisine's flag;
+  cuisine and source remain as filters, with a new Type filter.
+- Recipe pages show their type next to the cuisine and source.
+- Every recipe has a <meta name="recipe:course"> tag; `build-recipes.py add` now takes the type
+  (Entrée, Plat or Dessert) before the cuisine.
+
+## 2.6.1, 22.11.2026
+- More compact recipe tiles on the home page.
+
 ## 2.6.0, 22.11.2026
 - Carrot cake de Sébastien, with his remark.
 
