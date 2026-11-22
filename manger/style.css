@@ -103,6 +103,9 @@ h1 { font-size: 48px; line-height: 1.06; font-weight: 700; letter-spacing: -.04e
 .foot { background: var(--band-bottom); }
 .foot .wrap { padding-top: 26px; padding-bottom: 26px; color: var(--muted); font-size: 12.5px; }
 .foot a { color: inherit; }
+.foot .wrap { display: flex; justify-content: space-between; gap: 16px; }
+.version { color: var(--faint); font-size: 12px; font-variant-numeric: tabular-nums; }
+.rx-version { margin: 40px 6px 20px; }
 
 /* ---------- Recipe pages ---------- */
 
@@ -215,6 +218,7 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
 }
 
 @media print {
+  .version { display: none; }
   .rx-mode { display: none; }
   .rx-steps { display: none !important; }
   body:not(.home) .card { display: block !important; }

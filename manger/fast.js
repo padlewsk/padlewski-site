@@ -1,13 +1,29 @@
 // Makes moving between recipe pages instant, like mcmaster.com. Loaded by index.html and recipe.js.
 //  - Chrome and Edge prerender a recipe page when the pointer rests on its link (Speculation Rules).
 //  - Other browsers fetch the page as soon as the pointer or a finger is on the link, so it is ready on click.
-//  - sw.js keeps every page on the device (see that file).
+//  - sw.js keeps a copy of every page on the device, for offline use (see that file).
 //  - The visit counter waits until a prerendered page is actually opened, so hovering is not a visit.
 (function () {
+  // Version of the recipes section, shown at the bottom of every page and naming sw.js's cache, so a new
+  // version also refreshes every visitor's copy. MAJOR: redesign or new structure; MINOR: new feature
+  // or recipe; PATCH: fixes and small edits. Record each change in CHANGELOG.md.
+  var VERSION = "2.4.2";
   var here = document.currentScript.src.replace(/fast\.js.*$/, ""); // .../manger/
 
+  function stamp() {
+    var spots = document.querySelectorAll(".version");
+    if (!spots.length) { // recipe pages: a line at the very bottom
+      var p = document.createElement("p");
+      p.className = "version rx-version";
+      document.body.appendChild(p);
+      spots = [p];
+    }
+    [].forEach.call(spots, function (el) { el.textContent = "v" + VERSION; });
+  }
+  if (document.body) stamp(); else document.addEventListener("DOMContentLoaded", stamp);
+
   if (location.protocol !== "file:") {
-    if ("serviceWorker" in navigator) navigator.serviceWorker.register(here + "sw.js").catch(function () {});
+    if ("serviceWorker" in navigator) navigator.serviceWorker.register(here + "sw.js?v=" + VERSION).catch(function () {});
 
     if (HTMLScriptElement.supports && HTMLScriptElement.supports("speculationrules")) {
       var rules = document.createElement("script");
