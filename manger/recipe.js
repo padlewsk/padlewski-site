@@ -66,7 +66,8 @@
     .forEach(function (el) { if (el) hero.appendChild(el); });
 
   // Second view of the recipe, "Étapes": an ingredient list and numbered steps, chosen with the
-  // Tableau / Étapes switch below (the table is the default, and is always what prints). Read from
+  // Tableau / Étapes switch below (Étapes by default on phones, the table on larger screens; the
+  // table is always what prints). Read from
   // the table, so every recipe gets it:
   // its columns are in time order, each step cell covers the ingredient rows it uses, and a full-width
   // row in the middle ("Pendant ce temps…") starts a new group of steps.
@@ -216,7 +217,9 @@
       b.addEventListener("click", function () { show(v[0], true); });
       toggle.appendChild(b);
     });
-    show(saved === "steps" ? "steps" : "table", false);
+    // default: Étapes on phones, Tableau on larger screens; a choice made on this device wins
+    var phone = window.matchMedia && matchMedia("(max-width: 700px)").matches;
+    show(saved === "steps" || saved === "table" ? saved : phone ? "steps" : "table", false);
     var controls = document.querySelector(".controls");
     if (controls) {
       var tools = document.createElement("div");
