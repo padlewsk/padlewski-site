@@ -65,6 +65,150 @@
   [bar, h1, document.querySelector(".meta"), row.firstChild ? row : null, document.querySelector(".controls")]
     .forEach(function (el) { if (el) hero.appendChild(el); });
 
+  // On phones the wide table becomes an ingredient list and numbered steps (shown by style.css under
+  // 700 px; the table stays for larger screens and print). Read from the table, so every recipe gets it:
+  // its columns are in time order, each step cell covers the ingredient rows it uses, and a full-width
+  // row in the middle ("Pendant ce temps…") starts a new group of steps.
+  var table = document.querySelector(".card table");
+  if (table) {
+    var grid = [], cells = [], ncols = 0;
+    [].forEach.call(table.rows, function (tr, r) {
+      grid[r] = grid[r] || [];
+      var c = 0;
+      [].forEach.call(tr.cells, function (td) {
+        while (grid[r][c]) c++;
+        var cell = { td: td, r0: r, r1: r + td.rowSpan - 1, c0: c, c1: c + td.colSpan - 1 };
+        for (var i = cell.r0; i <= cell.r1; i++) {
+          grid[i] = grid[i] || [];
+          for (var j = cell.c0; j <= cell.c1; j++) grid[i][j] = cell;
+        }
+        cells.push(cell);
+        c = cell.c1 + 1;
+        ncols = Math.max(ncols, c);
+      });
+    });
+
+    var ings = {}, clones = [];
+    cells.forEach(function (cell) {
+      var ing = cell.c0 === 0 && cell.td.querySelector(".ing");
+      if (ing) ings[cell.r0] = { q: ing.querySelector(".q"), label: ing.lastElementChild };
+    });
+    // a copy of an ingredient whose amount and name follow the servings stepper
+    function copy(r) {
+      var span = document.createElement("span");
+      span.className = "rx-ing";
+      var q = document.createElement("span");
+      q.className = "q";
+      var name = document.createElement("span");
+      span.appendChild(q);
+      span.appendChild(name);
+      clones.push({ r: r, q: q, name: name });
+      return span;
+    }
+    function sync() {
+      clones.forEach(function (k) {
+        k.q.textContent = ings[k.r].q ? ings[k.r].q.textContent : "";
+        k.name.textContent = ings[k.r].label.textContent;
+      });
+    }
+
+    // groups of rows, split by full-width rows; full-width rows before any ingredient are first steps
+    var groups = [], intro = [], current = null;
+    for (var r = 0; r < grid.length; r++) {
+      var first = grid[r][0];
+      if (first && first.td.classList.contains("full") && first.r0 === r) {
+        if (!groups.length && !current) intro.push(first.td);
+        else { current = { note: first.td, r0: r + 1, r1: r + 1, ops: [] }; groups.push(current); }
+      } else if (ings[r]) {
+        if (!current) { current = { note: null, r0: r, r1: r, ops: [] }; groups.push(current); }
+        current.r1 = r;
+      }
+    }
+    var spanning = [];
+    cells.forEach(function (cell) {
+      if (!cell.td.classList.contains("op") || cell.c0 === 0 || !cell.td.textContent.trim()) return;
+      var g = groups.filter(function (g) { return cell.r0 >= g.r0 && cell.r1 <= g.r1; })[0];
+      (g ? g.ops : spanning).push(cell);
+    });
+    function byColumn(a, b) { return a.c0 - b.c0 || a.r0 - b.r0; }
+
+    var view = document.createElement("section");
+    view.className = "rx-steps";
+    var h = document.createElement("h2");
+    h.textContent = "Ingrédients";
+    var list = document.createElement("ul");
+    list.className = "rx-ings";
+    Object.keys(ings).forEach(function (r) {
+      var li = document.createElement("li");
+      li.appendChild(copy(+r));
+      list.appendChild(li);
+    });
+    var h2 = document.createElement("h2");
+    h2.textContent = "Étapes";
+    var steps = document.createElement("ol");
+    steps.className = "rx-step-list";
+    var used = {};
+    // the table breaks lines to fit narrow cells; here a single break is a space, a double one a new paragraph
+    function prose(html) {
+      return html.replace(/(<br\s*\/?>\s*){2,}/gi, "\u0000").replace(/<br\s*\/?>/gi, " ")
+        .replace(/\u00ad|&shy;/g, "")
+        .replace(/\u0000\s*(\S)/g, function (m, c) { return "<br><br>" + c.toUpperCase(); });
+    }
+    function step(html, cell) {
+      var li = document.createElement("li");
+      var text = document.createElement("div");
+      text.className = "rx-text";
+      text.innerHTML = prose(html);
+      li.appendChild(text);
+      if (cell) {
+        var uses = document.createElement("div");
+        uses.className = "rx-uses";
+        for (var r = cell.r0; r <= cell.r1; r++) {
+          if (ings[r] && !used[r]) { used[r] = true; uses.appendChild(copy(r)); }
+        }
+        if (uses.firstChild) li.appendChild(uses);
+      }
+      steps.appendChild(li);
+    }
+    intro.forEach(function (td) { step(td.innerHTML); });
+    groups.forEach(function (g) {
+      if (g.note) {
+        var li = document.createElement("li");
+        li.className = "rx-note";
+        li.innerHTML = prose(g.note.innerHTML);
+        steps.appendChild(li);
+      }
+      g.ops.sort(byColumn).forEach(function (cell) { step(cell.td.innerHTML, cell); });
+    });
+    spanning.sort(byColumn).forEach(function (cell) { step(cell.td.innerHTML, cell); });
+
+    view.appendChild(h);
+    view.appendChild(list);
+    view.appendChild(h2);
+    view.appendChild(steps);
+    var card = table.closest(".card");
+    card.parentNode.insertBefore(view, card.nextSibling);
+    sync();
+    new MutationObserver(sync).observe(table, { subtree: true, childList: true, characterData: true });
+  }
+
+  // For printing on a portrait page in Safari, which ignores the landscape request above: everything
+  // but the chef's tips goes in one block that style.css turns a quarter turn. Invisible on screen.
+  // Only Safari: Chrome and Firefox print landscape as asked.
+  if (/^((?!chrome|chromium|crios|fxios|android|edg).)*safari/i.test(navigator.userAgent)) {
+    document.documentElement.classList.add("rx-rotate");
+  }
+  var sheet = document.createElement("div");
+  sheet.className = "rx-sheet";
+  var first = document.createElement("div");
+  first.className = "rx-page";
+  first.appendChild(sheet);
+  var kids = [].slice.call(document.body.children).filter(function (el) {
+    return el.tagName !== "SCRIPT" && !el.classList.contains("chef");
+  });
+  document.body.insertBefore(first, kids[0] || null);
+  kids.forEach(function (el) { sheet.appendChild(el); });
+
 
   // Instant page loads, offline cache and the visit counter, shared with the home page.
   var fast = document.createElement("script");

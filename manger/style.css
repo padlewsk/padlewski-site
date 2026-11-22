@@ -34,6 +34,7 @@ a { color: var(--accent-ink); text-decoration: none; }
 a:hover { text-decoration: underline; }
 h1 { font-size: 48px; line-height: 1.06; font-weight: 700; letter-spacing: -.04em; }
 [hidden] { display: none !important; }
+.rx-page, .rx-sheet { display: contents; } /* wrappers for printing on portrait pages (see @media print) */
 
 /* Pills: filters, tags and buttons; white on the grey band, grey on white */
 .chip, .rx-tag, .rx-print {
@@ -160,6 +161,39 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
 .chef ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .chef li { color: var(--ink); font-size: 16px; line-height: 1.45; letter-spacing: -.01em; }
 
+/* Phone view of a recipe (built by recipe.js from the table): ingredient list and numbered steps */
+.rx-steps { display: none; }
+.rx-steps h2 { margin: 0 0 10px; font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
+.rx-ings { list-style: none; margin: 0 0 34px; padding: 0; border-top: 1px solid var(--line); }
+.rx-ings li { padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 16px; line-height: 1.35; }
+.rx-ing { display: flex; align-items: baseline; }
+.rx-ing .q { flex: 0 0 92px; margin-right: 12px; text-align: right; }
+.rx-step-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: step; }
+.rx-step-list li {
+  position: relative; padding: 14px 16px 15px 54px; border-radius: 16px; background: var(--fill);
+  font-size: 16px; line-height: 1.45; counter-increment: step;
+}
+.rx-step-list li::before {
+  content: counter(step); position: absolute; left: 14px; top: 12px; display: grid; place-items: center;
+  width: 28px; height: 28px; border-radius: 50%; background: #fff; color: var(--accent-ink);
+  font-size: 14px; font-weight: 600;
+}
+.rx-text::first-letter, .rx-note::first-letter { text-transform: uppercase; }
+.rx-step-list li.rx-note {
+  margin-top: 14px; padding: 0 2px 2px; background: none; color: var(--accent-ink);
+  font-size: 15px; font-weight: 600; counter-increment: none;
+}
+.rx-step-list li.rx-note::before { content: none; }
+.rx-uses { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.rx-uses .rx-ing { display: inline-block; padding: 4px 11px; border-radius: 999px; background: #fff; font-size: 14px; }
+.rx-uses .q { margin-right: 5px; }
+.rx-uses .q:empty { display: none; }
+
+@media (max-width: 700px) {
+  .rx-steps { display: block; margin: 0 2px; }
+  body:not(.home) .card, body:not(.home) .swipe { display: none; }
+}
+
 @media (max-width: 640px) {
   .wrap { padding-left: 20px; padding-right: 20px; }
   .hero .wrap { padding-top: 44px; padding-bottom: 36px; }
@@ -172,6 +206,8 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
 }
 
 @media print {
+  .rx-steps { display: none !important; }
+  body:not(.home) .card { display: block !important; }
   /* Kept simple so it fits whatever page the browser gives: recipe.js asks for landscape A4 (wide
      tables), and the same layout still fits on portrait if the browser or printer ignores that. No
      fixed sizes or rotation, which break when the browser adds its header and footer. The chef's
@@ -199,4 +235,17 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
   .chef .who { font-size: 13px; margin: 2px 0 14px; }
   .chef ul { gap: 8px; }
   .chef li { font-size: 14px; line-height: 1.5; }
+}
+
+/* Safari ignores recipe.js's request for landscape and prints portrait by default. There (html.rx-rotate,
+   set by recipe.js), when the page is portrait, the recipe is laid out as a 230 x 165 mm landscape block
+   and turned a quarter turn to the left, top of the recipe on the left. Smaller than A4 on purpose, so
+   that it still fits with Safari's header and footer and wide printer margins. Choosing Landscape in
+   Safari's print dialog prints it upright instead. */
+@media print and (orientation: portrait) {
+  .rx-rotate .rx-page { display: block; position: relative; height: 230mm; overflow: hidden; break-after: page; }
+  .rx-rotate .rx-sheet {
+    display: block; position: absolute; top: 0; left: 0; width: 230mm;
+    transform-origin: top left; transform: translateY(230mm) rotate(-90deg);
+  }
 }
