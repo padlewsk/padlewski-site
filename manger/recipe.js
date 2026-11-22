@@ -163,8 +163,11 @@
       if (cell) {
         var uses = document.createElement("div");
         uses.className = "rx-uses";
+        // the first column is preparation (chop, rinse…): it shows its ingredients but they still count
+        // as new when they go into the pan in a later column
+        var prep = cell.c0 === 1;
         for (var r = cell.r0; r <= cell.r1; r++) {
-          if (ings[r] && !used[r]) { used[r] = true; uses.appendChild(copy(r)); }
+          if (ings[r] && (prep || !used[r])) { if (!prep) used[r] = true; uses.appendChild(copy(r)); }
         }
         if (uses.firstChild) li.appendChild(uses);
       }
