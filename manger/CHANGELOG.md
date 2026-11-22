@@ -5,6 +5,9 @@ recipe; PATCH: fixes and small edits (wording, quantities, a quote). The version
 (`VERSION`), shown at the bottom of every page, and names the offline cache, so bumping it also makes
 every visitor fetch the new files.
 
+## 3.3.0, 22.11.2026
+- Muffins aux pommes et à la cannelle (Yasmine), adapted from Add a Pinch; the stepper counts muffins.
+
 ## 3.2.0, 22.11.2026
 - Handwritten recipes (or recipes annotated by hand) have a "Voir la recette originale" link under the
   table, which shows the scan full screen: Gâteau au chocolat de Mercedes, Banana cake and Carrot cake de

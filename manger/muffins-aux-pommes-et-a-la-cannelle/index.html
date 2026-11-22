@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muffins aux pommes et à la cannelle</title>
+<style>
+  :root {
+    --green: #3f9b35;
+    --pale: #f7f9cf;
+    --glow: #eef3b8;
+    --ink: #1a1a1a;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #fff; color: var(--ink); }
+  body {
+    font-family: Verdana, "DejaVu Sans", Tahoma, Geneva, sans-serif;
+    padding: 28px 24px 40px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 34px; margin: 0 0 6px 6px; letter-spacing: -0.4px; }
+  .meta { color: #555; font-size: 15px; margin: 0 0 16px 6px; }
+  .swipe { display: none; font-size: 13px; color: #888; font-style: italic; margin: 0 0 8px 6px; }
+  a { color: #2f7a27; }
+
+  .controls {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
+    margin: 0 0 20px 6px; font-size: 16px; color: #444;
+  }
+  .stepper { display: inline-flex; align-items: center; gap: 10px; }
+  .stepper button {
+    width: 40px; height: 40px; border-radius: 10px;
+    border: 2px solid var(--green); background: var(--pale); color: var(--ink);
+    font: inherit; font-size: 22px; line-height: 1; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    touch-action: manipulation;
+  }
+  .stepper button:hover { background: #eef3b8; }
+  .stepper button:active { transform: translateY(1px); }
+  .stepper button:disabled { opacity: 0.35; cursor: default; }
+  .stepper input {
+    width: 64px; height: 40px; text-align: center;
+    border: 2px solid var(--green); border-radius: 10px;
+    font: inherit; font-size: 20px; font-weight: bold; color: var(--ink); background: #fff;
+    -moz-appearance: textfield; appearance: textfield;
+  }
+  .stepper input::-webkit-outer-spin-button,
+  .stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .stepper input:focus { outline: 3px solid var(--glow); }
+
+  .card {
+    background: var(--pale); border-radius: 14px; padding: 9px;
+    box-shadow: 0 0 6px 3px var(--glow);
+  }
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table {
+    width: 100%; min-width: 820px;
+    border-collapse: collapse; background: #fff; table-layout: fixed;
+    font-size: 16px; line-height: 1.25;
+  }
+  td { border: 3px solid var(--green); padding: 8px 9px; vertical-align: middle; }
+  td.full { text-align: center; }
+  td.op { text-align: center; padding: 6px 4px; }
+  .ing { display: flex; align-items: flex-start; }
+  .q {
+    flex: 0 0 104px; margin-right: 10px; text-align: right; white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .q.changed { animation: flash 0.6s ease-out; }
+  @keyframes flash { from { color: var(--green); } to { color: var(--ink); } }
+
+  .footer { font-size: 12.5px; color: #666; margin: 16px 0 0 6px; line-height: 1.6; }
+
+  @media (max-width: 640px) {
+    body { padding: 18px 12px 28px; }
+    h1 { font-size: 26px; }
+    .swipe { display: block; }
+    table { font-size: 14px; min-width: 760px; }
+    .q { flex-basis: 92px; }
+  }
+  @media print {
+    @page { size: A4 landscape; margin: 14mm; }
+    body { padding: 0; max-width: none; }
+    .stepper button { display: none; }
+    .stepper input { border: none; width: 2.2em; padding: 0; height: auto; }
+    .hint { display: none; }
+    .card, td, .stepper input { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .scroll { overflow: visible; }
+    table { min-width: 0; }
+  }
+</style>
+<meta name="recipe:course" content="Dessert">
+<meta name="recipe:cuisine" content="Américaine">
+<meta name="recipe:source" content="Yasmine">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../style.css">
+<script src="../recipe.js" defer></script>
+</head>
+<body>
+  <h1>Muffins aux pommes et à la cannelle</h1>
+  <div class="meta">préparation 15 min &nbsp;·&nbsp; cuisson 20 à 30 min</div>
+
+  <div class="controls">
+    <span>Pour</span>
+    <span class="stepper">
+      <button type="button" id="minus" aria-label="Moins de muffins">−</button>
+      <input id="servings" type="number" inputmode="numeric" min="1" max="40" step="1" value="12" aria-label="Nombre de muffins">
+      <button type="button" id="plus" aria-label="Plus de muffins">+</button>
+    </span>
+    <span id="people">muffins</span>
+  </div>
+
+  <div class="swipe">Faites glisser le tableau sur le côté pour voir toutes les étapes →</div>
+  <div class="card"><div class="scroll">
+  <table>
+    <colgroup><col style="width:24%"><col style="width:13%"><col style="width:12%"><col style="width:12%"><col style="width:14%"><col style="width:10%"><col style="width:15%"></colgroup>
+    <tr><td class="full" colspan="7">Préchauffer le four à 190&nbsp;°C&nbsp;; beurrer et fariner un moule à 12 muffins (ôter l’excès de farine)</td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="240" data-unit="g"></span><span>farine</span></div></td><td></td><td class="op" rowspan="4">tamiser ensemble</td><td rowspan="4"></td><td class="op" rowspan="9">incorporer délicatement le mélange de farine, en alternant avec le lait, jusqu’à ce que ce soit juste mélangé</td><td class="op" rowspan="12">incorporer les pommes&nbsp;; remplir les moules aux ⅔ ou aux ¾</td><td class="op" rowspan="12">cuire 20 à 30&nbsp;min, jusqu’à ce qu’une pique plantée au centre ressorte sèche</td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="1.5" data-unit="c. à c." data-step="0.25"></span><span>levure chimique</span></div></td><td></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="0.25" data-unit="c. à c." data-step="0.25"></span><span>sel fin</span></div></td><td></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="2" data-unit="c. à c." data-step="0.25"></span><span>cannelle</span></div></td><td></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="115" data-unit="g"></span><span>beurre mou</span></div></td><td class="op">sortir à l’avance</td><td class="op" rowspan="2">battre ensemble 3&nbsp;min, jusqu’à ce que ce soit plus clair</td><td class="op" rowspan="4">ajouter les œufs un à un, en incorporant bien chacun&nbsp;; ajouter la vanille</td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="200" data-unit="g"></span><span>sucre</span></div></td><td></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="2" data-unit="" data-step="1"></span><span data-one="œuf" data-many="œufs">œufs</span></div></td><td class="op">sortir à l’avance</td><td></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="2" data-unit="c. à c." data-step="0.25"></span><span>extrait de vanille</span></div></td><td></td><td></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="120" data-unit="ml"></span><span>lait</span></div></td><td></td><td colspan="2"></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="240" data-unit="g"></span><span>pommes (2 environ)</span></div></td><td class="op">éplucher, couper en petits dés</td><td class="op" rowspan="3">mélanger pour enrober les dés de pomme</td><td rowspan="3" colspan="2"></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="2" data-unit="c. à c." data-step="0.25"></span><span>farine, pour les pommes</span></div></td><td></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="0.5" data-unit="c. à c." data-step="0.25"></span><span>cannelle, pour les pommes</span></div></td><td></td></tr>
+    <tr><td class="full" colspan="7">La garniture</td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="115" data-unit="g"></span><span>beurre</span></div></td><td class="op">faire fondre, laisser tiédir&nbsp;; verser dans un bol</td><td colspan="4"></td><td class="op" rowspan="3">démouler les muffins encore tièdes&nbsp;; badigeonner le dessus de beurre au pinceau (ou le tremper dedans), puis le tremper dans le sucre à la cannelle&nbsp;; laisser refroidir sur une assiette</td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="50" data-unit="g"></span><span>sucre</span></div></td><td></td><td class="op" rowspan="2">mélanger dans un autre bol</td><td rowspan="2" colspan="3"></td></tr>
+    <tr><td><div class="ing"><span class="q" data-base="30" data-unit="g"></span><span>cannelle</span></div></td><td></td></tr>
+  </table>
+  </div></div>
+
+  <div class="footer">
+    Adapté de <a href="https://addapinch.com/cinnamon-apple-muffins-recipe/">Add a Pinch (Robyn Stone), «&nbsp;Cinnamon Apple Muffins&nbsp;»</a> (recette d’origine&nbsp;: 12 muffins, four à 375&nbsp;°F).<br>Garniture moins forte en cannelle&nbsp;: 50&nbsp;g de sucre et 1&nbsp;c.&nbsp;à&nbsp;c. de cannelle seulement.
+  </div>
+
+<script>
+(function () {
+  var BASE = 12, MIN = 1, MAX = 40;
+  var FRACTIONS = { 0.25: "¼", 0.5: "½", 0.75: "¾" };
+  var input = document.getElementById("servings");
+  var minus = document.getElementById("minus");
+  var plus = document.getElementById("plus");
+  var people = document.getElementById("people");
+  var qs = Array.prototype.slice.call(document.querySelectorAll(".q[data-base]"));
+
+  // Grams and millilitres round to whole numbers (to 5 or 10 when large); spoons and pieces
+  // (data-step) to the nearest quarter or half, written as a fraction, and never below one step.
+  function amount(v, step) {
+    if (step) {
+      var r = Math.max(step, Math.round(v / step) * step), whole = Math.floor(r), frac = FRACTIONS[r - whole];
+      return { n: r, text: whole && frac ? whole + " " + frac : frac || String(whole) };
+    }
+    var n = v < 20 ? Math.round(v) : v < 1000 ? Math.round(v / 5) * 5 : Math.round(v / 10) * 10;
+    return { n: n, text: String(n) };
+  }
+
+  function render(n, animate) {
+    qs.forEach(function (el) {
+      var a = amount(el.dataset.base * n / BASE, parseFloat(el.dataset.step) || 0);
+      var many = a.n >= 2; // French: "1 ½ tomate", "2 tomates"
+      var unit = many && el.dataset.units ? el.dataset.units : el.dataset.unit;
+      var txt = unit ? a.text + " " + unit : a.text;
+      var label = el.nextElementSibling;
+      if (label.dataset.many) label.textContent = many ? label.dataset.many : label.dataset.one;
+      if (el.textContent !== txt) {
+        el.textContent = txt;
+        if (animate) { el.classList.remove("changed"); void el.offsetWidth; el.classList.add("changed"); }
+      }
+    });
+    people.textContent = n === 1 ? "muffin" : "muffins";
+    minus.disabled = n <= MIN;
+    plus.disabled = n >= MAX;
+  }
+
+  function current() {
+    var n = parseInt(input.value, 10);
+    return isNaN(n) ? null : Math.min(MAX, Math.max(MIN, n));
+  }
+
+  function set(n) { input.value = n; render(n, true); }
+
+  input.addEventListener("input", function () { var n = current(); if (n !== null) render(n, true); });
+  input.addEventListener("change", function () { set(current() || BASE); });
+  minus.addEventListener("click", function () { set(Math.max(MIN, (current() || BASE) - 1)); });
+  plus.addEventListener("click", function () { set(Math.min(MAX, (current() || BASE) + 1)); });
+
+  render(BASE, false);
+})();
+</script>
+</body>
+</html>
