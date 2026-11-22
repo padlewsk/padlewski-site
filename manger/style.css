@@ -145,6 +145,10 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
 .q { color: var(--accent-ink); font-weight: 600; }
 @keyframes flash { from { background: var(--accent-soft); } }
 .footer { margin-top: 18px; color: var(--muted); }
+.footer b { color: var(--ink); font-weight: 600; }
+/* A cook's comments with their photo (black and white): <div class="footer comments"><img class="avatar"> <div>…</div></div> */
+.comments { display: flex; align-items: flex-start; gap: 16px; }
+.avatar { flex: none; width: 64px; height: 64px; border-radius: 50%; object-fit: cover; filter: grayscale(1); box-shadow: 0 0 0 1px var(--line); }
 
 @media (max-width: 640px) {
   .wrap { padding-left: 20px; padding-right: 20px; }
@@ -179,4 +183,6 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
   td { padding: 7px 8px; }
   td.op { padding: 5px 4px; }
   .footer { font-size: 11px; margin-top: 8px; line-height: 1.5; }
+  .avatar { width: 44px; height: 44px; }
+  .comments { gap: 10px; }
 }
