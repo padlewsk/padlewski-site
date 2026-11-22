@@ -7,6 +7,11 @@
     return m ? m.content.split(",").map(function (s) { return s.trim(); }).filter(Boolean) : [];
   }
 
+  // Recipes print in landscape (their tables are wide); the home page keeps the printer's default.
+  var page = document.createElement("style");
+  page.textContent = "@page { size: A4 landscape; margin: 14mm; }";
+  document.head.appendChild(page);
+
   if (!document.querySelector('link[rel~="icon"]')) {
     var icon = document.createElement("link");
     icon.rel = "icon";
