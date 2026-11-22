@@ -13,14 +13,6 @@
   page.textContent = "@page { size: A4 portrait; margin: 10mm; }";
   document.head.appendChild(page);
 
-  if (!document.querySelector('link[rel~="icon"]')) {
-    var icon = document.createElement("link");
-    icon.rel = "icon";
-    icon.type = "image/svg+xml";
-    icon.href = "../favicon.svg";
-    document.head.appendChild(icon);
-  }
-
   var h1 = document.querySelector("h1");
   // Opened from disk (file://), a folder link does not open its index.html by itself.
   var home = location.protocol === "file:" ? "../index.html" : "../";
@@ -72,6 +64,19 @@
   document.body.insertBefore(hero, bar);
   [bar, h1, document.querySelector(".meta"), row.firstChild ? row : null, document.querySelector(".controls")]
     .forEach(function (el) { if (el) hero.appendChild(el); });
+
+  // For printing: everything but the chef's tips goes in one block, printed sideways as page 1
+  // (see style.css); the tips (.chef), if any, follow upright on page 2. Invisible on screen.
+  var sheet = document.createElement("div");
+  sheet.className = "rx-sheet";
+  var first = document.createElement("div");
+  first.className = "rx-page";
+  first.appendChild(sheet);
+  var kids = [].slice.call(document.body.children).filter(function (el) {
+    return el.tagName !== "SCRIPT" && !el.classList.contains("chef");
+  });
+  document.body.insertBefore(first, kids[0] || null);
+  kids.forEach(function (el) { sheet.appendChild(el); });
 
   // Instant page loads, offline cache and the visit counter, shared with the home page.
   var fast = document.createElement("script");
