@@ -161,7 +161,8 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
 .chef ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .chef li { color: var(--ink); font-size: 16px; line-height: 1.45; letter-spacing: -.01em; }
 
-/* Phone view of a recipe (built by recipe.js from the table): ingredient list and numbered steps */
+/* The two views of a recipe, switched by recipe.js (html[data-view]): the table (default) and
+   "Étapes", an ingredient list and numbered steps built from the table */
 .rx-steps { display: none; }
 .rx-steps h2 { margin: 0 0 10px; font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
 .rx-ings { list-style: none; margin: 0 0 34px; padding: 0; border-top: 1px solid var(--line); }
@@ -189,10 +190,18 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
 .rx-uses .q { margin-right: 5px; }
 .rx-uses .q:empty { display: none; }
 
-@media (max-width: 700px) {
-  .rx-steps { display: block; margin: 0 2px; }
-  body:not(.home) .card, body:not(.home) .swipe { display: none; }
+[data-view="steps"] .rx-steps { display: block; margin: 0 2px; }
+[data-view="steps"] body:not(.home) .card, [data-view="steps"] body:not(.home) .swipe { display: none; }
+
+/* Servings and the Tableau / Étapes switch share a row; the switch is an Apple-style segmented control */
+.rx-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; }
+.rx-mode { display: inline-flex; padding: 3px; border-radius: 11px; background: rgba(0, 0, 0, .07); }
+.rx-mode button {
+  min-width: 92px; height: 30px; padding: 0 16px; border: 0; border-radius: 8px; background: none;
+  color: var(--ink); font: inherit; font-size: 13.5px; cursor: pointer; transition: background .2s, box-shadow .2s;
 }
+.rx-mode button[aria-pressed="true"] { background: #fff; font-weight: 600; box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 0 0 .5px rgba(0, 0, 0, .04); }
+.rx-mode button:not([aria-pressed="true"]):hover { background: rgba(255, 255, 255, .5); }
 
 @media (max-width: 640px) {
   .wrap { padding-left: 20px; padding-right: 20px; }
@@ -206,6 +215,7 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
 }
 
 @media print {
+  .rx-mode { display: none; }
   .rx-steps { display: none !important; }
   body:not(.home) .card { display: block !important; }
   /* Kept simple so it fits whatever page the browser gives: recipe.js asks for landscape A4 (wide

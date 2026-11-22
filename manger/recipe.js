@@ -65,8 +65,9 @@
   [bar, h1, document.querySelector(".meta"), row.firstChild ? row : null, document.querySelector(".controls")]
     .forEach(function (el) { if (el) hero.appendChild(el); });
 
-  // On phones the wide table becomes an ingredient list and numbered steps (shown by style.css under
-  // 700 px; the table stays for larger screens and print). Read from the table, so every recipe gets it:
+  // Second view of the recipe, "Étapes": an ingredient list and numbered steps, chosen with the
+  // Tableau / Étapes switch below (the table is the default, and is always what prints). Read from
+  // the table, so every recipe gets it:
   // its columns are in time order, each step cell covers the ingredient rows it uses, and a full-width
   // row in the middle ("Pendant ce temps…") starts a new group of steps.
   var table = document.querySelector(".card table");
@@ -193,6 +194,39 @@
     card.parentNode.insertBefore(view, card.nextSibling);
     sync();
     new MutationObserver(sync).observe(table, { subtree: true, childList: true, characterData: true });
+
+    // The Tableau / Étapes switch, next to the servings; the choice is remembered on this device.
+    var KEY = "manger-view", views = [["table", "Tableau"], ["steps", "Étapes"]];
+    var root = document.documentElement, saved = null;
+    try { saved = localStorage.getItem(KEY); } catch (e) {}
+    var toggle = document.createElement("div");
+    toggle.className = "rx-mode";
+    toggle.setAttribute("role", "group");
+    toggle.setAttribute("aria-label", "Affichage de la recette");
+    function show(view, remember) {
+      root.setAttribute("data-view", view);
+      [].forEach.call(toggle.children, function (b) { b.setAttribute("aria-pressed", String(b.value === view)); });
+      if (remember) { try { localStorage.setItem(KEY, view); } catch (e) {} }
+    }
+    views.forEach(function (v) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.value = v[0];
+      b.textContent = v[1];
+      b.addEventListener("click", function () { show(v[0], true); });
+      toggle.appendChild(b);
+    });
+    show(saved === "steps" ? "steps" : "table", false);
+    var controls = document.querySelector(".controls");
+    if (controls) {
+      var tools = document.createElement("div");
+      tools.className = "rx-tools";
+      controls.parentNode.insertBefore(tools, controls);
+      tools.appendChild(controls);
+      tools.appendChild(toggle);
+    } else {
+      card.parentNode.insertBefore(toggle, card);
+    }
   }
 
   // For printing on a portrait page in Safari, which ignores the landscape request above: everything
