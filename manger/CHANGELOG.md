@@ -5,6 +5,9 @@ recipe; PATCH: fixes and small edits (wording, quantities, a quote). The version
 (`VERSION`), shown at the bottom of every page, and names the offline cache, so bumping it also makes
 every visitor fetch the new files.
 
+## 2.6.0, 22.11.2026
+- Carrot cake de Sébastien, with his remark.
+
 ## 2.5.0, 22.11.2026
 - Ten family recipes: Gâteau au chocolat de Mercedes; Banana cake, Carrot cake, Meatloaf, Guacamole and
   Moussakhachi de Sylvie; Cake au rhum et raisins secs, Couscous, Soupe chinoise and Dolmas de Vincente.
