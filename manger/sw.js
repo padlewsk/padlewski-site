@@ -3,7 +3,7 @@
 // Every page is served from the cache right away and refreshed from the network in the background,
 // so after the site changes, the first visit shows the previous version and the next one the new.
 // Registered by fast.js; its scope is /manger/.
-var CACHE = "manger-v1"; // change the name to throw away every visitor's cache
+var CACHE = "manger-v2"; // change the name to throw away every visitor's cache
 var CORE = ["./", "style.css", "recipe.js", "fast.js", "favicon.svg"];
 
 self.addEventListener("install", function (e) {

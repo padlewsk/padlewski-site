@@ -7,10 +7,10 @@
     return m ? m.content.split(",").map(function (s) { return s.trim(); }).filter(Boolean) : [];
   }
 
-  // Recipes print on portrait A4 (what printers default to), turned a quarter turn by style.css
-  // so that their wide tables run along the long side. The home page keeps the printer's default.
+  // Recipes ask to print on landscape A4 (their tables are wide); browsers that ignore this print
+  // portrait, which the print layout in style.css also fits. The home page keeps the printer's default.
   var page = document.createElement("style");
-  page.textContent = "@page { size: A4 portrait; margin: 10mm; }";
+  page.textContent = "@page { size: A4 landscape; margin: 10mm; }";
   document.head.appendChild(page);
 
   var h1 = document.querySelector("h1");
@@ -65,18 +65,6 @@
   [bar, h1, document.querySelector(".meta"), row.firstChild ? row : null, document.querySelector(".controls")]
     .forEach(function (el) { if (el) hero.appendChild(el); });
 
-  // For printing: everything but the chef's tips goes in one block, printed sideways as page 1
-  // (see style.css); the tips (.chef), if any, follow upright on page 2. Invisible on screen.
-  var sheet = document.createElement("div");
-  sheet.className = "rx-sheet";
-  var first = document.createElement("div");
-  first.className = "rx-page";
-  first.appendChild(sheet);
-  var kids = [].slice.call(document.body.children).filter(function (el) {
-    return el.tagName !== "SCRIPT" && !el.classList.contains("chef");
-  });
-  document.body.insertBefore(first, kids[0] || null);
-  kids.forEach(function (el) { sheet.appendChild(el); });
 
   // Instant page loads, offline cache and the visit counter, shared with the home page.
   var fast = document.createElement("script");

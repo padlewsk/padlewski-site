@@ -34,7 +34,6 @@ a { color: var(--accent-ink); text-decoration: none; }
 a:hover { text-decoration: underline; }
 h1 { font-size: 48px; line-height: 1.06; font-weight: 700; letter-spacing: -.04em; }
 [hidden] { display: none !important; }
-.rx-page, .rx-sheet { display: contents; } /* print-only wrappers (see @media print) */
 
 /* Pills: filters, tags and buttons; white on the grey band, grey on white */
 .chip, .rx-tag, .rx-print {
@@ -173,34 +172,28 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
 }
 
 @media print {
+  /* Kept simple so it fits whatever page the browser gives: recipe.js asks for landscape A4 (wide
+     tables), and the same layout still fits on portrait if the browser or printer ignores that. No
+     fixed sizes or rotation, which break when the browser adds its header and footer. The chef's
+     tips, if any, start on page 2. */
   html, body { background: #fff; }
-  .rx-hero { border-image: none; background: none; margin: 0; padding: 0; }
-  .rx-bar, .rx-tags { display: none; }
-  .stepper button { display: none; }
-  .stepper input { background: none; }
-  .card { box-shadow: 0 0 0 1px var(--line); border-radius: 0; }
-  td.op, td.full, .q { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  /* Page 1, the recipe (.rx-sheet, made by recipe.js), is laid out as a landscape page 345 mm wide,
-     shrunk to 80 % (276 mm: A4 less recipe.js's 10 mm margins) and turned a quarter turn to the left
-     onto the portrait page, top of the recipe on the left. It must stay under 237 mm tall (190 mm once
-     shrunk). The chef's tips, if any, follow upright on page 2. */
   body:not(.home) { margin: 0; padding: 0; max-width: none; }
-  .rx-page { display: block; position: relative; height: 276mm; overflow: hidden; break-after: page; }
-  .rx-sheet {
-    display: block; position: absolute; top: 0; left: 0; width: 345mm;
-    transform-origin: top left; transform: translateY(276mm) rotate(-90deg) scale(.8);
-  }
-  /* compact, so that a recipe fits on one A4 page */
-  h1, body:not(.home) h1 { font-size: 30px; margin-bottom: 4px; }
-  .meta { font-size: 13px; margin-bottom: 6px; }
-  .controls { font-size: 14px; margin-bottom: 10px; }
-  .stepper input { font-size: 16px; }
-  table { font-size: 14.5px; line-height: 1.25; }
-  td { padding: 7px 8px; }
-  td.op { padding: 5px 4px; }
-  .footer { font-size: 11px; margin-top: 8px; line-height: 1.5; }
+  .rx-hero { border-image: none; background: none; margin: 0 0 8px; padding: 0; }
+  .rx-bar, .rx-tags, .swipe, .stepper button { display: none; }
+  h1, body:not(.home) h1 { font-size: 22px; margin: 0 0 2px; }
+  .meta { font-size: 11px; margin: 0 0 2px; }
+  .controls { font-size: 11px; margin: 0; }
+  .stepper input { width: 2em; height: auto; padding: 0; background: none; font-size: 12px; }
+  .card { box-shadow: none; border: 1px solid #ccc; border-radius: 0; break-inside: avoid; }
+  .scroll { overflow: visible; }
+  table { min-width: 0; font-size: 11px; line-height: 1.25; }
+  td { padding: 4px 5px; border-color: #ccc; -webkit-hyphens: auto; hyphens: auto; overflow-wrap: break-word; }
+  td.op { padding: 3px 3px; }
+  .q { flex-basis: 66px; margin-right: 6px; }
+  td.op, td.full, .q { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .footer { font-size: 9.5px; margin-top: 6px; line-height: 1.4; }
   /* page 2: the chef's tips as plain text */
-  .chef { display: block; margin: 0; padding: 0; background: none; }
+  .chef { display: block; break-before: page; margin: 0; padding: 0; background: none; }
   .avatar { display: none; }
   .chef h2 { font-size: 20px; margin: 0; }
   .chef .who { font-size: 13px; margin: 2px 0 14px; }
