@@ -7,9 +7,10 @@
     return m ? m.content.split(",").map(function (s) { return s.trim(); }).filter(Boolean) : [];
   }
 
-  // Recipes print in landscape (their tables are wide); the home page keeps the printer's default.
+  // Recipes print on portrait A4 (what printers default to), turned a quarter turn by style.css
+  // so that their wide tables run along the long side. The home page keeps the printer's default.
   var page = document.createElement("style");
-  page.textContent = "@page { size: A4 landscape; margin: 14mm; }";
+  page.textContent = "@page { size: A4 portrait; margin: 10mm; }";
   document.head.appendChild(page);
 
   if (!document.querySelector('link[rel~="icon"]')) {

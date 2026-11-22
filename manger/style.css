@@ -131,4 +131,20 @@ td.full { background: var(--accent-soft); color: var(--accent-dark); font-weight
   .stepper input { border: none; }
   .card { box-shadow: none; border-radius: 0; }
   td.op, td.full, .q { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* A recipe is laid out as a landscape page (277 x 190 mm: A4 less recipe.js's 10 mm margins)
+     and turned a quarter turn to the left onto the portrait page, top of the recipe on the left. */
+  body:not(.home) {
+    position: absolute; top: 0; left: 0; margin: 0;
+    width: 277mm; max-width: none;
+    transform-origin: top left; transform: translateY(277mm) rotate(-90deg);
+  }
+  /* compact, so that a recipe fits on one A4 page */
+  h1 { font-size: 30px; margin-bottom: 4px; }
+  .meta { font-size: 13px; margin-bottom: 6px; }
+  .controls { font-size: 14px; margin-bottom: 10px; }
+  .stepper input { font-size: 16px; }
+  table { font-size: 14.5px; line-height: 1.25; }
+  td { padding: 7px 8px; }
+  td.op { padding: 5px 4px; }
+  .footer { font-size: 11px; margin-top: 8px; line-height: 1.5; }
 }
