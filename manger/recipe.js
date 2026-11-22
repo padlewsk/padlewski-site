@@ -49,13 +49,29 @@
     var a = document.createElement("a");
     a.className = "rx-tag rx-" + kind;
     a.href = home + "?" + kind + "=" + encodeURIComponent(value);
-    a.textContent = value;
+    if (kind === "cuisine") { // its round flag, ../flags/<cuisine>.svg, if there is one
+      var slug = value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      var img = document.createElement("img");
+      img.className = "flag";
+      img.alt = "";
+      img.src = "../flags/" + slug + ".svg";
+      img.onerror = function () { img.remove(); };
+      a.appendChild(img);
+    }
+    a.appendChild(document.createTextNode(value));
     row.appendChild(a);
   }
   tags("cuisine").forEach(function (v) { chip("cuisine", v); });
   tags("source").forEach(function (v) { chip("source", v); });
   var after = document.querySelector(".meta") || h1;
   if (row.firstChild && after) after.parentNode.insertBefore(row, after.nextSibling);
+
+  // The top of the page (bar, title, times, tags, servings) goes in a grey band, like the home page.
+  var hero = document.createElement("header");
+  hero.className = "rx-hero";
+  document.body.insertBefore(hero, bar);
+  [bar, h1, document.querySelector(".meta"), row.firstChild ? row : null, document.querySelector(".controls")]
+    .forEach(function (el) { if (el) hero.appendChild(el); });
 
   // Instant page loads, offline cache and the visit counter, shared with the home page.
   var fast = document.createElement("script");

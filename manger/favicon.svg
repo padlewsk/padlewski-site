@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="30" fill="#3f9b35"/>
-  <circle cx="32" cy="32" r="20" fill="#f7f9cf"/>
-  <circle cx="32" cy="32" r="11" fill="#c8452e"/>
+  <!-- French Air and Space Force roundel -->
+  <circle cx="32" cy="32" r="31" fill="#0055a4"/>
+  <circle cx="32" cy="32" r="20.5" fill="#fff"/>
+  <circle cx="32" cy="32" r="10.5" fill="#ef4135"/>
 </svg>
