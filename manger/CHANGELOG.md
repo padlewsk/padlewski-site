@@ -5,6 +5,9 @@ recipe; PATCH: fixes and small edits (wording, quantities, a quote). The version
 (`VERSION`), shown at the bottom of every page, and names the offline cache, so bumping it also makes
 every visitor fetch the new files.
 
+## 3.4.2, 23.11.2026
+- Back to round insignia for the US and China, like the other cuisines (undoes 3.4.1).
+
 ## 3.4.1, 23.11.2026
 - The US and Chinese insignia are drawn in full, with their side bars (they were cropped to a circle).
 
