@@ -7,7 +7,7 @@
   // Version of the recipes section, shown at the bottom of every page and naming sw.js's cache, so a new
   // version also refreshes every visitor's copy. MAJOR: redesign or new structure; MINOR: new feature
   // or recipe; PATCH: fixes and small edits. Record each change in CHANGELOG.md.
-  var VERSION = "3.3.1";
+  var VERSION = "3.4.1";
   var here = document.currentScript.src.replace(/fast\.js.*$/, ""); // .../manger/
 
   function stamp() {

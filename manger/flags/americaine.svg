@@ -1,1 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- US Air Force roundel --><circle cx="12" cy="12" r="12" fill="#0a3161"/><polygon points="12.00,1.40 14.38,8.72 22.08,8.72 15.85,13.25 18.23,20.58 12.00,16.05 5.77,20.58 8.15,13.25 1.92,8.72 9.62,8.72" fill="#fff"/><circle cx="12" cy="12" r="3.1" fill="#b31942"/><circle cx="12" cy="12" r="11.75" fill="none" stroke="#000" stroke-opacity=".12" stroke-width=".5"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-21.25 -11.25 42.50 22.50"><!-- US Air Force insignia (roundel and bars) -->
+<rect x="-21.25" y="-4.34" width="42.50" height="7.50" fill="#0a3161"/>
+<circle r="11.25" fill="#0a3161"/>
+<rect x="-20" y="-3.09" width="10.70" height="5.0" fill="#fff"/><rect x="9.3" y="-3.09" width="10.70" height="5.0" fill="#fff"/>
+<rect x="-20" y="-1.42" width="8.75" height="1.67" fill="#b31942"/><rect x="11.25" y="-1.42" width="8.75" height="1.67" fill="#b31942"/>
+<polygon points="0.00,-10.00 2.25,-3.09 9.51,-3.09 3.63,1.18 5.88,8.09 0.00,3.82 -5.88,8.09 -3.63,1.18 -9.51,-3.09 -2.25,-3.09" fill="#fff"/>
+</svg>

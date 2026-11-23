@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- PLA Air Force insignia --><polygon points="12.00,0.60 14.88,8.64 23.41,8.89 16.66,14.11 19.05,22.31 12.00,17.50 4.95,22.31 7.34,14.11 0.59,8.89 9.12,8.64" fill="#ffde00"/><polygon points="12.00,2.20 14.50,9.16 21.89,9.39 16.04,13.91 18.11,21.01 12.00,16.85 5.89,21.01 7.96,13.91 2.11,9.39 9.50,9.16" fill="#de2910"/><text x="12" y="15.1" font-size="5.2" font-weight="700" text-anchor="middle" fill="#ffde00" font-family="PingFang SC, Hiragino Sans, Noto Sans CJK SC, Microsoft YaHei, sans-serif">八一</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 764"><!-- PLA Air Force insignia (star, 八一 and bars) -->
+<path d="M1 323H495L732 495L705 577H1Z" fill="#ffde00"/><path d="M33 355H539L716 484L716 545H33Z" fill="#de2910"/>
+<path d="M1919 323H1425L1188 495L1215 577H1919Z" fill="#ffde00"/><path d="M1887 355H1381L1204 484L1204 545H1887Z" fill="#de2910"/>
+<path d="M960 2L1054 292H1360L1113 471L1207 762L960 582L713 762L807 471L560 292H865Z" fill="#ffde00"/>
+<path d="M960 104L1031 323H1262L1075 459L1147 679L960 543L773 679L845 459L657 323H888Z" fill="#de2910"/>
+<g fill="#ffde00"><path d="M891 349H975L996 332L1023 357L1012 366C1010 395 1030 405 1051 427L1027 453C1005 431 987 404 986 372H897C894 365 892 357 891 349Z"/>
+<path d="M905 386H939C934 420 912 447 875 453C890 428 899 415 905 386Z"/>
+<path d="M881 487H1003L1021 470L1040 490L1015 508H892C886 505 883 496 881 487Z"/></g>
+</svg>
