@@ -181,6 +181,14 @@ a:hover {
 }
 
 /* Mobile */
+.version {
+    max-width: 780px;
+    margin: 48px auto 0;
+    color: #777;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
 @media (max-width: 600px) {
     body {
         padding: 24px 16px;
@@ -249,6 +257,10 @@ a:hover {
 
 /* Print / PDF */
 @media print {
+    .version {
+        display: none;
+    }
+
     @page {
         margin: 12mm 15mm;
     }
@@ -601,6 +613,9 @@ arXiv:2408.16801
 </details>
 
 </div>
+
+<!-- Version of this page: MAJOR (new structure or address), MINOR (new section or feature), PATCH (content and fixes). Record each change in CHANGELOG.md. -->
+<p class="version">v2.4.0</p>
 
 <dialog class="lightbox">
     <img src="photo.jpg" alt="Portrait of Mathieu Padlewski">
