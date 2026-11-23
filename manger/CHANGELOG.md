@@ -5,6 +5,9 @@ recipe; PATCH: fixes and small edits (wording, quantities, a quote). The version
 (`VERSION`), shown at the bottom of every page, and names the offline cache, so bumping it also makes
 every visitor fetch the new files.
 
+## 3.3.1, 23.11.2026
+- No visit counter on the recipes any more (GoatCounter is only on mathieu/).
+
 ## 3.3.0, 22.11.2026
 - Muffins aux pommes et à la cannelle (Yasmine), adapted from Add a Pinch; the stepper counts muffins.
 

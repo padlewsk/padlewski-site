@@ -2,12 +2,12 @@
 //  - Chrome and Edge prerender a recipe page when the pointer rests on its link (Speculation Rules).
 //  - Other browsers fetch the page as soon as the pointer or a finger is on the link, so it is ready on click.
 //  - sw.js keeps a copy of every page on the device, for offline use (see that file).
-//  - The visit counter waits until a prerendered page is actually opened, so hovering is not a visit.
+// (No visit counter here: GoatCounter is only on mathieu/.)
 (function () {
   // Version of the recipes section, shown at the bottom of every page and naming sw.js's cache, so a new
   // version also refreshes every visitor's copy. MAJOR: redesign or new structure; MINOR: new feature
   // or recipe; PATCH: fixes and small edits. Record each change in CHANGELOG.md.
-  var VERSION = "3.3.0";
+  var VERSION = "3.3.1";
   var here = document.currentScript.src.replace(/fast\.js.*$/, ""); // .../manger/
 
   function stamp() {
@@ -46,15 +46,4 @@
       document.addEventListener("focusin", warm);
     }
   }
-
-  function count() {
-    var gc = document.createElement("script");
-    gc.async = true;
-    gc.src = "//gc.zgo.at/count.js";
-    gc.dataset.goatcounter = "https://padlewski.goatcounter.com/count";
-    document.body.appendChild(gc);
-  }
-  if (document.prerendering) document.addEventListener("prerenderingchange", count, { once: true });
-  else if (document.body) count();
-  else document.addEventListener("DOMContentLoaded", count);
 })();

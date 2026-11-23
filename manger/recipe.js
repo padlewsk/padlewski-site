@@ -364,7 +364,7 @@
   kids.forEach(function (el) { sheet.appendChild(el); });
 
 
-  // Instant page loads, offline cache and the visit counter, shared with the home page.
+  // Instant page loads and the offline cache, shared with the home page.
   var fast = document.createElement("script");
   fast.src = "../fast.js";
   document.body.appendChild(fast);
