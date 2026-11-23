@@ -5,7 +5,7 @@ Every recipe is a self-contained page at manger/<slug>/index.html. Its type (Ent
 cuisine and sources are written in its <head> as <meta name="recipe:course">, <meta name="recipe:cuisine">
 and <meta name="recipe:source"> (several sources are separated by commas). The home page lists the
 recipes by type, each tile showing its cuisine's flag; its filters (type, cuisine, source) are generated
-from those tags, so a new cuisine or source appears on the home page as soon as one recipe uses it. A cuisine's flag (its air force insignia) is
+from those tags, so a new cuisine or source appears on the home page as soon as one recipe uses it. A cuisine's round flag is
 manger/flags/<cuisine>.svg (flags/italienne.svg); the build says when a cuisine has none.
 
   ./build-recipes.py add <file.html> <type> <cuisine> <source> [source ...]
@@ -106,15 +106,10 @@ def build(args=None):
         return sorted(n.items(), key=lambda kv: slugify(kv[0]))
 
     def flag(cuisine, title=""):
-        # A cuisine's flag (air force insignia) is manger/flags/<cuisine>.svg (e.g. flags/italienne.svg), if there is one.
+        # A cuisine's round flag is manger/flags/<cuisine>.svg (e.g. flags/italienne.svg), if there is one.
         name = f"flags/{slugify(cuisine)}.svg"
         alt = f' alt="{html.escape(title)}" title="{html.escape(title)}"' if title else ' alt=""'
-        if not (ROOT / name).exists():
-            return ""
-        # width from the drawing's own proportions (viewBox), so wide insignia with bars are not squeezed
-        box = re.search(r'viewBox="([^"]+)"', (ROOT / name).read_text(encoding="utf-8"))
-        w, h = (float(v) for v in box.group(1).split()[2:]) if box else (1, 1)
-        return f'<img class="flag" src="{name}"{alt} width="{round(18 * w / h)}" height="18">'
+        return f'<img class="flag" src="{name}"{alt} width="18" height="18">' if (ROOT / name).exists() else ""
 
     def chips(kind, label, values, order=None):
         # on phones, only the Type row shows until "Filtres" is tapped (the others are class "filter more")

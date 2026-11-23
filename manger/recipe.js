@@ -41,7 +41,7 @@
     var a = document.createElement("a");
     a.className = "rx-tag rx-" + kind;
     a.href = home + "?" + kind + "=" + encodeURIComponent(value);
-    if (kind === "cuisine") { // its air force insignia, ../flags/<cuisine>.svg, if there is one
+    if (kind === "cuisine") { // its round flag, ../flags/<cuisine>.svg, if there is one
       var slug = value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
       var img = document.createElement("img");
       img.className = "flag";
