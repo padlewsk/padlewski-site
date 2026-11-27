@@ -5,6 +5,12 @@ recipe; PATCH: fixes and small edits (wording, quantities, a quote). The version
 (`VERSION`), shown at the bottom of every page, and names the offline cache, so bumping it also makes
 every visitor fetch the new files.
 
+## 3.7.0, 27.11.2026
+- Mode expert (Stephan's idea): under the pot-au-feu, the couscous, the ribs, the salade and the moussakhachi, cooking times against the water's temperature (Arrhenius law), up to the pressure cooker, with editable activation energies.
+
+## 3.6.0, 27.11.2026
+- Pot-au-feu de Sylvie and Salade avec tout dedans de Sylvie.
+
 ## 3.5.0, 25.11.2026
 - Poivrons farcis de Sylvie (with her tips in a "Conseils de la cheffe" card) and BBQ baby back ribs de Sylvie.
 

@@ -346,6 +346,124 @@
     document.body.appendChild(viewer);
   }
 
+  // Mode expert (Stephan's idea): cooking times against the temperature of the water, by the Arrhenius
+  // law. A recipe opts in with <script type="application/json" class="rx-thermo">{"ref": 95, "items":
+  // [{"name": "Viande", "min": 105, "ea": 78}, …]}</script>: the temperature the recipe cooks at ("ref",
+  // °C), and for each ingredient its total cooking time there (minutes) and its activation energy (kJ/mol).
+  // The rate goes as exp(−Ea/RT), so the time at T is t₀·exp(Ea/R·(1/T − 1/T₀)). The ingredients go in one
+  // after the other so that they are done together. Shown under the recipe, on or off for every recipe
+  // (remembered on this device); not printed.
+  var thermo = null;
+  try { thermo = JSON.parse(document.querySelector("script.rx-thermo").textContent); } catch (e) {}
+  if (thermo && thermo.items && thermo.items.length) {
+    var EXPERT = "manger-expert", R = 8.314, K = 273.15, T0 = thermo.ref;
+    var items = thermo.items.map(function (it) { return { name: it.name, min: it.min, ea: it.ea }; });
+    var minutes = function (m) {
+      if (m < 1) return "< 1 min";
+      m = Math.round(m);
+      if (m < 60) return m + " min";
+      return Math.floor(m / 60) + " h" + (m % 60 ? " " + String(m % 60).padStart(2, "0") : "");
+    };
+    var timeAt = function (it, T) { return it.min * Math.exp(it.ea * 1000 / R * (1 / (T + K) - 1 / (T0 + K))); };
+
+    var xbtn = document.createElement("button");
+    xbtn.type = "button";
+    xbtn.className = "rx-original rx-expert-toggle";
+    xbtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" ' +
+      'stroke-linejoin="round" aria-hidden="true"><path d="M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0z"/>' +
+      '<path d="M12 9v8"/></svg>Mode expert<span class="rx-pages">temps de cuisson selon la température</span>';
+    var panel = document.createElement("section");
+    panel.className = "rx-expert";
+    panel.id = "rx-expert";
+    xbtn.setAttribute("aria-controls", panel.id);
+    var several = items.length > 1;
+    panel.innerHTML =
+      '<h2>Temps de cuisson selon la température</h2>' +
+      '<p class="rx-x-lead">Loi d’Arrhenius&nbsp;: la vitesse de cuisson suit exp(−E<sub>a</sub>/RT), où E<sub>a</sub> est ' +
+      'l’énergie d’activation de chaque ingrédient. Pour les protéines, 10&nbsp;°C de plus divisent le temps par 2 environ.</p>' +
+      '<div class="rx-x-temp"><label for="rx-x-t">Température de l’eau</label>' +
+      '<input id="rx-x-t" type="range" min="80" max="125" step="1"><output for="rx-x-t" class="rx-x-deg"></output></div>' +
+      '<div class="rx-x-presets"></div>' +
+      '<p class="rx-x-warn" hidden>Au-dessus de 100&nbsp;°C, il faut une cocotte-minute.</p>' +
+      '<div class="rx-x-scroll"><table><thead><tr><th>Ingrédient</th><th class="num">E<sub>a</sub> (kJ/mol)</th>' +
+      '<th class="num">à ' + T0 + '&nbsp;°C</th><th class="num rx-x-now"></th>' + (several ? '<th class="num">Mettre</th>' : "") +
+      '</tr></thead><tbody></tbody>' + (several ? '<tfoot><tr><td>Total</td><td></td><td class="num"></td>' +
+      '<td class="num rx-x-new"></td><td></td></tr></tfoot>' : "") + '</table></div>' +
+      '<div class="rx-x-notes"><p>t(T) = t<sub>0</sub> · exp[E<sub>a</sub>/R · (1/T − 1/T<sub>0</sub>)], ' +
+      'avec R = 8,314&nbsp;J/(mol·K) et T en kelvins. E<sub>a</sub> ≈ 78&nbsp;kJ/mol pour la viande et les œufs ' +
+      '(«&nbsp;+10&nbsp;°C, temps ÷&nbsp;2&nbsp;», la règle de Stephan)&nbsp;; ≈ 100&nbsp;kJ/mol pour le ramollissement ' +
+      'des légumes (80 à 115&nbsp;kJ/mol mesurés sur les pommes de terre, les carottes, les navets). Modifiables.</p>' +
+      '<p>Seule la chimie est comptée&nbsp;: dans un gros morceau, la chaleur met du temps à atteindre le cœur, et ce ' +
+      'temps-là raccourcit beaucoup moins. Les vrais temps, à la cocotte-minute surtout, sont plus longs&nbsp;: ' +
+      'prenez ceux-ci comme un minimum et vérifiez la cuisson.</p></div>';
+
+    var range = panel.querySelector("#rx-x-t"), deg = panel.querySelector(".rx-x-deg");
+    var warn = panel.querySelector(".rx-x-warn"), now = panel.querySelector(".rx-x-now");
+    var rows = panel.querySelector("tbody"), foot = panel.querySelector("tfoot");
+    var presets = [[T0, "Recette"], [100, "Ébullition"], [120, "Cocotte-minute"]].filter(function (p, i, all) {
+      return all.findIndex(function (q) { return q[0] === p[0]; }) === i;
+    });
+    var pbtns = presets.map(function (p) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "chip";
+      b.innerHTML = p[1] + ' <span class="n">' + p[0] + "&nbsp;°C</span>";
+      b.addEventListener("click", function () { range.value = p[0]; update(); });
+      panel.querySelector(".rx-x-presets").appendChild(b);
+      return b;
+    });
+    var cells = items.map(function (it) {
+      var tr = document.createElement("tr");
+      tr.innerHTML = "<td></td><td class=\"num\"><input class=\"rx-x-ea\" type=\"number\" inputmode=\"numeric\" " +
+        "min=\"10\" max=\"400\" step=\"1\"></td><td class=\"num\"></td><td class=\"num rx-x-new\"></td>" + (several ? "<td class=\"num\"></td>" : "");
+      tr.children[0].textContent = it.name;
+      var ea = tr.querySelector("input");
+      ea.value = it.ea;
+      ea.setAttribute("aria-label", "Énergie d’activation, " + it.name + ", en kJ/mol");
+      ea.addEventListener("input", function () { var v = parseFloat(ea.value); if (v > 0) { it.ea = v; update(); } });
+      tr.children[2].textContent = minutes(it.min);
+      rows.appendChild(tr);
+      return tr;
+    });
+    function update() {
+      var T = +range.value;
+      deg.textContent = T + " °C";
+      now.textContent = "à " + T + " °C";
+      warn.hidden = T <= 100;
+      pbtns.forEach(function (b, i) { b.setAttribute("aria-pressed", String(presets[i][0] === T)); });
+      var times = items.map(function (it) { return timeAt(it, T); });
+      var total = Math.max.apply(null, times);
+      items.forEach(function (it, i) {
+        cells[i].children[3].textContent = minutes(times[i]);
+        if (several) {
+          var wait = Math.round(total) - Math.round(times[i]);
+          cells[i].children[4].textContent = wait < 1 ? "au début" : "après " + minutes(wait);
+        }
+      });
+      if (foot) {
+        foot.querySelectorAll("td")[2].textContent = minutes(Math.max.apply(null, items.map(function (it) { return it.min; })));
+        foot.querySelectorAll("td")[3].textContent = minutes(total);
+      }
+    }
+    range.value = 120;
+    range.addEventListener("input", update);
+    update();
+
+    var setExpert = function (on, remember) {
+      panel.hidden = !on;
+      xbtn.setAttribute("aria-expanded", String(on));
+      if (remember) { try { localStorage.setItem(EXPERT, on ? "1" : ""); } catch (e) {} }
+    };
+    xbtn.addEventListener("click", function () { setExpert(panel.hidden, true); });
+    var expertOn = false;
+    try { expertOn = localStorage.getItem(EXPERT) === "1"; } catch (e) {}
+    setExpert(expertOn, false);
+    var below = document.querySelector(".footer");
+    var above = document.querySelector(".rx-steps") || document.querySelector(".card");
+    if (below) { below.parentNode.insertBefore(xbtn, below); below.parentNode.insertBefore(panel, below); }
+    else if (above) { above.parentNode.insertBefore(panel, above.nextSibling); above.parentNode.insertBefore(xbtn, panel); }
+  }
+
   // For printing on a portrait page in Safari, which ignores the landscape request above: everything
   // but the chef's tips goes in one block that style.css turns a quarter turn. Invisible on screen.
   // Only Safari: Chrome and Firefox print landscape as asked.

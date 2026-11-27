@@ -174,6 +174,34 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
 .rx-original svg { width: 19px; height: 19px; flex: none; }
 .rx-pages { color: var(--faint); }
 .rx-original + .footer { margin-top: 14px; }
+/* Mode expert: cooking times against temperature (Arrhenius), on recipes that give the data (recipe.js) */
+.rx-expert-toggle { margin-right: 8px; }
+.rx-expert-toggle[aria-expanded="true"] { background: var(--accent-soft); }
+.rx-expert-toggle .rx-pages { margin-left: 2px; }
+.rx-expert { max-width: 780px; margin: 12px 0 0; padding: 22px 24px 20px; border-radius: 18px; background: #fff; box-shadow: 0 0 0 1px var(--line); }
+.rx-expert[hidden] { display: none; }
+.rx-expert h2 { margin: 0 0 6px; font-size: 19px; font-weight: 600; letter-spacing: -.02em; }
+.rx-x-lead { margin: 0 0 16px; color: var(--muted); font-size: 14.5px; line-height: 1.45; }
+.rx-x-temp { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; color: var(--muted); font-size: 14px; }
+.rx-x-temp input { flex: 1 1 180px; accent-color: var(--accent); }
+.rx-x-deg { min-width: 4.2em; color: var(--ink); font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
+.rx-x-presets { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
+.rx-x-presets .chip { height: 30px; padding: 0 12px; background: var(--fill); font-size: 13px; }
+.rx-x-presets .chip:hover { background: var(--accent-soft); }
+.rx-x-presets .chip[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.rx-x-presets .chip[aria-pressed="true"] .n { color: rgba(255, 255, 255, .8); }
+.rx-x-warn { margin: 10px 0 0; color: #b4530a; font-size: 13.5px; }
+.rx-x-scroll { margin: 14px 0 0; overflow-x: auto; }
+.rx-expert table { width: 100%; min-width: 0; table-layout: auto; border-collapse: collapse; border-style: none; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+.rx-expert th, .rx-expert td { padding: 8px 8px; border: 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; white-space: nowrap; }
+.rx-expert th { color: var(--muted); font-size: 12px; font-weight: 600; }
+.rx-expert .num { text-align: right; }
+.rx-expert tfoot td { border-bottom: 0; font-weight: 600; }
+.rx-expert .rx-x-new { color: var(--accent-ink); font-weight: 600; }
+.rx-x-ea { width: 4.2em; padding: 4px 6px; border: 0; border-radius: 8px; background: var(--fill); color: var(--ink); font: inherit; text-align: right; }
+.rx-x-ea:focus { outline: 3px solid var(--accent-soft); }
+.rx-x-notes { margin: 12px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.rx-x-notes p { margin: 6px 0 0; }
 .rx-viewer {
   width: min(920px, 100vw); max-width: 100vw; max-height: 100dvh; height: 100dvh; margin: 0 auto; padding: 0 16px 24px;
   border: 0; background: transparent; overflow-y: auto; overscroll-behavior: contain;
@@ -268,6 +296,8 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
 .rx-mode button:not([aria-pressed="true"]):hover { background: rgba(255, 255, 255, .5); }
 
 @media (max-width: 640px) {
+  .rx-expert { padding: 18px 16px 16px; }
+  .rx-expert-toggle .rx-pages { display: none; }
   .wrap { padding-left: 20px; padding-right: 20px; }
   .hero .wrap { padding-top: 44px; padding-bottom: 36px; }
   .home h1 { font-size: 40px; }
@@ -292,7 +322,7 @@ td.full { background: var(--accent-soft); color: var(--accent-ink); font-weight:
 
 @media print {
   .version { display: none; }
-  .rx-mode, .rx-awake, .rx-original, .rx-viewer { display: none; }
+  .rx-mode, .rx-awake, .rx-original, .rx-viewer, .rx-expert { display: none !important; }
   .rx-steps { display: none !important; }
   body:not(.home) .card { display: block !important; }
   /* Kept simple so it fits whatever page the browser gives: recipe.js asks for landscape A4 (wide
